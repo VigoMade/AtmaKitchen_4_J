@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,17 +57,9 @@ Route::get('/indexProduk', function () {
 });
 
 //hampers
-Route::get('/createHampers', function () {
-    return view('AdminHampers.createHampers');
-});
+Route::resource('/hampers', HampersController::class);
+Route::get('/hampers/search', 'HampersController@search')->name('hampers.search');
 
-Route::get('/editHampers', function () {
-    return view('AdminHampers.editHampers');
-});
-
-Route::get('/indexHampers', function () {
-    return view('AdminHampers.indexHampers');
-});
 
 //penitip
 Route::get('/editPenitip', function () {
