@@ -84,8 +84,8 @@
                     <li class="nav-item {{ Request::is('jabatan') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('jabatan')}}">Jabatan</a>
                     </li>
-                    <li class="nav-item {{ Request::is('indexBahan') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/indexKaryawan')}}">Karyawan</a>
+                    <li class="nav-item {{ Request::is('pegawai') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('pegawai')}}">Karyawan</a>
                     </li>
 
                 </ul>

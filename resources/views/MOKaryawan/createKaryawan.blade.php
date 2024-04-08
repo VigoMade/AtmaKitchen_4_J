@@ -55,13 +55,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('pegawai.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Nama Karyawan</label>
-                                        <input type="text" class="form-control @error('namaKaryawan') is-invalid @enderror" name="namaKaryawan" value="{{ old('namaKaryawan') }}" placeholder="Masukkan Nama Karyawan">
-                                        @error('namaKaryawan')
+                                        <input type="text" class="form-control @error('nama_pegawai') is-invalid @enderror" name="nama_pegawai" value="{{ old('nama_pegawai') }}" placeholder="Masukkan Nama Karyawan">
+                                        @error('nama_pegawai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -71,35 +71,65 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">No Telpon Karyawan</label>
-                                        <input type="text" class="form-control @error('noTelpKaryawan') is-invalid @enderror" name="noTelpKaryawan" value="{{old('noTelpKaryawan') }}" placeholder="Masukkan No Telepon Karyawan">
-                                        @error('noTelpKaryawan')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weightbold">Username Karyawan</label>
-                                        <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{old('username') }}" placeholder="Masukkan UserName">
-                                        @error('username')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weightbold">Password Karyawan</label>
-                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password') }}" placeholder="Masukkan Password Karyawan">
-                                        @error('password')
+                                        <input type="text" class="form-control @error('telepon_pegawai') is-invalid @enderror" name="telepon_pegawai" value="{{old('telepon_pegawai') }}" placeholder="Masukkan No Telepon Karyawan">
+                                        @error('telepon_pegawai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label class="font-weightbold">Jabatan</label>
-                                        <input type="text" class="form-control @error('jabatanKaryawan') is-invalid @enderror" name="jabatanKaryawan" value="{{old('jabatanKaryawan') }}" placeholder="Masukkan Jabatan Karyawan">
-                                        @error('jabatanKaryawan')
+                                        <label class="font-weightbold">Email Karyawan</label>
+                                        <input type="text" class="form-control @error('email_pegawai') is-invalid @enderror" name="email_pegawai" value="{{old('email_pegawai') }}" placeholder="Masukkan Email Karyawan">
+                                        @error('email_pegawai')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weight-bold" for="id_role">Jabatan</label>
+                                        <select class="form-control @error('id_role') is-invalid @enderror" name="id_role" id="id_role_select">
+                                            <option value="">Pilih Jabatan</option>
+                                            <option value="" {{ old('id_role', isset($pegawai) ? $pegawai->id_role : '') === null ? 'selected' : '' }}>
+                                                Pegawai Biasa
+                                            </option>
+                                            @foreach ($jabatan as $item)
+                                            <option value="{{ $item->id_role }}" {{ old('id_role', isset($pegawai) ? $pegawai->id_role : '') == $item->id_role ? 'selected' : '' }}>
+                                                {{ $item->role }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="username_field" style="display: none;">
+                                        <label class="font-weightbold">Username Karyawan</label>
+                                        <input type="text" class="form-control @error('username_pegawai') is-invalid @enderror" name="username_pegawai" value="{{old('username_pegawai') }}" placeholder="Masukkan UserName (tidak wajib)">
+                                        @error('username_pegawai')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="password_field" style="display: none;">
+                                        <label class="font-weightbold">Password Karyawan</label>
+                                        <input type="password" class="form-control @error('password_pegawai') is-invalid @enderror" name="password_pegawai" value="{{old('password_pegawai') }}" placeholder="Masukkan Password Karyawan(tidak wajib)">
+                                        @error('password_pegawai')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weightbold">Gaji Karyawan</label>
+                                        <input type="number" class="form-control @error('gaji') is-invalid @enderror" name="gaji" value="{{old('gaji') }}">
+                                        @error('gaji')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -107,8 +137,8 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Foto Karyawan</label>
-                                        <input type="file" class="form-control @error('fotoKaryawan') is-invalid @enderror" name="fotoKaryawan" value="{{old('fotoKaryawan') }}">
-                                        @error('fotoKaryawan')
+                                        <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{old('foto') }}">
+                                        @error('foto')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -131,5 +161,20 @@
     </div>
 
 </body>
+<script>
+    document.getElementById('id_role_select').addEventListener('change', function() {
+        var selectedValue = this.value;
+        var usernameField = document.getElementById('username_field');
+        var passwordField = document.getElementById('password_field');
+
+        if (selectedValue === '') {
+            usernameField.style.display = 'none';
+            passwordField.style.display = 'none';
+        } else {
+            usernameField.style.display = 'block';
+            passwordField.style.display = 'block';
+        }
+    });
+</script>
 
 @endsection
