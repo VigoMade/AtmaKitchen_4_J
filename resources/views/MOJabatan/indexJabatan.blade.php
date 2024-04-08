@@ -61,7 +61,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createJabatan')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Jabatan</a>
+                            <a href="{{route('jabatan.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Jabatan</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -71,17 +71,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse($jabatan as $item)
                                         <tr>
-                                            <td class="text-center">#</td>
+                                            <td class="text-center">{{$item->role}}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editJabatan')}}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('jabatan.destroy',$item->id_role)}}" method="POST">
+                                                    <a href="{{route('jabatan.edit',$item->id_role)}}" class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Data Jabatan belum tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
