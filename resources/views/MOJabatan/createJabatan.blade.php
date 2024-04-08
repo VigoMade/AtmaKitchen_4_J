@@ -55,13 +55,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('jabatan.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Jabatan</label>
-                                        <input type="text" class="form-control @error('jabatan') is-invalid @enderror" name="jabatan" value="{{ old('jabatan') }}" placeholder="Masukkan Jabatan">
-                                        @error('jabatan')
+                                        <input type="text" class="form-control @error('role') is-invalid @enderror" name="role" value="{{ old('role') }}" placeholder="Masukkan Role">
+                                        @error('role')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

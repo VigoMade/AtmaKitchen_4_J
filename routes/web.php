@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JabatanController;
 use Illuminate\Support\Facades\Route;
 
 //resep
@@ -81,17 +82,7 @@ Route::get('/indexPenitip', function () {
 
 
 //jabatan
-Route::get('/editJabatan', function () {
-    return view('MOJabatan.editJabatan');
-});
-
-Route::get('/createJabatan', function () {
-    return view('MOJabatan.createJabatan');
-});
-
-Route::get('/indexJabatan', function () {
-    return view('MOJabatan.indexJabatan');
-});
+Route::resource('/jabatan', JabatanController::class);
 
 //karyawan
 Route::get('/editKaryawan', function () {
