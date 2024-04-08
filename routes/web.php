@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
 //resep
@@ -85,6 +86,13 @@ Route::get('/indexPenitip', function () {
 Route::resource('/jabatan', JabatanController::class);
 
 //karyawan
+Route::resource('/pegawai', PegawaiController::class);
+Route::get('/pegawai/search', 'PegawaiController@search')->name('pegawai.search');
+
+
+
+
+
 Route::get('/editKaryawan', function () {
     return view('MOKaryawan.editKaryawan');
 });

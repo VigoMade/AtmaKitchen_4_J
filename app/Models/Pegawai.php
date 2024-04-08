@@ -19,9 +19,10 @@ class Pegawai extends Model
         'gaji',
         'username_pegawai',
         'password_pegawai',
+        'foto'
     ];
 
-    public function role()
+    public function jabatan()
     {
         return $this->belongsTo(Jabatan::class, 'id_role', 'id_role');
     }
