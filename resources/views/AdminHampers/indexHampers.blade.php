@@ -49,6 +49,13 @@
                     </ol>
                     <li class="breadcrumb-item active">Show Hampers</li>
                 </div>
+
+                <form action="{{route('hampers.search')}}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name = "search" placeholder="Cari Hampers....">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
+                </form>
                 <!-- /.col -->
             </div>
             <!-- row -->
@@ -61,7 +68,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createHampers')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Hampers</a>
+                            <a href="{{route('hampers.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Hampers</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -74,20 +81,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse ($hampers as $item)
                                         <tr>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
+                                            <td class="text-center">{{ $item->nama_hampers }}</td>
+                                            <td class="text-center">{{ $item->deskripsi_hampers }}</td>
+                                            <td class="text-center">{{ $item->harga_hampers }}</td>
+                                             <td class="text-center"><img src="/images/{{ $item->image }}" width="100px"></td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editHampers')}}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('hampers.destroy',$item->id_hampers)}}" method="POST">
+                                                    <a href="{{route('hampers.edit',$item->id_hampers)}}"class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                         @empty
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

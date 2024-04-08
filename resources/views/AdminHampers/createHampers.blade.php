@@ -49,27 +49,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('hampers.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Hampers</label>
-                                <input type="text" class="form-control @error('namaHampers') is-invalid @enderror" name="namaHampers" value="{{ old('namaHampers') }}" placeholder="Masukkan Nama Hampers">
-                                @error('namaHampers')
+                                <input type="text" class="form-control @error('nama_hampers') is-invalid @enderror" name="nama_hampers" value="{{ old('nama_hampers') }}" placeholder="Masukkan Nama Hampers">
+                                @error('nama_hampers')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Deskripsi Hampers</label>
-                                <input type="text" class="form-control @error('deskripsiHampers') is-invalid @enderror" name="deskripsiHampers" value="{{ old('deskripsiHampers') }}" placeholder="Masukkan Deskripsi Hampers">
-                                @error('deskripsiHampers')
+                                <input type="text" class="form-control @error('deskripsi_hampers') is-invalid @enderror" name="deskripsi_hampers" value="{{ old('deskripsi_hampers') }}" placeholder="Masukkan Deskripsi Hampers">
+                                @error('deskripsi_hampers')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Harga</label>
-                                    <input type="number" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('harga') }}" placeholder="Masukkan Harga">
-                                    @error('harga')
+                                    <input type="number" class="form-control @error('harga_hampers') is-invalid @enderror" name="harga_hampers" value="{{ old('harga_hampers') }}" placeholder="Masukkan Harga">
+                                    @error('harga_hampers')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
