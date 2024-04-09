@@ -119,6 +119,7 @@ Route::get('/resep/search', 'ResepController@search')->name('resep.search');
 Route::delete('/reseps/{id_resep}/{id_bahanBaku}', [ResepController::class, 'destroy'])->name('reseps.destroy');
 Route::get('/reseps/{id_resep}/{id_bahanBaku}/edit', [ResepController::class, 'edit'])->name('reseps.edit');
 Route::put('/reseps/{id_resep}/{id_bahanBaku}', [ResepController::class, 'update'])->name('reseps.update');
+Route::get('/reseps/search', 'ResepController@search')->name('reseps.search');
 
 //bahan baku
 Route::resource('/bahanBaku', BahanBakuController::class);
