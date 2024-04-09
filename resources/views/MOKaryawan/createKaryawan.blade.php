@@ -127,15 +127,6 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label class="font-weightbold">Gaji Karyawan</label>
-                                        <input type="number" class="form-control @error('gaji') is-invalid @enderror" name="gaji" value="{{old('gaji') }}">
-                                        @error('gaji')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-12">
                                         <label class="font-weightbold">Foto Karyawan</label>
                                         <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto" value="{{old('foto') }}">
                                         @error('foto')

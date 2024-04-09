@@ -65,28 +65,41 @@
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Foto Karyawan</th>
                                             <th class="text-center">Nama Karyawan</th>
-                                            <th class="text-center">Gaji Karyawan</th>
+                                            <th class="text-center">Bonus Gaji Karyawan</th>
+                                            <th class="text-center">Total Gaji Karyawan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse($pegawai as $item)
                                         <tr>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
+                                            <td class="text-center">@if($item->foto)
+                                                <img src="/images/{{$item->foto}}" width="100px" alt="foto">
+                                                @else
+                                                <div class="alert alert-danger">
+                                                    Tidak ada foto
+                                                </div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{$item->nama_pegawai}}</td>
+                                            <td class="text-center">{{$item->bonus_gaji}}</td>
+                                            <td class="text-center">{{$item->gaji}}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editGaji')}}" class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                </form>
+                                                <a href="{{route('gaji.edit',$item->id_pegawai)}}" class="btn btn-sm btn-primary">EDIT</a>
                                             </td>
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Data Pegawai belum tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
                         </div>
+                        {{$pegawai->links()}}
                         <!-- body -->
                     </div>
                     <!-- card -->

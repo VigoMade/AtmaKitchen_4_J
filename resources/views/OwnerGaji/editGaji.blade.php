@@ -55,22 +55,32 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('gaji.update',$pegawai->id_pegawai)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Nama Karyawan</label>
-                                        <input type="text" class="form-control @error('namaKaryawan') is-invalid @enderror" name="namaKaryawan" value="{{ old('namaKaryawan') }}" placeholder="Masukkan Nama Karyawan">
-                                        @error('namaKaryawan')
+                                        <input type="text" class="form-control @error('nama_pegawai') is-invalid @enderror" value="{{old('nama_pegawai',$pegawai->nama_pegawai) }}" disabled>
+                                        @error('nama_pegawai')
+                                        <div class=" invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weightbold">Gaji Karyawan</label>
+                                        <input type="number" class="form-control @error('gaji') is-invalid @enderror" name="gaji" value="{{old('gaji',$pegawai->gaji) }}">
+                                        @error('gaji')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label class="font-weightbold">Gaji</label>
-                                        <input type="number" class="form-control @error('gaji') is-invalid @enderror" name="gaji" value="{{ old('gaji') }}" placeholder="Masukkan gaji">
-                                        @error('gaji')
+                                        <label class="font-weightbold">Bonus Gaji Karyawan</label>
+                                        <input type="number" class="form-control @error('bonus_gaji') is-invalid @enderror" name="bonus_gaji" value="{{old('bonus_gaji',$pegawai->bonus_gaji) }}">
+                                        @error('bonus_gaji')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

@@ -44,7 +44,6 @@ class PegawaiController extends Controller
             'nama_pegawai' => 'required',
             'telepon_pegawai' => 'required',
             'email_pegawai' => 'required',
-            'gaji' => 'required',
             'foto' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
         ]);
 
@@ -63,6 +62,7 @@ class PegawaiController extends Controller
 
         $input['username'] = $request->input('username_pegawai', null);
         $input['password'] = $request->input('password_pegawai', null);
+        $input['gaji'] = 0;
 
         try {
             Pegawai::create($input);
@@ -96,12 +96,10 @@ class PegawaiController extends Controller
     public function update(Request $request, $id)
     {
         $pegawai = Pegawai::find($id);
-        // validate form
         $this->validate($request, [
             'nama_pegawai' => 'required',
             'telepon_pegawai' => 'required',
             'email_pegawai' => 'required',
-            'gaji' => 'required',
             'foto' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
         ]);
 
