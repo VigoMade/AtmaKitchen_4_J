@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PenitipController;
+use App\Http\Controllers\ResepController;
 use Illuminate\Support\Facades\Route;
 
 
