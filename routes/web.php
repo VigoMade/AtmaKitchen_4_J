@@ -4,8 +4,6 @@ use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PegawaiController;
-use App\Http\Controllers\ResepController;
-use App\Http\Controllers\BahanBakuController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,17 +39,10 @@ Route::get('/hampers/search', 'HampersController@search')->name('hampers.search'
 
 
 //penitip
-Route::get('/editPenitip', function () {
-    return view('MOPenitip.editPenitip');
-});
+Route::resource('/penitip', PenitipController::class);
+Route::get('/penitip/search', 'PenitipController@search')->name('penitip.search');
 
-Route::get('/createPenitip', function () {
-    return view('MOPenitip.createPenitip');
-});
 
-Route::get('/indexPenitip', function () {
-    return view('MOPenitip.indexPenitip');
-});
 
 
 //jabatan

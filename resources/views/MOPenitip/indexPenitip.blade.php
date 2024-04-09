@@ -49,6 +49,12 @@
                     </ol>
                     <li class="breadcrumb-item active">Show Pentip</li>
                 </div>
+                <form action="{{route('penitip.search')}}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name = "search" placeholder="Cari Penitip....">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
+                </form>
                 <!-- /.col -->
             </div>
             <!-- row -->
@@ -61,7 +67,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createPenitip')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Penitip</a>
+                            <a href="{{route('penitip.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Penitip</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -76,23 +82,30 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
+                                            @forelse($penitips as $item)
+                                           <td class="text-center"><img src="/images/{{ $item->image }}" width="100px"></td>
+                                            <td class="text-center">{{$item->nama_penitip}}</td>
+                                            <td class="text-center">{{$item->nama_produk_penitip}}</td>
+                                            <td class="text-center">{{$item->jumlah_produk_penitip}}</td>
+                                            <td class="text-center">{{$item->jenis_produk_penitip}}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editPenitip')}}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('penitip.destroy',$item->id_penitip)}}" method="POST">
+                                                    <a href="{{route('penitip.edit' , $item->id_penitip)}}" class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                          @empty
+                                        <div class="alert alert-danger">
+                                            Data Jabatan belum tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{$penitips->links()}}
                         </div>
                         <!-- body -->
                     </div>

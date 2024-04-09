@@ -55,13 +55,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('penitip.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Nama Penitip</label>
-                                        <input type="text" class="form-control @error('namaPenitip') is-invalid @enderror" name="namaPenitip" value="{{ old('namaPenitip') }}" placeholder="Masukkan Nama Penitip">
-                                        @error('namaPenitip')
+                                        <input type="text" class="form-control @error('nama_penitip') is-invalid @enderror" name="nama_penitip" value="{{ old('nama_penitip') }}" placeholder="Masukkan Nama Penitip">
+                                        @error('nama_penitip')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -71,8 +71,8 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Nama Produk Penitip</label>
-                                        <input type="text" class="form-control @error('produkPenitip') is-invalid @enderror" name="produkPenitip" value="{{old('produkPenitip') }}" placeholder="Masukkan Nama Produk Penitip">
-                                        @error('produkPenitip')
+                                        <input type="text" class="form-control @error('nama_produk_penitip') is-invalid @enderror" name="nama_produk_penitip" value="{{old('nama_produk_penitip') }}" placeholder="Masukkan Nama Produk Penitip">
+                                        @error('nama_produk_penitip')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -80,26 +80,27 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Jumlah Produk Penitip</label>
-                                        <input type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" value="{{old('jumlah') }}" placeholder="Masukkan Jumlah Produk Penitip">
-                                        @error('jumlah')
+                                        <input type="number" class="form-control @error('jumlah_produk_penitip') is-invalid @enderror" name="jumlah_produk_penitip" value="{{old('jumlah_produk_penitip') }}" placeholder="Masukkan Jumlah Produk Penitip">
+                                        @error('jumlah_produk_penitip')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    
+                                    <div class="form-group col-md-12">
                                         <label class="font-weightbold">Jenis Produk Penitip</label>
-                                        <input type="text" class="form-control @error('jenis') is-invalid @enderror" name="jenis" value="{{old('jenis') }}" placeholder="Masukkan Jenis Produk Penitip">
-                                        @error('jenis')
+                                        <input type="text" class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip" value="{{old('jenis_produk_penitip') }}" placeholder="Masukkan Jenis Produk Penitip">
+                                        @error('jenis_produk_penitip')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md-12">
                                         <label class="font-weightbold">Foto Produk Penitip</label>
-                                        <input type="file" class="form-control @error('fotoProdukPenitip') is-invalid @enderror" name="fotoProdukPenitip" value="{{old('fotoProdukPenitip') }}">
-                                        @error('fotoProdukPenitip')
+                                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{old('image') }}">
+                                        @error('image')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

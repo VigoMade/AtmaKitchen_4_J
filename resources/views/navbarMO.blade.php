@@ -79,8 +79,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('indexPenitip') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/indexPenitip')}}">Penitip</a>
+                    <li class="nav-item {{ Request::is('penitip') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('/penitip')}}">Penitip</a>
                     </li>
                     <li class="nav-item {{ Request::is('jabatan') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('jabatan')}}">Jabatan</a>
