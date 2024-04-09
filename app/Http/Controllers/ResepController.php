@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetailResepBahanBaku;
+use App\Models\BahanBaku;
+use App\Models\Resep;
 use Illuminate\Http\Request;
 
 class ResepController extends Controller
@@ -27,7 +29,8 @@ class ResepController extends Controller
 
     public function create()
     {
-        return view('AdminResep.createResep');
+        $reseps = DetailResepBahanBaku::all();
+        return view('adminResep.createResep', compact('reseps'));
     }
 
     /**
@@ -39,8 +42,31 @@ class ResepController extends Controller
 
     public function store(Request $request)
     {
-        Resep::create($request->only('nama_resep'));
-        return redirect()->route('resep.index')->with('success', 'Resep berhasil ditambahkan.');
+        $this->validate($request, [
+            'nama_resep' => 'required',
+            'nama_bahan_baku' => 'required',
+            'total_penggunaan_bahan' => 'required',
+        ]);
+
+        $nama_resep = $request->input('nama_resep');
+         $nama_bahan_baku = $request->input('nama_bahan_baku');
+         $total_penggunaan_bahan = $request->input('total_penggunaan_bahan');
+         
+         $bahanBaku = BahanBaku::where('nama_bahan_baku', $nama_bahan_baku)->first();
+         $resep_ = Resep::where('nama_resep', $nama_resep)->first();
+         
+         if ($bahanBaku && $resep_) {
+            DetailResepBahanBaku::create([
+                 'deskripsi_resep_produk'=> $resep_->nama_resep,
+                 'id_resep' => $resep_->id_resep,
+                 'id_bahan_baku' => $bahanBaku->id_bahan_baku,
+                 'total_penggunaan_bahan' => $total_penggunaan_bahan,
+             ]);
+
+             return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Diubah!']);
+         } else {
+             return redirect()->route('reseps.index')->with(['error' => 'Nama Bahan baku atau Nama resep tidak ditemukan!']);
+         }
     }
 
     /**
@@ -66,11 +92,44 @@ class ResepController extends Controller
      * @return void
      */
 
-    public function update(Request $request, Resep $resep)
-    {
-        $resep->update($request->only('nama_resep'));
-        return redirect()->route('resep.index')->with('success', 'Resep berhasil diperbarui.');
-    }
+    /**
+     * update
+     *
+     * @param mixed $request
+     * @param int $id
+     * @return void
+     */
+
+     public function update(Request $request, $id_resep,$id_bahanBaku)
+     {
+         $resep = DetailResepBahanBaku::where('id_resep', $id_resep)
+                                            ->where('id_bahan_baku', $id_bahanBaku);
+ 
+         $this->validate($request, [
+             'nama_resep' => 'required',
+             'nama_bahan_baku' => 'required',
+             'total_penggunaan_bahan' => 'required',
+         ]);
+ 
+         $nama_resep = $request->input('nama_resep');
+         $nama_bahan_baku = $request->input('nama_bahan_baku');
+         $total_penggunaan_bahan = $request->input('total_penggunaan_bahan');
+         
+         $bahanBaku = BahanBaku::where('nama_bahan_baku', $nama_bahan_baku)->first();
+         $resep_ = Resep::where('nama_resep', $nama_resep)->first();
+         
+         if ($bahanBaku && $resep_) {
+             $resep->update([
+                 'id_resep' => $resep_->id_resep,
+                 'id_bahan_baku' => $bahanBaku->id_bahan_baku,
+                 'total_penggunaan_bahan' => $total_penggunaan_bahan,
+             ]);
+         
+             return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Diubah!']);
+         } else {
+             return redirect()->route('reseps.index')->with(['error' => 'Bahan baku atau resep tidak ditemukan!']);
+         }
+     }
 
     /**
      * destroy
@@ -83,9 +142,7 @@ class ResepController extends Controller
     {
         $resep = DetailResepBahanBaku::where('id_resep', $id_resep)
                                         ->where('id_bahan_baku', $id_bahanBaku)
-                                        ->firstOrFail();
-                                        dd($resep);
-        $resep->delete();
+                                        ->delete();
         return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
