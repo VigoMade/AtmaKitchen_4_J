@@ -115,9 +115,10 @@ Route::get('/indexGaji', function () {
 
 //resep
 Route::resource('/reseps', ResepController::class);
-Route::get('/resep/search', 'ResepController@search')->name('resep.search');
 Route::get('/reseps/{id_detail_resep_bahan}/{id_resep}/{id_bahanBaku}/edit', [ResepController::class, 'edit'])->name('reseps.edit');
 Route::put('/reseps/{id_detail_resep_bahan}/{id_resep}/{id_bahanBaku}', [ResepController::class, 'update'])->name('reseps.update');
+Route::get('/reseps/search', 'ResepController@search')->name('reseps.search');
+
 
 //bahan baku
 Route::resource('/bahanBaku', BahanBakuController::class);

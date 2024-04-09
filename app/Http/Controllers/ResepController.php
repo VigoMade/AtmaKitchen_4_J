@@ -152,17 +152,25 @@ class ResepController extends Controller
         return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
-    public function show(Request $request)
-    {
-        $search = $request->search;
-        $resep = Resep::where('nama_resep', 'like', '%' . $search . "%")->paginate(5);
-        return view('AdminResep.indexResep', compact('reseps'));
-    }
+ 
 
     public function search(Request $request)
     {
         $search = $request->search;
         $resep = Resep::where('nama_resep', 'like', '%' . $search . "%")->paginate(5);
+        $reseps = DetailResepBahanBaku::whereHas('resep', function ($query) use ($search) {
+            $query->where('nama_resep', 'like', '%' . $search . "%");
+        })->paginate(5);
+
+        return view('AdminResep.indexResep', compact('reseps'));
+    }
+
+
+     public function search(Request $request){
+        $search = $request->search;
+        $reseps = DetailResepBahanBaku::whereHas('resep', function ($query) use ($search) {
+            $query->where('nama_resep', 'like', '%' . $search . "%");
+        })->paginate(5);
         return view('AdminResep.indexResep', compact('reseps'));
     }
 }
