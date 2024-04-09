@@ -8,31 +8,7 @@ use App\Http\Controllers\ResepController;
 use App\Http\Controllers\BahanBakuController;
 use Illuminate\Support\Facades\Route;
 
-//resep
-// Route::get('/createResep', function () {
-//     return view('AdminResep.createResep');
-// });
 
-// Route::get('/editResep', function () {
-//     return view('AdminResep.editResep');
-// });
-
-// Route::get('/indexResep', function () {
-//     return view('AdminResep.indexResep');
-// });
-
-// //bahan baku
-// Route::get('/createBahan', function () {
-//     return view('AdminBahanBaku.createBahanBaku');
-// });
-
-// Route::get('/editBahan', function () {
-//     return view('AdminBahanBaku.editBahanBaku');
-// });
-
-// Route::get('/indexBahan', function () {
-//     return view('AdminBahanBaku.indexBahanBaku');
-// });
 
 Route::get('/', function () {
     return view('MOPenitip.indexPenitip');
@@ -86,31 +62,10 @@ Route::resource('/pegawai', PegawaiController::class);
 Route::get('/pegawai/search', 'PegawaiController@search')->name('pegawai.search');
 
 
-
-
-
-Route::get('/editKaryawan', function () {
-    return view('MOKaryawan.editKaryawan');
-});
-
-Route::get('/createKaryawan', function () {
-    return view('MOKaryawan.createKaryawan');
-});
-
-Route::get('/indexKaryawan', function () {
-    return view('MOKaryawan.indexKaryawan');
-});
-
 //gaji
 Route::resource('/gaji', GajiController::class);
 
-Route::get('/editGaji', function () {
-    return view('OwnerGaji.editGaji');
-});
 
-Route::get('/indexGaji', function () {
-    return view('OwnerGaji.indexGaji');
-});
 
 
 //resep
