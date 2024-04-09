@@ -49,6 +49,15 @@
                     </ol>
                     <li class="breadcrumb-item active">Show Karyawan</li>
                 </div>
+
+                <form action="{{ route('pegawai.search') }}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Pegawai...">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
+                </form>
+
+
                 <!-- /.col -->
             </div>
             <!-- row -->
@@ -61,7 +70,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createKaryawan')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Karyawan</a>
+                            <a href="{{route('pegawai.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Karyawan</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -70,29 +79,62 @@
                                             <th class="text-center">Nama Karyawan</th>
                                             <th class="text-center">No Telpon</th>
                                             <th class="text-center">Email</th>
+                                            <th class="text-center">Username</th>
+                                            <th class="text-center">Password</th>
                                             <th class="text-center">Jabatan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse($pegawai as $item)
                                         <tr>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
+                                            <td class="text-center">@if($item->foto)
+                                                <img src="/images/{{$item->foto}}" width="100px" alt="foto">
+                                                @else
+                                                <div class="alert alert-danger">
+                                                    Tidak ada foto
+                                                </div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{$item->nama_pegawai}}</td>
+                                            <td class="text-center">{{$item->telepon_pegawai}}</td>
+                                            <td class="text-center">{{$item->email_pegawai}}</td>
+                                            <td class="text-center">@if($item->username_pegawai)
+                                                {{ $item->username_pegawai }}
+                                                @else
+                                                Tidak Ada Username
+                                                @endif
+                                            </td>
+                                            <td class="text-center">@if($item->password_pegawai)
+                                                {{ $item->password_pegawai }}
+                                                @else
+                                                Tidak Ada Password
+                                                @endif
+                                            </td>
+                                            <td class="text-center">@if($item->jabatan)
+                                                {{ $item->jabatan->role }}
+                                                @else
+                                                Pegawai Biasa
+                                                @endif
+                                            </td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editKaryawan')}}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pegawai.destroy',$item->id_pegawai)}}" method="POST">
+                                                    <a href="{{route('pegawai.edit',$item->id_pegawai)}}" class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Data Pegawai belum tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{ $pegawai->links() }}
                         </div>
                         <!-- body -->
                     </div>
