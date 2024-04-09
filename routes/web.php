@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PegawaiController;
@@ -101,6 +102,8 @@ Route::get('/indexKaryawan', function () {
 });
 
 //gaji
+Route::resource('/gaji', GajiController::class);
+
 Route::get('/editGaji', function () {
     return view('OwnerGaji.editGaji');
 });
