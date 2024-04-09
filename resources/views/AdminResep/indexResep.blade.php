@@ -79,7 +79,7 @@
                                         <td class="text-center">{{ $resep->bahanBaku->nama_bahan_baku }}</td>
                                         <td class="text-center">{{ $resep->total_penggunaan_bahan }}</td>
                                         <td class="text-center">
-                                            <form  onsubmit="return confirm('Apakah Anda Yakin ?');"  action="{{ route('reseps.destroy',  ['id_resep' => $resep->id_resep, 'id_bahanBaku' => $resep->id_bahan_baku]) }}" method="POST">
+                                            <form  onsubmit="return confirm('Apakah Anda Yakin ?');"  action="{{ route('reseps.destroy', ['id_resep' => $resep->id_resep, 'id_bahanBaku' => $resep->id_bahan_baku]) }}" method="POST">
                                                 <a href="{{ route('reseps.edit',['id_resep' => $resep->id_resep, 'id_bahanBaku' => $resep->id_bahan_baku]) }}" class="btn btn-sm btn-primary">Edit</a>
                                                 @csrf
                                                 @method('DELETE')

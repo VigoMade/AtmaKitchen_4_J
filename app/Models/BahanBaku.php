@@ -13,8 +13,5 @@ class BahanBaku extends Model
 
     protected $fillable = ['nama_bahan_baku', 'takaran_bahan_baku_tersedia', 'satuan_bahan_baku'];
     
-    public function detailResep()
-    {
-        return $this->hasMany(DetailResepBahanBaku::class, 'id_bahan_baku');
-    }
+   
 }
