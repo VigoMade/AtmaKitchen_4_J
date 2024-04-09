@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('reseps.update',$resep->id_resep)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
