@@ -52,6 +52,12 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <form action="{{ route('bahanBaku.search') }}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Cari BahanBaku...">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
+            </form>
             <!-- row -->
         </div>
         <!-- container -->
@@ -62,7 +68,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createBahan')}}" class="btn btn-md btn-success mb-3 btn-tambah-bahan">Tambah Bahan Baku</a>
+                            <a href="{{route('bahanBaku.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-bahan">Tambah Bahan Baku</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -74,22 +80,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @forelse ($bahanBaku as $item)
                                         <tr>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
+                                            <td class="text-center">{{ $item->nama_bahan_baku }}</td>
+                                            <td class="text-center">{{ $item->takaran_bahan_baku_tersedia }}</td>
+                                            <td class="text-center">{{ $item->satuan_bahan_baku }}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editBahan')}}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('bahanBaku.destroy',$item->id_bahan_baku)}}" method="POST">
+                                                    <a href="{{route('bahanBaku.edit',$item->id_bahan_baku)}}"class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                         @empty
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{ $bahanBaku->links() }}
                         </div>
                         <!-- body -->
                     </div>

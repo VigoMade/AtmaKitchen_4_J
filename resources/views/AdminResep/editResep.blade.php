@@ -55,13 +55,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('reseps.update',['id_resep' => $resep->id_resep, 'id_bahanBaku' => $resep->id_bahan_baku])}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Nama Resep</label>
-                                        <input type="text" class="form-control @error('namaResep') is-invalid @enderror" name="namaResep" value="{{ old('namaResep') }}" placeholder="Masukkan Nama Resep">
-                                        @error('namaResep')
+                                        <input type="text" class="form-control @error('nama_resep') is-invalid @enderror" name="nama_resep" value="{{ old('nama_resep',$resep->resep->nama_resep) }}" placeholder="Masukkan Nama Resep">
+                                        @error('nama_resep')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -71,8 +72,8 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Bahan Baku yang Digunakan</label>
-                                        <input type="text" class="form-control @error('bahan') is-invalid @enderror" name="bahan" value="{{old('bahan') }}" placeholder="Masukkan Bahan Baku yang Digunakan">
-                                        @error('bahan')
+                                        <input type="text" class="form-control @error('nama_bahan_baku') is-invalid @enderror" name="nama_bahan_baku" value="{{old('nama_bahan_baku',$resep->bahanBaku->nama_bahan_baku) }}" placeholder="Masukkan Bahan Baku yang Digunakan">
+                                        @error('nama_bahan_baku')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -80,8 +81,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Total Penggunaan</label>
-                                        <input type="number" class="form-control @error('penggunaan') is-invalid @enderror" name="penggunaan" value="{{old('penggunaan') }}" placeholder="Masukkan Total penggunaan">
-                                        @error('penggunaan')
+                                        <input type="number" class="form-control @error('total_penggunaan_bahan') is-invalid @enderror" name="total_penggunaan_bahan" value="{{old('total_penggunaan_bahan',$resep->total_penggunaan_bahan) }}" placeholder="Masukkan Total penggunaan">
+                                        @error('total_penggunaan_bahan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

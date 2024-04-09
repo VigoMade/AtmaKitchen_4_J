@@ -55,13 +55,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('bahanBaku.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Nama Bahan Baku</label>
-                                        <input type="text" class="form-control @error('namaBahan') is-invalid @enderror" name="namaBahan" value="{{ old('namaBahan') }}" placeholder="Masukkan Nama Bahan Baku">
-                                        @error('namaBahan')
+                                        <input type="text" class="form-control @error('nama_bahan_baku') is-invalid @enderror" name="nama_bahan_baku" value="{{ old('nama_bahan_baku') }}" placeholder="Masukkan Nama Bahan Baku">
+                                        @error('nama_bahan_baku')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -71,8 +71,8 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Stock Bahan Baku</label>
-                                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{old('stock') }}" placeholder="Masukkan stock Bahan Baku">
-                                        @error('stock')
+                                        <input type="number" class="form-control @error('takaran_bahan_baku_tersedia') is-invalid @enderror" name="takaran_bahan_baku_tersedia" value="{{old('takaran_bahan_baku_tersedia') }}" placeholder="Masukkan stock Bahan Baku">
+                                        @error('takaran_bahan_baku_tersedia')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -80,8 +80,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Satuan Bahan Baku</label>
-                                        <input type="text" class="form-control @error('satuan') is-invalid @enderror" name="satuan" value="{{old('satuan') }}" placeholder="Masukkan satuan Bahan Baku">
-                                        @error('satuan')
+                                        <input type="text" class="form-control @error('satuan_bahan_baku') is-invalid @enderror" name="satuan_bahan_baku" value="{{old('satuan_bahan_baku') }}" placeholder="Masukkan satuan Bahan Baku">
+                                        @error('satuan_bahan_baku')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

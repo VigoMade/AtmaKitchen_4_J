@@ -14,7 +14,7 @@
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
-
+    <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <style>
         .navbar-light .navbar-nav .nav-link {
             color: #FFFFFF;
@@ -77,8 +77,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('indexGaji') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/indexGaji')}}">Gaji</a>
+                    <li class="nav-item {{ Request::is('gaji') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('/gaji')}}">Gaji</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">Laporan</a>

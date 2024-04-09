@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-
+    <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
@@ -86,8 +86,8 @@
                     <li class="nav-item {{ Request::is('indexBahan') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('/indexBahan')}}">Bahan Baku</a>
                     </li>
-                    <li class="nav-item {{ Request::is('indexHampers') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/indexHampers')}}">Hampers</a>
+                    <li class="nav-item {{ Request::is('hampers') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('hampers')}}">Hampers</a>
                     </li>
                 </ul>
             </div>
