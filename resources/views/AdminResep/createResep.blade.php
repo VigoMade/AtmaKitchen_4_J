@@ -69,10 +69,28 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weightbold">Deskripsi Resep</label>
+                                        <input type="text" class="form-control @error('deskripsi_resep_produk') is-invalid @enderror" name="deskripsi_resep_produk" value="{{ old('deskripsi_resep_produk') }}" placeholder="Masukkan Deskripsi Resep">
+                                        @error('deskripsi_resep_produk')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label class="font-weightbold">Bahan Baku yang Digunakan</label>
-                                        <input type="text" class="form-control @error('nama_bahan_baku') is-invalid @enderror" name="nama_bahan_baku" value="{{old('nama_bahan_baku') }}" placeholder="Masukkan Bahan Baku yang Digunakan">
-                                        @error('nama_bahan_baku')
+                                        <label class="font-weight-bold" for="id_bahan_baku">Masukkan Bahan Baku</label>
+                                        <select class="form-control @error('id_bahan_baku') is-invalid @enderror" name="id_bahan_baku">
+                                            <option value="">Pilih Bahan Baku</option>
+                                            @foreach ($bahanBaku as $item)
+                                            <option value="{{ $item->id_bahan_baku }}" {{ old( isset($resep) ? $resep->id_bahan_baku : '') == $item->id_bahan_baku ? 'selected' : '' }}>
+                                                {{ $item->nama_bahan_baku }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_bahan_baku')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

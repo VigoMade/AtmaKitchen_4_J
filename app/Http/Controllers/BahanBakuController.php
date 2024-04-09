@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BahanBaku;
+use Exception;
 use Illuminate\Http\Request;
 
 class BahanBakuController extends Controller
@@ -30,7 +31,7 @@ class BahanBakuController extends Controller
         return view('adminBahanBaku.createBahanBaku', compact('bahanBaku'));
     }
 
-     /**
+    /**
      * store
      *
      * @param Request $request
@@ -92,7 +93,7 @@ class BahanBakuController extends Controller
         return redirect()->route('bahanBaku.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
-     /**
+    /**
      * destroy
      *
      * @param int $id

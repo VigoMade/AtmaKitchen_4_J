@@ -80,14 +80,14 @@
                     <li class="nav-item {{ Request::is('indexProduk') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('/indexProduk')}}">Produk</a>
                     </li>
-                    <li class="nav-item {{ Request::is('indexResep') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/indexResep')}}">Resep</a>
+                    <li class="nav-item {{ Request::is('reseps') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('/reseps')}}">Resep</a>
                     </li>
-                    <li class="nav-item {{ Request::is('indexBahan') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/indexBahan')}}">Bahan Baku</a>
+                    <li class="nav-item {{ Request::is('bahanBaku') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('/bahanBaku')}}">Bahan Baku</a>
                     </li>
                     <li class="nav-item {{ Request::is('hampers') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('hampers')}}">Hampers</a>
+                        <a class="nav-link mx-2" href="{{url('/hampers')}}">Hampers</a>
                     </li>
                 </ul>
             </div>
