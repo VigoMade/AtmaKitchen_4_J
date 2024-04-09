@@ -78,8 +78,8 @@
                                             <td class="text-center">@if($item->foto)
                                                 <img src="/images/{{$item->foto}}" width="100px" alt="foto">
                                                 @else
-                                                <div class="alert alert-danger">
-                                                    Tidak ada foto
+                                                <div class="alert alert-danger" role="alert">
+                                                    Tidak ada foto!
                                                 </div>
                                                 @endif
                                             </td>

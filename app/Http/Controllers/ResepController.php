@@ -109,7 +109,6 @@ class ResepController extends Controller
         $total_penggunaan_bahan = $request->input('total_penggunaan_bahan');
         $deskripsi_resep_produk = $request->input('deskripsi_resep_produk');
 
-        // Update Resep first
         $resep = Resep::find($id_resep);
         if ($resep) {
             $resep->update(['nama_resep' => $nama_resep]);
@@ -118,24 +117,29 @@ class ResepController extends Controller
         $detailResep = DetailResepBahanBaku::find($id);
 
         if ($detailResep) {
-            $detailResep->update([
-                'deskripsi_resep_produk' => $deskripsi_resep_produk,
-                'total_penggunaan_bahan' => $total_penggunaan_bahan,
-            ]);
-
-
             $bahanBaku = BahanBaku::find($id_bahanBaku);
             if ($bahanBaku) {
                 $bahanBaku->takaran_bahan_baku_tersedia += $detailResep->total_penggunaan_bahan;
+                $bahanBaku->save();
+
+
+                $detailResep->update([
+                    'deskripsi_resep_produk' => $deskripsi_resep_produk,
+                    'total_penggunaan_bahan' => $total_penggunaan_bahan,
+                ]);
+
                 $bahanBaku->takaran_bahan_baku_tersedia -= $total_penggunaan_bahan;
                 $bahanBaku->save();
-            }
 
-            return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Diubah!']);
+                return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Diubah!']);
+            } else {
+                return redirect()->route('reseps.index')->with(['error' => 'Bahan Baku tidak ditemukan!']);
+            }
         } else {
-            return redirect()->route('reseps.index')->with(['error' => 'Data tidak ditemukan!']);
+            return redirect()->route('reseps.index')->with(['error' => 'Detail Resep tidak ditemukan!']);
         }
     }
+
 
 
     /**
@@ -152,21 +156,10 @@ class ResepController extends Controller
         return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
- 
+
 
     public function search(Request $request)
     {
-        $search = $request->search;
-        $resep = Resep::where('nama_resep', 'like', '%' . $search . "%")->paginate(5);
-        $reseps = DetailResepBahanBaku::whereHas('resep', function ($query) use ($search) {
-            $query->where('nama_resep', 'like', '%' . $search . "%");
-        })->paginate(5);
-
-        return view('AdminResep.indexResep', compact('reseps'));
-    }
-
-
-     public function search(Request $request){
         $search = $request->search;
         $reseps = DetailResepBahanBaku::whereHas('resep', function ($query) use ($search) {
             $query->where('nama_resep', 'like', '%' . $search . "%");
