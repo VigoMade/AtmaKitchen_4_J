@@ -19,7 +19,8 @@ class Pegawai extends Model
         'gaji',
         'username_pegawai',
         'password_pegawai',
-        'foto'
+        'foto',
+        'bonus_gaji'
     ];
 
     public function jabatan()

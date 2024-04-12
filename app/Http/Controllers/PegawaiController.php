@@ -63,6 +63,7 @@ class PegawaiController extends Controller
         $input['username'] = $request->input('username_pegawai', null);
         $input['password'] = $request->input('password_pegawai', null);
         $input['gaji'] = 0;
+        $input['bonus_gaji'] = 0;
 
         try {
             Pegawai::create($input);
