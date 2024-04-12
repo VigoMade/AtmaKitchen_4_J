@@ -53,10 +53,10 @@
                 <!-- /.col -->
             </div>
             <form action="{{ route('bahanBaku.search') }}" method="GET" class="mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari BahanBaku...">
-                        <button class="btn btn-outline-primary" type="submit">Cari</button>
-                    </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Cari BahanBaku...">
+                    <button class="btn btn-outline-primary" type="submit">Cari</button>
+                </div>
             </form>
             <!-- row -->
         </div>
@@ -68,6 +68,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if(session('error'))
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+
+                            @if(session('success'))
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                             <a href="{{route('bahanBaku.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-bahan">Tambah Bahan Baku</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
@@ -80,21 +91,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @forelse ($bahanBaku as $item)
+                                        @forelse ($bahanBaku as $item)
                                         <tr>
                                             <td class="text-center">{{ $item->nama_bahan_baku }}</td>
                                             <td class="text-center">{{ $item->takaran_bahan_baku_tersedia }}</td>
                                             <td class="text-center">{{ $item->satuan_bahan_baku }}</td>
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('bahanBaku.destroy',$item->id_bahan_baku)}}" method="POST">
-                                                    <a href="{{route('bahanBaku.edit',$item->id_bahan_baku)}}"class="btn btn-sm btn-primary">EDIT</a>
+                                                    <a href="{{route('bahanBaku.edit',$item->id_bahan_baku)}}" class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
-                                         @empty
+                                        @empty
                                         @endforelse
                                     </tbody>
                                 </table>

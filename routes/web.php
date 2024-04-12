@@ -6,13 +6,16 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PenitipController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ResepController;
+use App\Models\Penitip;
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::get('/', function () {
-    return view('MOPenitip.indexPenitip');
+    $penitips = Penitip::orderBy('id_penitip', 'desc')->paginate(5);
+    return view('MOPenitip.indexPenitip', compact('penitips'));
 });
 
 Route::get('/register', function () {
@@ -23,18 +26,10 @@ Route::get('/login', function () {
     return view('login');
 });
 
-//produk
-Route::get('/createProduk', function () {
-    return view('AdminProduk.createProduk');
-});
 
-Route::get('/editProduk', function () {
-    return view('AdminProduk.editProduk');
-});
-
-Route::get('/indexProduk', function () {
-    return view('AdminProduk.indexProduk');
-});
+//hampers
+Route::resource('/produks', ProdukController::class);
+Route::get('/produks/search', 'ProdukController@search')->name('produks.search');
 
 //hampers
 Route::resource('/hampers', HampersController::class);
