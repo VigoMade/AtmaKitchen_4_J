@@ -7,12 +7,14 @@ use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PenitipController;
 use App\Http\Controllers\ResepController;
+use App\Models\Penitip;
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::get('/', function () {
-    return view('MOPenitip.indexPenitip');
+    $penitips = Penitip::orderBy('id_penitip', 'desc')->paginate(5);
+    return view('MOPenitip.indexPenitip', compact('penitips'));
 });
 
 Route::get('/register', function () {
@@ -44,6 +46,7 @@ Route::get('/hampers/search', 'HampersController@search')->name('hampers.search'
 //penitip
 Route::resource('/penitip', PenitipController::class);
 Route::get('/penitip/search', 'PenitipController@search')->name('penitip.search');
+
 
 
 
