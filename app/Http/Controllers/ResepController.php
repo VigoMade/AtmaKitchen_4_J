@@ -45,13 +45,21 @@ class ResepController extends Controller
         $this->validate($request, [
             'nama_resep' => 'required',
             'id_bahan_baku' => 'required',
-            'total_penggunaan_bahan' => 'required',
+            'total_penggunaan_bahan' => 'required|numeric|min:1',
             'deskripsi_resep_produk' => 'required',
         ]);
 
-        $nama_resep = $request->input('nama_resep');
         $id_bahan_baku = $request->input('id_bahan_baku');
         $total_penggunaan_bahan = $request->input('total_penggunaan_bahan');
+
+
+        $bahanBaku = BahanBaku::find($id_bahan_baku);
+        if ($bahanBaku) {
+            if ($total_penggunaan_bahan > $bahanBaku->takaran_bahan_baku_tersedia) {
+                return redirect()->back()->withErrors(['total_penggunaan_bahan' => 'Total penggunaan bahan baku tidak boleh melebihi takaran bahan baku tersedia.']);
+            }
+        }
+        $nama_resep = $request->input('nama_resep');
         $deskripsi_resep_produk = $request->input('deskripsi_resep_produk');
 
         $resep = Resep::create(['nama_resep' => $nama_resep]);
@@ -62,7 +70,6 @@ class ResepController extends Controller
             'deskripsi_resep_produk' => $deskripsi_resep_produk,
         ]);
 
-        $bahanBaku = BahanBaku::find($id_bahan_baku);
         if ($bahanBaku) {
             $bahanBaku->takaran_bahan_baku_tersedia -= $total_penggunaan_bahan;
             $bahanBaku->save();
@@ -70,6 +77,7 @@ class ResepController extends Controller
 
         return redirect()->route('reseps.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
 
     /**
      * edit
@@ -159,6 +167,15 @@ class ResepController extends Controller
 
 
     public function search(Request $request)
+    {
+        $search = $request->search;
+        $reseps = DetailResepBahanBaku::whereHas('resep', function ($query) use ($search) {
+            $query->where('nama_resep', 'like', '%' . $search . "%");
+        })->paginate(5);
+        return view('AdminResep.indexResep', compact('reseps'));
+    }
+
+    public function show(Request $request)
     {
         $search = $request->search;
         $reseps = DetailResepBahanBaku::whereHas('resep', function ($query) use ($search) {

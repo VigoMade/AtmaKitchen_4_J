@@ -70,6 +70,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if(session('error'))
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+
+                            @if(session('success'))
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                             <a href="{{route('pegawai.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Karyawan</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">

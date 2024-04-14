@@ -12,6 +12,7 @@ class Produk extends Model
     protected $table = 'produk';
     protected $primaryKey = 'id_produk';
     protected $fillable = [
+        'tipe_produk',
         'id_penitip',
         'id_resep',
         'nama_produk',
@@ -22,5 +23,17 @@ class Produk extends Model
         'kuota',
         'harga_produk',
         'satuan_produk',
+        'image',
+        'status',
     ];
+
+    public function penitips()
+    {
+        return $this->belongsTo(Penitip::class, 'id_penitip');
+    }
+
+    public function reseps()
+    {
+        return $this->belongsTo(Resep::class, 'id_resep');
+    }
 }
