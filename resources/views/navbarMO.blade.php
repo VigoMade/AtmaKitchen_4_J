@@ -88,6 +88,14 @@
                     <li class="nav-item {{ Request::is('pegawai') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('pegawai')}}">Karyawan</a>
                     </li>
+                    <li class="nav-item {{ Request::is('pengeluaran') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('indexPengeluaran')}}">Pengeluaran Lainnya</a>
+                    </li>
+                    <li class="nav-item {{ Request::is('pembelian') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('indexPembelianBB')}}">Pembelian Bahan Baku</a>
+                    </li>
+
+                    
 
                 </ul>
             </div>
