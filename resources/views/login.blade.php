@@ -75,7 +75,8 @@
                 </div>
                 @endif
 
-                <form>
+                <form method="post" action="{{route('actionLogin')}}">
+                    @csrf
                     <div class="form-group">
                         <label>Username</label>
                         <input class="form-control" type="username" name="username" placeholder="Enter your username" required>
@@ -87,7 +88,7 @@
 
                     <button class="btn btn-edit" type="submit">Login</button>
                     <hr>
-                    <p class="text-center">Belum Punya akun? <a href="{{url('/register')}}" style="text-decoration: none; color:black; font-weight:bold;">Daftar Sekarang</a></p>
+                    <p class="text-center">Belum Punya akun? <a href="{{route('register')}}" style="text-decoration: none; color:black; font-weight:bold;">Daftar Sekarang</a></p>
                 </form>
             </div>
         </div>

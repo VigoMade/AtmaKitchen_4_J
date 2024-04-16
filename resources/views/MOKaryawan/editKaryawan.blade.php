@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Email Karyawan</label>
-                                        <input type="text" class="form-control @error('email_pegawai') is-invalid @enderror" name="email_pegawai" value="{{old('email_pegawai',$pegawai->email_pegawai) }}" placeholder="Masukkan Email Karyawan">
+                                        <input type="email" class="form-control @error('email_pegawai') is-invalid @enderror" name="email_pegawai" value="{{old('email_pegawai',$pegawai->email_pegawai) }}" placeholder="Masukkan Email Karyawan">
                                         @error('email_pegawai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -119,8 +119,8 @@
 
                                     <div class="form-group col-md-6" id="username_field" style="display: none;">
                                         <label class="font-weightbold">Username Karyawan</label>
-                                        <input type="text" class="form-control @error('username_pegawai') is-invalid @enderror" name="username_pegawai" value="{{old('username_pegawai',$pegawai->username_pegawai) }}" placeholder="Masukkan UserName (tidak wajib)">
-                                        @error('username_pegawai')
+                                        <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{old('username',$pegawai->username) }}" placeholder="Masukkan UserName">
+                                        @error('username')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -129,8 +129,8 @@
 
                                     <div class="form-group col-md-6" id="password_field" style="display: none;">
                                         <label class="font-weightbold">Password Karyawan</label>
-                                        <input type="password" class="form-control @error('password_pegawai') is-invalid @enderror" name="password_pegawai" value="{{old('password_pegawai',$pegawai->password_pegawai) }}" placeholder="Masukkan Password Karyawan(tidak wajib)">
-                                        @error('password_pegawai')
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password',$pegawai->password) }}" placeholder="Masukkan Password Karyawan">
+                                        @error('password')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

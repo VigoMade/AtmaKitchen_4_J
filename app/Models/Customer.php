@@ -8,26 +8,26 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\Authenticatable;
 
-class Pegawai extends Model implements Authenticatable
+class Customer extends Model implements Authenticatable
 {
     use HasFactory, HasApiTokens, Notifiable;
+
+    protected $table = "customer";
     public $timestamps = false;
-    protected $table = 'pegawai';
-    protected $primaryKey = 'id_pegawai';
+    protected $primaryKey = "id_customer";
     protected $fillable = [
-        'id_role',
-        'nama_pegawai',
-        'telepon_pegawai',
-        'email_pegawai',
-        'gaji',
+        'nama',
+        'email',
+        'noTelpon',
+        'poin_customer',
+        'saldo_customer',
         'username',
         'password',
-        'foto',
-        'bonus_gaji',
         'active',
         'verify_key',
         'email_verified_at',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -77,10 +77,5 @@ class Pegawai extends Model implements Authenticatable
     public function getRememberTokenName()
     {
         return 'remember_token';
-    }
-
-    public function jabatan()
-    {
-        return $this->belongsTo(Jabatan::class, 'id_role', 'id_role');
     }
 }

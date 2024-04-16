@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailSend;
 use App\Models\Jabatan;
 use App\Models\Pegawai;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class PegawaiController extends Controller
 {
@@ -60,13 +64,24 @@ class PegawaiController extends Controller
             $input['id_role'] = null;
         }
 
-        $input['username'] = $request->input('username_pegawai', null);
-        $input['password'] = $request->input('password_pegawai', null);
+        $input['username'] = $request->input('username', null);
+        $input['password'] = $request->input('password') ? bcrypt($request->input('password')) : null;
         $input['gaji'] = 0;
         $input['bonus_gaji'] = 0;
-
+        $str = Str::random(100);
+        $input['verify_key'] = $str;
         try {
+
             Pegawai::create($input);
+            $details = [
+                'username' => $request->username,
+                'website' => 'Atma Kitchen',
+                'datetime' => date('Y-m-d H:i:s'),
+                'url' => request()->getHttpHost() . '/register/verify/' . $str
+            ];
+
+            Mail::to($request->email_pegawai)->send(new MailSend($details));
+            Session::flash('message', 'Link Verifikasi telah dikirim ke email anda. Silahkan Cek email anda untuk mengaktifkan akun');
             return redirect()->route('pegawai.index');
         } catch (Exception $e) {
             return redirect()->route('pegawai.index')->with('error', $e->getMessage());
@@ -118,8 +133,8 @@ class PegawaiController extends Controller
             $input['id_role'] = null;
         }
 
-        $input['username'] = $request->input('username_pegawai', null);
-        $input['password'] = $request->input('password_pegawai', null);
+        $input['username'] = $request->input('username', null);
+        $input['password'] = $request->input('password', null);
         $pegawai->update($input);
 
         return redirect()->route('pegawai.index')->with(['success' => 'Data Berhasil Diubah!']);
@@ -152,5 +167,23 @@ class PegawaiController extends Controller
         $search = $request->search;
         $pegawai = Pegawai::where('nama_pegawai', 'like', "%" . $search . "%")->paginate(5);
         return view('MOKaryawan.indexKaryawan', compact('pegawai'));
+    }
+
+    public function verify($verify_key)
+    {
+        $keyCheck = Pegawai::select('verify_key')
+            ->where('verify_key', $verify_key)
+            ->exists();
+        if ($keyCheck) {
+            $user = Pegawai::where('verify_key', $verify_key)
+                ->update([
+                    'active' => 1,
+                    'email_verified_at' => date('Y-m-d H:i:s'),
+                ]);
+
+            return "Verifikasi Berhasil. Akun Anda sudah aktif.";
+        } else {
+            return 'Keys tidak valid';
+        }
     }
 }
