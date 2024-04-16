@@ -81,6 +81,13 @@
                                 {{ session('success') }}
                             </div>
                             @endif
+
+                            @if(session('message'))
+                            <div class="alert alert-success">
+                                {{session('message')}}
+                            </div>
+                            @endif
+
                             <a href="{{route('pegawai.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Karyawan</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
@@ -91,7 +98,6 @@
                                             <th class="text-center">No Telpon</th>
                                             <th class="text-center">Email</th>
                                             <th class="text-center">Username</th>
-                                            <th class="text-center">Password</th>
                                             <th class="text-center">Jabatan</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -110,16 +116,10 @@
                                             <td class="text-center">{{$item->nama_pegawai}}</td>
                                             <td class="text-center">{{$item->telepon_pegawai}}</td>
                                             <td class="text-center">{{$item->email_pegawai}}</td>
-                                            <td class="text-center">@if($item->username_pegawai)
-                                                {{ $item->username_pegawai }}
+                                            <td class="text-center">@if($item->username)
+                                                {{ $item->username }}
                                                 @else
                                                 Tidak Ada Username
-                                                @endif
-                                            </td>
-                                            <td class="text-center">@if($item->password_pegawai)
-                                                {{ $item->password_pegawai }}
-                                                @else
-                                                Tidak Ada Password
                                                 @endif
                                             </td>
                                             <td class="text-center">@if($item->jabatan)
