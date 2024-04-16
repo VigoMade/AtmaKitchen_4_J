@@ -56,6 +56,32 @@ Route::get('/pegawai/search', 'PegawaiController@search')->name('pegawai.search'
 Route::resource('/gaji', GajiController::class);
 
 
+//pengeluaran lainnya
+Route::get('/createPengeluaran', function () {
+    return view('MOPengeluaranLainnya.createPengeluaran');
+});
+
+Route::get('/editPengeluaran', function () {
+    return view('MOPengeluaranLainnya.editPengeluaran');
+});
+
+Route::get('/indexPengeluaran', function () {
+    return view('MOPengeluaranLainnya.indexPengeluaran');
+});
+
+//pembelian bahan baku
+Route::get('/createPembelianBB', function () {
+    return view('MOPembelianBahanBaku.createPembelianBB');
+});
+
+Route::get('/editPembelianBB', function () {
+    return view('MOPembelianBahanBaku.editPembelianBB');
+});
+
+Route::get('/indexPembelianBB', function () {
+    return view('MOPembelianBahanBaku.indexPembelianBB');
+});
+
 
 
 //resep
@@ -68,3 +94,4 @@ Route::get('/reseps/search', 'ResepController@search')->name('reseps.search');
 //bahan baku
 Route::resource('/bahanBaku', BahanBakuController::class);
 Route::get('/bahanBaku/search', 'BahanBakuController@search')->name('bahanBaku.search');
+
