@@ -67,7 +67,7 @@
     <div class="container center-container">
         <div class="col-md-4">
             <h2><b>Lupa Password!</b></h2>
-            <p style="text-align: center;">Masukkan alamat email Anda agar kami dapat membantu Anda mengatur ulang kata sandi Anda.</p>
+            <p style="text-align: center;">Silahkan mengatur ulang kata sandi Anda.</p>
 
             <div class="login-box">
                 @if(session('error'))
@@ -76,18 +76,24 @@
                 </div>
                 @endif
                 @if(session('message'))
-                <div class="alert alert-success">
-                    {{session('message')}}
+                <div class="alert alert-danger">
+                    <b>Selamat!</b> {{ session('message') }}
                 </div>
                 @endif
 
-                <form method="post" action="{{route('actionReset')}}">
+
+                <form method="post" action="{{route('reset.update',$user->email)}}">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" type="email" name="email" placeholder="Masukan Email Anda" required>
+                        <input class="form-control" type="email" name="email" placeholder="Masukan Email Anda" value="{{old('email',$user->email) }}">
                     </div>
-                    <button class="btn btn-edit" type="submit">Cari Email</button>
+                    <div>
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" value="{{old('password')}}" placeholder="Masukkan Password yang baru..">
+                    </div>
+                    <button class="btn btn-edit" type="submit">Kirim</button>
 
                 </form>
             </div>
