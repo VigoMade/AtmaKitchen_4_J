@@ -66,8 +66,9 @@
 
     <div class="container center-container">
         <div class="col-md-4">
-            <h2><b>Login</b></h2>
-            <p style="text-align: center;">Selamat datang di Dunia Manis kami! Temukan kelezatan yang tersembunyi di setiap klik. Ayo masuk ke dalam dunia kue dan roti yang penuh cita rasa</p>
+            <h2><b>Lupa Password!</b></h2>
+            <p style="text-align: center;">Masukkan alamat email Anda agar kami dapat membantu Anda mengatur ulang kata sandi Anda.</p>
+
             <div class="login-box">
                 @if(session('error'))
                 <div class="alert alert-danger">
@@ -75,23 +76,14 @@
                 </div>
                 @endif
 
-                <form method="post" action="{{route('actionLogin')}}">
+                <form method="post" action="#">
                     @csrf
                     <div class="form-group">
-                        <label>Username</label>
-                        <input class="form-control" type="username" name="username" placeholder="Enter your username" required>
+                        <label>Email</label>
+                        <input class="form-control" type="email" name="email" placeholder="Masukan Email Anda" required>
                     </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" type="password" name="password" placeholder="Enter your password" required>
-                    </div>
-
-                    <button class="btn btn-edit" type="submit">Login</button>
-                    <hr>
-                    <p class="text-center">Belum Punya akun? <a href="{{route('register')}}" style="text-decoration: none; color:black; font-weight:bold;">Daftar Sekarang</a></p>
-                    <p style="text-align: center; color: blue; font-weight: bold; text-decoration: underline;">
-                        <a href="{{ route('lupaPassword') }}">Lupa Password</a>
-                    </p>
+                    <button class="btn btn-edit" type="submit">Kirim</button>
+                
                 </form>
             </div>
         </div>

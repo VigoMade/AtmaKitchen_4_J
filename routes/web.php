@@ -28,6 +28,12 @@ Route::get('register', [RegisterController::class, 'register'])->name('register'
 Route::post('register/action', [RegisterController::class, 'actionRegister'])->name('actionRegister');
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
 
+//lupa password
+Route::get('/lupaPassword', function () {
+    return view('lupaPassword');
+})->name('lupaPassword');
+
+
 //logout
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
 
