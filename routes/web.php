@@ -10,6 +10,7 @@ use App\Http\Controllers\PenitipController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Models\Penitip;
 use Illuminate\Support\Facades\Route;
 
@@ -28,10 +29,17 @@ Route::get('register', [RegisterController::class, 'register'])->name('register'
 Route::post('register/action', [RegisterController::class, 'actionRegister'])->name('actionRegister');
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
 
-//lupa password
+//forget
+
 Route::get('/lupaPassword', function () {
     return view('lupaPassword');
 })->name('lupaPassword');
+
+Route::get('/reset/{email}', [ResetPasswordController::class, 'reset'])->name('reset');
+Route::post('reset/action', [ResetPasswordController::class, 'actionReset'])->name('actionReset');
+Route::get('/reset/{email}/{verify_key}', [ResetPasswordController::class, 'gotoResetPassword'])->name('gotoResetPassword');
+Route::put('/reset/{email}', [ResetPasswordController::class, 'update'])->name('reset.update');
+
 
 
 //logout
@@ -118,4 +126,3 @@ Route::get('/reseps/search', 'ResepController@search')->name('reseps.search');
 //bahan baku
 Route::resource('/bahanBaku', BahanBakuController::class);
 Route::get('/bahanBaku/search', 'BahanBakuController@search')->name('bahanBaku.search');
-
