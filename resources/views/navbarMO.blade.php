@@ -94,9 +94,9 @@
                     <li class="nav-item {{ Request::is('pembelian') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('indexPembelianBB')}}">Pembelian Bahan Baku</a>
                     </li>
-
-                    
-
+                    <li class="nav-item {{ Request::is('presensi') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('indexPresensi')}}">Presensi</a>
+                    </li>
                 </ul>
             </div>
         </div>

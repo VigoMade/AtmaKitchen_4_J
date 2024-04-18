@@ -80,6 +80,19 @@ Route::get('/indexPengeluaran', function () {
     return view('MOPengeluaranLainnya.indexPengeluaran');
 });
 
+//presensi
+Route::get('/createPresensi', function () {
+    return view('MOPresensi.createPresensi');
+});
+
+Route::get('/editPresensi', function () {
+    return view('MOPresensi.editPresensi');
+});
+
+Route::get('/indexPresensi', function () {
+    return view('MOPresensi.indexPresensi');
+});
+
 //pembelian bahan baku
 Route::get('/createPembelianBB', function () {
     return view('MOPembelianBahanBaku.createPembelianBB');
