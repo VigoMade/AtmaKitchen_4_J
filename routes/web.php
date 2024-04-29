@@ -40,7 +40,15 @@ Route::post('reset/action', [ResetPasswordController::class, 'actionReset'])->na
 Route::get('/reset/{email}/{verify_key}', [ResetPasswordController::class, 'gotoResetPassword'])->name('gotoResetPassword');
 Route::put('/reset/{email}', [ResetPasswordController::class, 'update'])->name('reset.update');
 
+// landing page customer
+Route::get('/landingPageCustomer', function () {
+    return view('landingPageCustomer');
+})->name('landingPageCustomer');
 
+// landing page tim
+Route::get('/landingPageTim', function () {
+    return view('landingPageTim');
+})->name('landingPageTim');
 
 //logout
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');

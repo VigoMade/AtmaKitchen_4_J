@@ -4,16 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MO</title>
-
+    <title>Atma Kitchen</title>
+    <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <!-- Boostrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+
     <!-- Bootstrap Icons -->
-    <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
 
     <style>
@@ -55,17 +54,6 @@
             color: white;
             font-size: 2.5rem;
         }
-
-
-        body {
-            background-image: url('/images/bg1.jpg');
-        }
-
-        .nav-item.active .nav-link {
-            color: white !important;
-            font-weight: bold;
-            text-decoration: underline;
-        }
     </style>
 </head>
 
@@ -79,20 +67,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('penitip') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/penitip')}}">Penitip</a>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#!">Home</a>
                     </li>
-                    <li class="nav-item {{ Request::is('jabatan') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('jabatan')}}">Jabatan</a>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#!">Menu</a>
                     </li>
-                    <li class="nav-item {{ Request::is('pegawai') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('pegawai')}}">Karyawan</a>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" href="#!">About</a>
                     </li>
-                    <li class="nav-item {{ Request::is('pengeluaran') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('indexPengeluaran')}}">Pengeluaran Lainnya</a>
-                    </li>
-                    <li class="nav-item {{ Request::is('pembelian') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('indexPembelianBB')}}">Pembelian Bahan Baku</a>
+                    <li class="nav-item ms-3">
+                        <a class="btn  btn-rounded" href="{{url('/login')}}">Sign in</a>
                     </li>
                 </ul>
             </div>
