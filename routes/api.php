@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ForgetPasswordController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/reset', [ForgetPasswordController::class, 'reset']);
+Route::get('/reset/{email}/{verify_key}', [ForgetPasswordController::class, 'gotoResetPassword']);
