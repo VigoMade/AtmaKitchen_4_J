@@ -40,7 +40,15 @@ Route::post('reset/action', [ResetPasswordController::class, 'actionReset'])->na
 Route::get('/reset/{email}/{verify_key}', [ResetPasswordController::class, 'gotoResetPassword'])->name('gotoResetPassword');
 Route::put('/reset/{email}', [ResetPasswordController::class, 'update'])->name('reset.update');
 
+// landing page customer
+Route::get('/landingPageCustomer', function () {
+    return view('landingPageCustomer');
+})->name('landingPageCustomer');
 
+// landing page tim
+Route::get('/landingPageTim', function () {
+    return view('landingPageTim');
+})->name('landingPageTim');
 
 //logout
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
@@ -86,6 +94,19 @@ Route::get('/editPengeluaran', function () {
 
 Route::get('/indexPengeluaran', function () {
     return view('MOPengeluaranLainnya.indexPengeluaran');
+});
+
+//presensi
+Route::get('/createPresensi', function () {
+    return view('MOPresensi.createPresensi');
+});
+
+Route::get('/editPresensi', function () {
+    return view('MOPresensi.editPresensi');
+});
+
+Route::get('/indexPresensi', function () {
+    return view('MOPresensi.indexPresensi');
 });
 
 //pembelian bahan baku

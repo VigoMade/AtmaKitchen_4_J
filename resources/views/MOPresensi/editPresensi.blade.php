@@ -51,16 +51,7 @@
                     <div class="card-body">
                         <form action="#" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Nama Pegawai</label>
-                                    <input type="text" class="form-control @error('nama_pengeluaran_lainnya') is-invalid @enderror" name="nama_pengeluaran_lainnya" value="{{ old('nama_pengeluaran_lainnya') }}" placeholder="Masukkan Pengeluaran Lainnya">
-                                    @error('nama_pengeluaran_lainnya')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
+                           
                                 <div class="form-group col-md-6">
                                     <label class="font-weight-bold">Status Presensi</label>
                                     <select class="form-control @error('status_presensi') is-invalid @enderror" name="status_presensi">
@@ -75,17 +66,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Tanggal Presensi</label>
-                                    <input type="date" class="form-control @error('tanggal_pengeluaran_lainnya') is-invalid @enderror" name="tanggal_pengeluaran_lainnya" value="{{old('tanggal_pengeluaran_lainnya') }}" placeholder="Masukkan Tanggal Pengeluaran Lainnya">
-                                    @error('tanggal_pengeluaran_lainnya')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
+                           
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                         </form>
                     </div>
