@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('pengeluaranLainnya.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
@@ -80,15 +80,15 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Tanggal Pengeluaran Lainnya</label>
-                                        <input type="date" class="form-control @error('tanggal_pengeluaran_lainnya') is-invalid @enderror" name="tanggal_pengeluaran_lainnya" value="{{old('tanggal_pengeluaran_lainnya') }}" placeholder="Masukkan Tanggal Pengeluaran Lainnya">
+                                        <input type="datetime-local" class="form-control @error('tanggal_pengeluaran_lainnya') is-invalid @enderror" name="tanggal_pengeluaran_lainnya" value="{{old('tanggal_pengeluaran_lainnya') }}" placeholder="Masukkan Tanggal Pengeluaran Lainnya">
                                         @error('tanggal_pengeluaran_lainnya')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                  
-                                
+
+
 
                                 </div>
                                 <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>

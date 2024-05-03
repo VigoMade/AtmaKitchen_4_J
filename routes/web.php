@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\AdminCustomerController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PembelianBBController;
+use App\Http\Controllers\PengeluaranLainnyaController;
 use App\Http\Controllers\PenitipController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Models\PengeluaranLainnya;
 use App\Models\Penitip;
 use Illuminate\Support\Facades\Route;
 
@@ -53,84 +57,45 @@ Route::get('/landingPageTim', function () {
 //logout
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
 
-//hampers
+
+
+//ADMIN//
+//produks
 Route::resource('/produks', ProdukController::class);
 Route::get('/produks/search', 'ProdukController@search')->name('produks.search');
-
 //hampers
 Route::resource('/hampers', HampersController::class);
 Route::get('/hampers/search', 'HampersController@search')->name('hampers.search');
+//bahan baku
+Route::resource('/bahanBaku', BahanBakuController::class);
+Route::get('/bahanBaku/search', 'BahanBakuController@search')->name('bahanBaku.search');
+//resep
+Route::resource('/reseps', ResepController::class);
+Route::get('/reseps/{id_detail_resep_bahan}/{id_resep}/edit', [ResepController::class, 'edit'])->name('reseps.edit');
+Route::put('/reseps/{id_detail_resep_bahan}/{id_resep}/{id_bahanBaku}', [ResepController::class, 'update'])->name('reseps.update');
+Route::get('/reseps/search', [ResepController::class, 'search'])->name('reseps.search');
+//Customer
+Route::resource('/dataCust', AdminCustomerController::class);
 
 
+//MO//
+//jabatan
+Route::resource('/jabatan', JabatanController::class);
 //penitip
 Route::resource('/penitip', PenitipController::class);
 Route::get('/penitip/search', 'PenitipController@search')->name('penitip.search');
-
-
-
-
-
-//jabatan
-Route::resource('/jabatan', JabatanController::class);
-
 //karyawan
 Route::resource('/pegawai', PegawaiController::class);
 Route::get('/pegawai/search', 'PegawaiController@search')->name('pegawai.search');
 Route::get('register/verify/{verify_key}', [PegawaiController::class, 'verify'])->name('verify');
+//Pengeluaran Lainnya
+Route::resource('/pengeluaranLainnya', PengeluaranLainnyaController::class);
+Route::get('/pengeluaranLainnya/search', [PengeluaranLainnya::class, 'show'])->name('pengeluaranLainnya.search');
+//pembelian BahanBaku
+Route::resource('/pembelianBB', PembelianBBController::class);
+Route::put('/pembelianBB/{id_pembelian}/{id_bahanBaku}', [PembelianBBController::class, 'update'])->name('pembelianBB.update');
+Route::get('/pembelianBB/search', [PembelianBBController::class, 'search'])->name('pembelianBB.search');
 
-
+//OWNER//
 //gaji
 Route::resource('/gaji', GajiController::class);
-
-
-//pengeluaran lainnya
-Route::get('/createPengeluaran', function () {
-    return view('MOPengeluaranLainnya.createPengeluaran');
-});
-
-Route::get('/editPengeluaran', function () {
-    return view('MOPengeluaranLainnya.editPengeluaran');
-});
-
-Route::get('/indexPengeluaran', function () {
-    return view('MOPengeluaranLainnya.indexPengeluaran');
-});
-
-//presensi
-Route::get('/createPresensi', function () {
-    return view('MOPresensi.createPresensi');
-});
-
-Route::get('/editPresensi', function () {
-    return view('MOPresensi.editPresensi');
-});
-
-Route::get('/indexPresensi', function () {
-    return view('MOPresensi.indexPresensi');
-});
-
-//pembelian bahan baku
-Route::get('/createPembelianBB', function () {
-    return view('MOPembelianBahanBaku.createPembelianBB');
-});
-
-Route::get('/editPembelianBB', function () {
-    return view('MOPembelianBahanBaku.editPembelianBB');
-});
-
-Route::get('/indexPembelianBB', function () {
-    return view('MOPembelianBahanBaku.indexPembelianBB');
-});
-
-
-
-//resep
-Route::resource('/reseps', ResepController::class);
-Route::get('/reseps/{id_detail_resep_bahan}/{id_resep}/{id_bahanBaku}/edit', [ResepController::class, 'edit'])->name('reseps.edit');
-Route::put('/reseps/{id_detail_resep_bahan}/{id_resep}/{id_bahanBaku}', [ResepController::class, 'update'])->name('reseps.update');
-Route::get('/reseps/search', 'ResepController@search')->name('reseps.search');
-
-
-//bahan baku
-Route::resource('/bahanBaku', BahanBakuController::class);
-Route::get('/bahanBaku/search', 'BahanBakuController@search')->name('bahanBaku.search');

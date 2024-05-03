@@ -39,19 +39,20 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0" style="color:black">Resep</h1>
+                    <h1 class="m-0" style="color:black">Data Customer</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="#">Resep</a>
+                            <a href="#">Customer</a>
                         </li>
                     </ol>
-                    <li class="breadcrumb-item active">Show Resep</li>
+                    <li class="breadcrumb-item active">Show Customer</li>
                 </div>
-                <form action="{{ route('reseps.search') }}" method="GET" class="mb-3">
+
+                <form action="#" method="GET" class="mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari BahanBaku...">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Hampers....">
                         <button class="btn btn-outline-primary" type="submit">Cari</button>
                     </div>
                 </form>
@@ -78,41 +79,41 @@
                                 {{ session('success') }}
                             </div>
                             @endif
-                            <a href="{{route('reseps.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Resep</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Nama Resep</th>
-                                            <th class="text-center">Penggunaan Bahan Baku</th>
-                                            <th class="text-center">Total Penggunaan Bahan Baku</th>
-                                            <th class="text-center">Aksi</th>
+                                            <th class="text-center">Foto Profil</th>
+                                            <th class="text-center">Nama Customer</th>
+                                            <th class="text-center">Email Customer</th>
+                                            <th class="text-center">No Telpon Customer</th>
+                                            <th class="text-center">Poin Customer</th>
+                                            <th class="text-center">Username Customer</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($reseps as $resep)
+                                        @forelse ($customer as $item)
                                         <tr>
-                                            <td class="text-center">{{ $resep->resep->nama_resep }}</td>
-                                            <td class="text-center">{{ $resep->bahanBaku->nama_bahan_baku }}</td>
-                                            <td class="text-center">{{ $resep->total_penggunaan_bahan }}</td>
-                                            <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('reseps.destroy',$resep->id_detail_resep_bahan)}}" method="POST">
-                                                    <a href="{{ route('reseps.edit',['id_detail_resep_bahan' =>$resep->id_detail_resep_bahan ,'id_resep' => $resep->id_resep]) }}" class="btn btn-sm btn-primary">Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                </form>
-                                            </td>
+                                            <td class="text-center"><img src="/images/{{ $item->image }}" width="100px"></td>
+                                            <td class="text-center">{{ $item->nama }}</td>
+                                            <td class="text-center">{{ $item->email }}</td>
+                                            <td class="text-center">{{ $item->noTelpon }}</td>
+                                            @if($item->poin_customer != null)
+                                            <td class="text-center">{{ $item->poin_customer }}</td>
+                                            @else
+                                            <td class="text-center">0</td>
+                                            @endif
+                                            <td class="text-center">{{ $item->username }}</td>
                                         </tr>
                                         @empty
-                                        <tr>
-                                            <td colspan="4" class="text-center">Tidak ada data resep</td>
-                                        </tr>
+                                        <div class="alert alert-danger">
+                                            Data Produk belum tersedia
+                                        </div>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $reseps->links() }}
+                            {{$customer->links()}}
                         </div>
                         <!-- body -->
                     </div>
@@ -125,27 +126,5 @@
         <!-- container -->
     </div>
 </body>
-
-<script>
-    function hideAlerts() {
-
-        const duration = 5000;
-
-        setTimeout(function() {
-            const errorAlert = document.getElementById('errorAlert');
-            if (errorAlert) {
-                errorAlert.style.display = 'none';
-            }
-        }, duration);
-
-        setTimeout(function() {
-            const successAlert = document.getElementById('successAlert');
-            if (successAlert) {
-                successAlert.style.display = 'none';
-            }
-        }, duration);
-    }
-    window.onload = hideAlerts;
-</script>
 
 @endsection

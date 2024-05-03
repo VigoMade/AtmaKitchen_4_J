@@ -19,99 +19,81 @@
     }
 </style>
 
-<body>
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0" style="color: black;">Tambah Pembelian Bahan Baku</h1>
-                </div>
-                <!-- col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">
-                            <a href="#" style="text-decoration: none; color:black; font-weight: bold;">Pembelian Bahan Baku</a>
-                        </li>
-                        <li class="breadcrumb-item active">Create</li>
-                    </ol>
-                </div>
-                <!-- col -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0" style="color: black;">Tambah Pembelian Bahan Baku</h1>
             </div>
-            <!-- row -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item">
+                        <a href="#" style="text-decoration: none; color:black; font-weight: bold;">Pembelian Bahan Baku</a>
+                    </li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </div>
         </div>
-        <!-- container -->
     </div>
-    <!-- header -->
-    <!-- content -->
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="#" method="POST" enctype="multipart/form-data">
-                                @csrf
-                               <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="font-weight-bold">Nama Bahan Baku</label>
-                                    <select class="form-control @error('namaPenitip') is-invalid @enderror" name="namaPenitip">
-                                        <option value="">Pilih Nama Bahan Baku</option>
-                                        <option value="bahan1" {{ old('namaPenitip') == 'bahan1' ? 'selected' : '' }}>Butter</option>
-                                        <option value="bahan2" {{ old('namaPenitip') == 'bahan2' ? 'selected' : '' }}>Tepung</option>
-                                            </select>
-                                    @error('namaPenitip')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="{{route('pembelianBB.store')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="id_bahan_baku">Masukkan Bahan Baku</label>
+                                <select class="form-control @error('id_bahan_baku') is-invalid @enderror" name="id_bahan_baku">
+                                    <option value="">Pilih Bahan Baku</option>
+                                    @foreach ($bahanBaku as $item)
+                                    <option value="{{ $item->id_bahan_baku }}" {{ old('id_bahan_baku') == $item->id_bahan_baku ? 'selected' : '' }}>
+                                        {{ $item->nama_bahan_baku }}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error('id_bahan_baku')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Harga Bahan Baku</label>
+                                    <input type="text" class="form-control @error('harga_bahan_baku') is-invalid @enderror" name="harga_bahan_baku" value="{{ old('harga_bahan_baku') }}" placeholder="Masukkan Harga Bahan Baku">
+                                    @error('harga_bahan_baku')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Jumlah Pembelian Bahan Baku</label>
+                                    <input type="number" class="form-control @error('total_penambahan') is-invalid @enderror" name="total_penambahan" value="{{ old('total_penambahan') }}" placeholder="Masukkan Jumlah Bahan Baku">
+                                    @error('total_penambahan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
 
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Harga Bahan Baku</label>
-                                        <input type="text" class="form-control @error('harga_bahan_baku') is-invalid @enderror" name="harga_bahan_baku" value="{{ old('harga_bahan_baku') }}" placeholder="Masukkan Harga Bahan Baku">
-                                        @error('produkPenitip')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Jumlah Pembelian Bahan Baku</label>
-                                        <input type="number" class="form-control @error('jumlah_bahan_baku') is-invalid @enderror" name="jumlah_bahan_baku" value="{{ old('jumlah_bahan_baku') }}" placeholder="Masukkan Jumlah Bahan Baku">
-                                        @error('jumlah_bahan_baku')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold">Tanggal Pembelian</label>
+                                    <input type="datetime-local" class="form-control @error('tanggal_pembelian') is-invalid @enderror" name="tanggal_pembelian" value="{{ old('tanggal_pembelian') }}" placeholder="Masukkan Tanggal Pembelian">
+                                    @error('tanggal_pembelian')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Tanggal Pembelian</label>
-                                        <input type="date" class="form-control @error('tanggal_pembelian') is-invalid @enderror" name="tanggal_pembelian" value="{{ old('tanggal_pembelian') }}" placeholder="Masukkan Tanggal Pembelian">
-                                        @error('tanggal_pembelian')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-                            </form>
-                        </div>
-                        <!-- body -->
-                    </div>
-                    <!-- card -->
-                </div>
-                <!-- col -->
-            </div>
-            <!-- row -->
-        </div>
-        <!-- container -->
-    </div>
+                            </div>
 
-</body>
+                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection

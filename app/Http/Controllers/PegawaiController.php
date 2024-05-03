@@ -134,7 +134,7 @@ class PegawaiController extends Controller
         }
 
         $input['username'] = $request->input('username', null);
-        $input['password'] = $request->input('password', null);
+        $input['password'] = $request->input('password') ? bcrypt($request->input('password')) : null;
         $pegawai->update($input);
 
         return redirect()->route('pegawai.index')->with(['success' => 'Data Berhasil Diubah!']);
