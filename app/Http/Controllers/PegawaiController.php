@@ -77,7 +77,7 @@ class PegawaiController extends Controller
                 'username' => $request->username,
                 'website' => 'Atma Kitchen',
                 'datetime' => date('Y-m-d H:i:s'),
-                'url' => request()->getHttpHost() . '/register/verify/' . $str
+                'url' => request()->getHttpHost() . '/registerPegawai/verify/' . $str
             ];
 
             Mail::to($request->email_pegawai)->send(new MailSend($details));
@@ -169,7 +169,7 @@ class PegawaiController extends Controller
         return view('MOKaryawan.indexKaryawan', compact('pegawai'));
     }
 
-    public function verify($verify_key)
+    public function verifyPegawai($verify_key)
     {
         $keyCheck = Pegawai::select('verify_key')
             ->where('verify_key', $verify_key)

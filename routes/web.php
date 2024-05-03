@@ -32,7 +32,6 @@ Route::post('actionLogin', [LoginController::class, 'actionLogin'])->name('actio
 Route::get('register', [RegisterController::class, 'register'])->name('register');
 Route::post('register/action', [RegisterController::class, 'actionRegister'])->name('actionRegister');
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
-
 //forget
 
 Route::get('/lupaPassword', function () {
@@ -87,7 +86,7 @@ Route::get('/penitip/search', 'PenitipController@search')->name('penitip.search'
 //karyawan
 Route::resource('/pegawai', PegawaiController::class);
 Route::get('/pegawai/search', 'PegawaiController@search')->name('pegawai.search');
-Route::get('register/verify/{verify_key}', [PegawaiController::class, 'verify'])->name('verify');
+Route::get('registerPegawai/verify/{verify_key}', [PegawaiController::class, 'verifyPegawai'])->name('verifyPegawai');
 //Pengeluaran Lainnya
 Route::resource('/pengeluaranLainnya', PengeluaranLainnyaController::class);
 Route::get('/pengeluaranLainnya/search', [PengeluaranLainnya::class, 'show'])->name('pengeluaranLainnya.search');
