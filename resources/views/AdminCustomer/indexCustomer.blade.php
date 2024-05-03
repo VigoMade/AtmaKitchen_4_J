@@ -50,9 +50,9 @@
                     <li class="breadcrumb-item active">Show Customer</li>
                 </div>
 
-                <form action="#" method="GET" class="mb-3">
+                <form action="{{route('dataCust.search')}}" method="GET" class="mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari Hampers....">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Nama Customer....">
                         <button class="btn btn-outline-primary" type="submit">Cari</button>
                     </div>
                 </form>

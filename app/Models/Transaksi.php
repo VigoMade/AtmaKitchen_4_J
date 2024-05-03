@@ -37,6 +37,6 @@ class Transaksi extends Model
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class, 'id_produk_fk');
+        return $this->belongsTo(Produk::class, 'id_produk_fk')->with('penitips');;
     }
 }

@@ -16,6 +16,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
 
     <style>
+        .navbar {
+            padding: 0 1.5rem;
+        }
+
+        .navbar-brand {
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
         .navbar-light .navbar-nav .nav-link {
             color: #FFFFFF;
         }
@@ -34,6 +50,8 @@
             background-color: transparent;
             border: 2px solid white;
             color: white;
+            padding: 0.5rem 0.5rem;
+            font-size: 0.8rem;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
@@ -76,8 +94,12 @@
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">About</a>
                     </li>
-                    <li class="nav-item ms-3">
-                        <a class="btn  btn-rounded" href="{{url('/login')}}">Sign in</a>
+                    <li class="nav-item ">
+                        @if(auth()->guard('customer')->check())
+                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                        @else
+                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                        @endif
                     </li>
                 </ul>
             </div>

@@ -5,16 +5,19 @@ use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
+use App\Http\Controllers\HistoryAdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PembelianBBController;
 use App\Http\Controllers\PengeluaranLainnyaController;
 use App\Http\Controllers\PenitipController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Models\PengeluaranLainnya;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Penitip;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +57,8 @@ Route::get('/landingPageTim', function () {
 })->name('landingPageTim');
 
 //logout
-Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
+Route::get('/logout', [LoginController::class, 'actionLogout'])->name('actionLogout');
+
 
 
 
@@ -75,6 +79,8 @@ Route::put('/reseps/{id_detail_resep_bahan}/{id_resep}/{id_bahanBaku}', [ResepCo
 Route::get('/reseps/search', [ResepController::class, 'search'])->name('reseps.search');
 //Customer
 Route::resource('/dataCust', AdminCustomerController::class);
+Route::get('/dataCust/search', [AdminCustomerController::class, 'search'])->name('dataCust.search');
+Route::resource('/history', HistoryAdminController::class);
 
 
 //MO//
@@ -98,3 +104,7 @@ Route::get('/pembelianBB/search', [PembelianBBController::class, 'search'])->nam
 //OWNER//
 //gaji
 Route::resource('/gaji', GajiController::class);
+
+
+//Customer
+Route::resource('/customer', ProfileController::class);
