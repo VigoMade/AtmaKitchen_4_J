@@ -46,9 +46,17 @@ Route::get('/landingPageCustomer', function () {
 })->name('landingPageCustomer');
 
 // landing page tim
-Route::get('/landingPageTim', function () {
-    return view('landingPageTim');
-})->name('landingPageTim');
+Route::get('/landingPageAdmin', function () {
+    return view('landingPageAdmin');
+})->name('landingPageAdmin');
+
+Route::get('/landingPageMO', function () {
+    return view('landingPageMO');
+})->name('landingPageMO');
+
+Route::get('/landingPageOwner', function () {
+    return view('landingPageOwner');
+})->name('landingPageOwner');
 
 //logout
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
