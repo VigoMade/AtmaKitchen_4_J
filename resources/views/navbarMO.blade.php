@@ -79,22 +79,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('penitip') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/penitip')}}">Penitip</a>
+                    <li class="nav-item {{ Request::routeIs('penitip.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('penitip.index') }}">Penitip</a>
                     </li>
-                    <li class="nav-item {{ Request::is('jabatan') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('jabatan')}}">Jabatan</a>
+                    <li class="nav-item {{ Request::routeIs('jabatan.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('jabatan.index') }}">Jabatan</a>
                     </li>
-                    <li class="nav-item {{ Request::is('pegawai') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('pegawai')}}">Karyawan</a>
+                    <li class="nav-item {{ Request::routeIs('pegawai.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('pegawai.index') }}">Karyawan</a>
                     </li>
-                    <li class="nav-item {{ Request::is('pengeluaran') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('indexPengeluaran')}}">Pengeluaran Lainnya</a>
+                    <li class="nav-item {{ Request::routeIs('pengeluaranLainnya.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('pengeluaranLainnya.index') }}">Pengeluaran Lainnya</a>
                     </li>
-                    <li class="nav-item {{ Request::is('pembelian') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('indexPembelianBB')}}">Pembelian Bahan Baku</a>
+                    <li class="nav-item {{ Request::routeIs('pembelianBB.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('pembelianBB.index') }}">Pembelian Bahan Baku</a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>

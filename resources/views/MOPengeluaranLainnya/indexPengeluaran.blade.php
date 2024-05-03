@@ -56,12 +56,23 @@
         <!-- container -->
     </div>
     <div class="content">
+        @if(session('error'))
+        <div id="errorAlert" class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+
+        @if(session('success'))
+        <div id="successAlert" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createPengeluaran')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Pengeluaran Lainnya</a>
+                            <a href="{{route('pengeluaranLainnya.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Pengeluaran Lainnya</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -74,21 +85,28 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
-                                            <td class="text-center">#</td>
+                                            @forelse($pengeluaran as $item)
+                                            <td class="text-center">{{$item->nama_pengeluaran_lainnya}}</td>
+                                            <td class="text-center">{{$item->biaya_pengeluaran_lainnya}}</td>
+                                            <td class="text-center">{{$item->tanggal_pengeluaran_lainnya}}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{url('/editPengeluaran')}}" class="btn btn-sm btn-primary">EDIT</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pengeluaranLainnya.destroy',$item->id_pengeluaran)}}" method="POST">
+                                                    <a href="{{route('pengeluaranLainnya.edit',$item->id_pengeluaran)}}" class="btn btn-sm btn-primary">EDIT</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Data Pegawai belum tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{$pengeluaran->links()}}
                         </div>
                         <!-- body -->
                     </div>

@@ -77,19 +77,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('produks') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('produks')}}">Produk</a>
+                    <li class="nav-item {{ Request::routeIs('produks.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('produks.index')}}">Produk</a>
                     </li>
-                    <li class="nav-item {{ Request::is('reseps') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/reseps')}}">Resep</a>
+                    <li class="nav-item {{ Request::routeIs('reseps.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('reseps.index')}}">Resep</a>
                     </li>
-                    <li class="nav-item {{ Request::is('bahanBaku') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/bahanBaku')}}">Bahan Baku</a>
+                    <li class="nav-item {{ Request::routeIs('bahanBaku.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('bahanBaku.index')}}">Bahan Baku</a>
                     </li>
-                    <li class="nav-item {{ Request::is('hampers') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/hampers')}}">Hampers</a>
+                    <li class="nav-item {{ Request::routeIs('hampers.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('hampers.index')}}">Hampers</a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>

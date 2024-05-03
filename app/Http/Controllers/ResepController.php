@@ -86,7 +86,7 @@ class ResepController extends Controller
      * @return void
      */
 
-    public function edit($id, $id_resep, $id_bahanBaku)
+    public function edit($id, $id_resep)
     {
         $resepDetail = DetailResepBahanBaku::find($id);
         $resep = Resep::find($id_resep);

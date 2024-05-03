@@ -11,10 +11,18 @@ class LoginController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->route('pegawai.index');
-        } else {
-            return view('login');
+            $pegawai = Auth::guard('pegawai')->user();
+            if ($pegawai->jabatan->role == "Owner") {
+                return redirect()->route('gaji.index');
+            } else if ($pegawai->jabatan->role == "Admin") {
+                return redirect()->route('produks.index');
+            } else if ($pegawai->jabatan->role == "MO") {
+                return redirect()->route('pegawai.index');
+            }
+        } else if (Auth::guard('customer')->check()) {
+            return redirect()->route('customer.index');
         }
+        return view('login');
     }
 
     public function actionLogin(Request $request)
@@ -42,7 +50,7 @@ class LoginController extends Controller
             $user = Auth::guard('customer')->user();
 
             if ($user->active) {
-                return redirect()->route('hampers.index');
+                return redirect()->route('customer.index');
             } else {
                 Auth::guard('customer')->logout();
                 Session::flash('error', 'Akun anda belum terverifikasi. Silahkan cek email anda.');
@@ -58,7 +66,12 @@ class LoginController extends Controller
 
     public function actionLogout()
     {
-        Auth::logout();
-        return redirect()->route('login');
+        if (Auth::guard('pegawai')->check()) {
+            Auth::guard('pegawai')->logout();
+            return redirect()->route('login');
+        } elseif (Auth::guard('customer')->check()) {
+            Auth::guard('customer')->logout();
+            return redirect()->route('login');
+        }
     }
 }

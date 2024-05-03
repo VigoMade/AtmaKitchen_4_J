@@ -1,4 +1,4 @@
-@extends('navbarMO')
+@extends('navbarAdmin')
 @section('content')
 <style>
     body {
@@ -39,16 +39,18 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0" style="color:black">Jabatan</h1>
+                    <h1 class="m-0" style="color:black">History Customer</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="#">Jabatan</a>
+                            <a href="#">History All Customer</a>
                         </li>
                     </ol>
-                    <li class="breadcrumb-item active">Show Jabatan</li>
+                    <li class="breadcrumb-item active">Show History</li>
                 </div>
+
+
                 <!-- /.col -->
             </div>
             <!-- row -->
@@ -60,48 +62,55 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        @if(session('error'))
-                        <div id="errorAlert" class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                        @endif
-
-                        @if(session('success'))
-                        <div id="successAlert" class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                        @endif
                         <div class="card-body">
-                            <a href="{{route('jabatan.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Jabatan</a>
+                            @if(session('error'))
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+
+                            @if(session('success'))
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Jabatan</th>
-                                            <th class="text-center">Aksi</th>
+                                            <th class="text-center">Nama Customer</th>
+                                            <th class="text-center">Nama Produk</th>
+                                            <th class="text-center">Status Pesanan Customer</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($jabatan as $item)
+                                        @forelse ($history as $item)
                                         <tr>
-                                            <td class="text-center">{{$item->role}}</td>
+                                            <td class="text-center">{{ $item->customer->nama }}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('jabatan.destroy',$item->id_role)}}" method="POST">
-                                                    <a href="{{route('jabatan.edit',$item->id_role)}}" class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                </form>
+                                                @if($item->produk->nama_produk != null)
+                                                {{ $item->produk->nama_produk }}
+                                                @else
+                                                {{$item->produk->penitips->nama_produk_penitip}}
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if($item->status == 'Selesai')
+                                                <span class="badge badge-success">{{ $item->status }}</span>
+                                                @else
+                                                <span class="badge badge-secondary">{{ $item->status }}</span>
+                                                @endif
                                             </td>
                                         </tr>
                                         @empty
                                         <div class="alert alert-danger">
-                                            Data Jabatan belum tersedia
+                                            Data Produk belum tersedia
                                         </div>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{$history->links()}}
                         </div>
                         <!-- body -->
                     </div>
