@@ -23,6 +23,7 @@ class Customer extends Model implements Authenticatable
         'saldo_customer',
         'username',
         'password',
+        'image',
         'active',
         'verify_key',
         'email_verified_at',
