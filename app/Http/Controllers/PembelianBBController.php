@@ -59,13 +59,17 @@ class PembelianBBController extends Controller
         ]);
         $pembelianBB = PembelianBB::find($id);
         if ($pembelianBB) {
+             $total_penambahan = $request->input('total_penambahan');
             $pembelianBB->update($request->all());
             $bahanBaku = BahanBaku::find($id_bahan_baku);
             if ($bahanBaku) {
-                $bahanBaku->takaran_bahan_baku_tersedia -= $pembelianBB->total_penambahan;
-                $bahanBaku->save();
-                $bahanBaku->takaran_bahan_baku_tersedia += $request->total_penambahan;
-                $bahanBaku->save();
+                if( $bahanBaku->takaran_bahan_baku_tersedia > $request->total_penambahan){
+                    $bahanBaku->takaran_bahan_baku_tersedia -= $request->total_penambahan;
+                    $bahanBaku->save();
+                }else{
+                    $bahanBaku->takaran_bahan_baku_tersedia += $request->total_penambahan;
+                    $bahanBaku->save();
+                }
 
                 return redirect()->route('pembelianBB.index')->with(['success' => 'Data Berhasil Diubah!']);
             } else {

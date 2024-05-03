@@ -15,7 +15,7 @@ class PengeluaranLainnyaController extends Controller
         return view('MOPengeluaranLainnya.indexPengeluaran', compact('pengeluaran'));
     }
 
-    public function create($id)
+    public function create()
     {
         return view('MOPengeluaranLainnya.createPengeluaran');
     }
