@@ -52,4 +52,71 @@ class AuthController extends Controller
             return response(['message' => 'Invalid credentials'], 422);
         }
     }
+
+
+    public function login_role(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        // Validasi data masukan
+        $validator = Validator::make($credentials, [
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        // Jika validasi gagal, kembalikan respon dengan status 422 (Unprocessable Entity)
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
+
+        // Lakukan autentikasi pegawai
+        if (auth()->guard('pegawai')->attempt($credentials)) {
+            $pegawai = auth()->guard('pegawai')->user();
+            $token = $pegawai->createToken('Personal Access Token')->accessToken;
+
+            // Cek peran pegawai
+            switch ($pegawai->role) {
+                case 'Owner':
+                    return response()->json([
+                        'message' => 'Authenticated as Owner',
+                        'user' => $pegawai,
+                        'token' => $token,
+                    ]);
+                    break;
+                case 'Admin':
+                    return response()->json([
+                        'message' => 'Authenticated as Admin',
+                        'user' => $pegawai,
+                        'token' => $token,
+                    ]);
+                    break;
+                case 'MO':
+                    return response()->json([
+                        'message' => 'Authenticated as MO',
+                        'user' => $pegawai,
+                        'token' => $token,
+                    ]);
+                    break;
+                default:
+                    return response()->json(['message' => 'Unauthorized'], 401);
+                    break;
+            }
+        }
+
+        // Lakukan autentikasi customer
+        if (auth()->guard('customer')->attempt($credentials)) {
+            $customer = auth()->guard('customer')->user();
+            $token = $customer->createToken('Personal Access Token')->accessToken;
+            
+            // Tentukan respons sesuai peran customer
+            return response()->json([
+                'message' => 'Authenticated as Customer',
+                'user' => $customer,
+                'token' => $token,
+            ]);
+        }
+
+        // Jika autentikasi gagal, kembalikan respon Unauthorized
+        return response()->json(['message' => 'Unauthorized'], 401);
+    }
 }
