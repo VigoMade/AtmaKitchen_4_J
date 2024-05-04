@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/login', [AuthController::class, 'actionactionLogin_mobile']);
 Route::post('/reset', [ForgetPasswordController::class, 'reset']);
 Route::get('/reset/{email}/{verify_key}', [ForgetPasswordController::class, 'gotoResetPassword']);
 Route::put('/presensi/{id}', [PresensiController::class, 'update']);
