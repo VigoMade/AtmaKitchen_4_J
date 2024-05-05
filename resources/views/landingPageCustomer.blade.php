@@ -2,10 +2,11 @@
 
 @section('content')
 <style>
-     body {
-        background-image: url('{{ asset('images/bg5.jpeg') }}');
-        background-size: background-size: 50px 100px; /* Atau bisa juga contain */
-        font-family: 'Playfair Display', serif;
+    body {
+        background-color: #F5EEDC;
+        /* background-image: url('/images/bg1.jpg'); */
+        background-size: cover;
+        background-repeat: no-repeat;
     }
     .center-container {
         display: flex;
@@ -123,11 +124,12 @@
       <div class="container">
         <div class="row">
           <div class="col-6">
-            <h3 class="mb-3">Our Menu</h3>
+            <h3 class="mb-3" style="color: #AD343E; font-family: 'Playfair Display', serif;">Our Menu</h3>
+
           </div>
           <div class="col-6 text-right">
             <a
-              class="btn btn-primary mb-3 mr-1"
+              class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;"
               href="#carouselExampleIndicators2"
               role="button"
               data-slide="prev"
@@ -135,7 +137,7 @@
               <i class="fa fa-arrow-left"></i>
             </a>
             <a
-              class="btn btn-primary mb-3"
+              class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;"
               href="#carouselExampleIndicators2"
               role="button"
               data-slide="next"
@@ -163,11 +165,8 @@
                         </a>
 
                         <div class="card-body">
-                          <h4 class="card-title">Lapis Legit</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;" >Lapis Legit</h4>
+                          
                         </div>
                       </div>
                     </div>
@@ -179,11 +178,8 @@
                             src="{{ asset('images/brownies.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
+                         
                         </div>
                       </div>
                     </div>
@@ -195,11 +191,8 @@
                             src="{{ asset('images/lapisurabaya.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
+                         
                         </div>
                       </div>
                     </div>
@@ -215,11 +208,8 @@
                             src="{{ asset('images/mandarin.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Mandarin Cake</h4>
+                          
                         </div>
                       </div>
                     </div>
@@ -231,11 +221,8 @@
                             src="{{ asset('images/brownies.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
+                         
                         </div>
                       </div>
                     </div>
@@ -247,11 +234,8 @@
                             src="{{ asset('images/lapisurabaya.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
+                          
                         </div>
                       </div>
                     </div>
@@ -267,11 +251,8 @@
                             src="{{ asset('images/roti sosis.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Roti Sosis</h4>
+                          
                         </div>
                       </div>
                     </div>
@@ -283,11 +264,8 @@
                             src="{{ asset('images/roti keju.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Roti Keju</h4>
+                         
                         </div>
                       </div>
                     </div>
@@ -299,11 +277,8 @@
                             src="{{ asset('images/milkbun.jpeg') }}"
                         />
                         <div class="card-body">
-                          <h4 class="card-title">Special title treatment</h4>
-                          <p class="card-text">
-                            With supporting text below as a natural lead-in to
-                            additional content.
-                          </p>
+                          <h4 class="card-title" style="color: #AD343E;">Milkbun</h4>
+                          
                         </div>
                       </div>
                     </div>

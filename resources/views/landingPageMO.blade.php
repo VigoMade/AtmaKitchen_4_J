@@ -89,7 +89,7 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title" style="color: #AD343E; font-weight: bold;">Manajer Operasional</h5>
-                <p class="card-text" style="color: #AD343E;">Sebagai admin di toko roti online, tanggung jawab Anda meliputi manajemen pesanan, pengelolaan stok, pemeliharaan situs web, pelayanan pelanggan, keuangan, pengemasan dan pengiriman, pemasaran, administrasi, dan pemeliharaan database pelanggan. Anda perlu memiliki keterampilan multitasking, komunikasi yang baik, ketelitian dalam detail, dan pemahaman tentang industri roti dan belanja online.</p>
+                <p class="card-text" style="color: #AD343E;">pelanggan, keuangan, pengemasan dan pengiriman, pemasaran, administrasi, dan pemeliharaan database pelanggan. Anda perlu memiliki keterampilan multitasking, komunikasi yang baik, ketelitian dalam detail, dan pemahaman tentang industri roti dan belanja online.</p>
                            
                         </div>
                     </div>
@@ -119,17 +119,17 @@
 
 
 
- <section class="pt-5 pb-5">
+<section class="pt-5 pb-5">
   <div class="container">
     <div class="row">
       <div class="col-6">
         <h3 class="mb-3" style="color: #AD343E;">Jobdesc Detail</h3>
       </div>
       <div class="col-6 text-right">
-        <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+        <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="prev">
           <i class="fa fa-arrow-left"></i>
         </a>
-        <a class="btn btn-primary mb-3" href="#carouselExampleIndicators2" role="button" data-slide="next">
+        <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="next">
           <i class="fa fa-arrow-right"></i>
         </a>
       </div>
@@ -140,28 +140,25 @@
               <div class="row">
                 <div class="col-md-4 mb-3">
                   <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Produk</div>
+                    <div class="card-header">Pencatatan Pengeluaran Lainnya</div>
                     <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-text" style="color: #AD343E;">Melakukan penambahan pencatatan pengeluaran lainnya, mengubah pencatatan pengeluaran lainnya ,menghapus pencatatan pengeluaran lainnya, menampilkan pencatatan pengeluaran lainnya, mencari pencatatan pengeluaran lainnya.</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Resep</div>
+                    <div class="card-header">Pencatan Pembelian Bahan Baku</div>
                     <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-text" style="color: #AD343E;">Melakukan penambahan pembelian bahan baku, mengubah pembelian bahan baku, menghapus pembelian bahan baku, menampilkan pembelian bahan baku, mencari pembelian bahan baku.</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Bahan Baku</div>
+                    <div class="card-header">Mengelola Data Karyawan </div>
                     <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-text" style="color: #AD343E;">Melakukan penambahan data karyawan, mengubah data karyawan,menghapus data karyawan, menampilkan data karyawan, mencari data karyawan.</p>
                     </div>
                   </div>
                 </div>
@@ -173,61 +170,31 @@
                   <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                     <div class="card-header">Mencari Data Customer</div>
                     <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-text" style="color: #AD343E;">Melakukan pengubahan pada presensi serta menampilkan presensi karyawan.</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Hampers</div>
+                    <div class="card-header">Mengelola Data Jabatan</div>
                     <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-text" style="color: #AD343E;">Melakukan penambahan data jabatan, mengubah data jabatan, menghapus data jabatan, menampilkan data jabatan, mencari data jabatan.</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4 mb-3">
                   <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
+                    <div class="card-header">Mengelola Data Penitip</div>
                     <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <p class="card-text" style="color: #AD343E;" >Melakukan penambahan penitip, mengubah penitip, menghapus penitip, menampilkan penitip, mencari penitip.<p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                      <h5 class="card-title">Primary card title</h5>
-                      <p class="card-text" style="color: #AD343E;" >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+           
+              
+               
             </div>
           </div>
         </div>
@@ -235,6 +202,7 @@
     </div>
   </div>
 </section>
+
 
 
 
