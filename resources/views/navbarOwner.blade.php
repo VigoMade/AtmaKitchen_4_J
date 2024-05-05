@@ -77,11 +77,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('gaji') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/gaji')}}">Gaji</a>
+                    <li class="nav-item {{ Request::routeIs('gaji.*') ? 'active' : ''}}">
+                        <a class="nav-link mx-2" href="{{route('gaji.index')}}">Gaji</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">Laporan</a>
+                    </li>
+                    <li class="nav-item ">
+                        @if(auth()->guard('pegawai')->check())
+                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                        @else
+                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                        @endif
                     </li>
                 </ul>
             </div>

@@ -94,6 +94,13 @@
                     <li class="nav-item {{ Request::routeIs('pembelianBB.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('pembelianBB.index') }}">Pembelian Bahan Baku</a>
                     </li>
+                    <li class="nav-item ">
+                        @if(auth()->guard('pegawai')->check())
+                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                        @else
+                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                        @endif
+                    </li>
                 </ul>
 
             </div>

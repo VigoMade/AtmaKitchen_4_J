@@ -89,6 +89,13 @@
                     <li class="nav-item {{ Request::routeIs('hampers.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('hampers.index')}}">Hampers</a>
                     </li>
+                    <li class="nav-item ">
+                        @if(auth()->guard('pegawai')->check())
+                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                        @else
+                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                        @endif
+                    </li>
                 </ul>
 
             </div>
