@@ -4,19 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MO</title>
+    <title>Owner</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- Boostrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-    <!-- Bootstrap Icons -->
-    <link rel="icon" href="{{ asset('images/logo4.png') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
+    <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <style>
+        .nav-item.active .nav-link {
+            color: white !important;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .navbar {
+            padding: 0 1.5rem;
+        }
+
+        .navbar-brand {
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
         .navbar-light .navbar-nav .nav-link {
             color: #FFFFFF;
         }
@@ -35,6 +56,8 @@
             background-color: transparent;
             border: 2px solid white;
             color: white;
+            padding: 0.5rem 0.5rem;
+            font-size: 0.8rem;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
@@ -55,17 +78,6 @@
             color: white;
             font-size: 2.5rem;
         }
-
-
-        body {
-            background-image: url('/images/bg1.jpg');
-        }
-
-        .nav-item.active .nav-link {
-            color: white !important;
-            font-weight: bold;
-            text-decoration: underline;
-        }
     </style>
 </head>
 
@@ -79,6 +91,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item {{ Request::routeIs('landingPageMO') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('landingPageMO') }}">Home</a>
+                    </li>
                     <li class="nav-item {{ Request::routeIs('penitip.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('penitip.index') }}">Penitip</a>
                     </li>
@@ -102,7 +117,6 @@
                         @endif
                     </li>
                 </ul>
-
             </div>
         </div>
     </nav>
