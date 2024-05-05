@@ -91,8 +91,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" href="#!">Home</a>
+                    <li class="nav-item {{ Request::routeIs('landingPageCustomer') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('landingPageCustomer') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">Menu</a>

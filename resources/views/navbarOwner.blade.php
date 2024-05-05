@@ -16,6 +16,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
     <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <style>
+        .nav-item.active .nav-link {
+            color: white !important;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .navbar {
+            padding: 0 1.5rem;
+        }
+
+        .navbar-brand {
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
         .navbar-light .navbar-nav .nav-link {
             color: #FFFFFF;
         }
@@ -34,6 +56,8 @@
             background-color: transparent;
             border: 2px solid white;
             color: white;
+            padding: 0.5rem 0.5rem;
+            font-size: 0.8rem;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
@@ -54,16 +78,6 @@
             color: white;
             font-size: 2.5rem;
         }
-
-        .nav-item.active .nav-link {
-            color: white !important;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-
-        body {
-            background-image: url('/images/bg1.jpg');
-        }
     </style>
 </head>
 
@@ -77,8 +91,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::routeIs('gaji.*') ? 'active' : ''}}">
-                        <a class="nav-link mx-2" href="{{route('gaji.index')}}">Gaji</a>
+                    @if(auth()->guard('pegawai')->check())
+                    <li class="nav-item {{ Request::routeIs('landingPageOwner') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('landingPageOwner') }}">Home</a>
+                    </li>
+                    @endif
+                    <li class="nav-item {{ Request::is('gaji') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{url('/gaji')}}">Gaji</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">Laporan</a>
@@ -90,6 +109,7 @@
                         <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
                         @endif
                     </li>
+
                 </ul>
             </div>
         </div>

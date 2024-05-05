@@ -13,14 +13,14 @@ class LoginController extends Controller
         if (Auth::check()) {
             $pegawai = Auth::guard('pegawai')->user();
             if ($pegawai->jabatan->role == "Owner") {
-                return redirect()->route('gaji.index');
+                return redirect()->route('landingPageOwner');
             } else if ($pegawai->jabatan->role == "Admin") {
-                return redirect()->route('produks.index');
+                return redirect()->route('landingPageAdmin');
             } else if ($pegawai->jabatan->role == "MO") {
-                return redirect()->route('pegawai.index');
+                return redirect()->route('landingPageMO');
             }
         } else if (Auth::guard('customer')->check()) {
-            return redirect()->route('customer.index');
+            return redirect()->route('landingPageCustomer');
         }
         return view('login');
     }
@@ -35,11 +35,11 @@ class LoginController extends Controller
             $pegawai = Auth::guard('pegawai')->user();
             if ($pegawai->active) {
                 if ($pegawai->jabatan->role == "Owner") {
-                    return redirect()->route('gaji.index');
+                    return redirect()->route('landingPageOwner');
                 } else if ($pegawai->jabatan->role == "Admin") {
-                    return redirect()->route('produks.index');
+                    return redirect()->route('landingPageAdmin');
                 } else if ($pegawai->jabatan->role == "MO") {
-                    return redirect()->route('pegawai.index');
+                    return redirect()->route('landingPageMO');
                 }
             } else {
                 Auth::guard('pegawai')->logout();
@@ -50,7 +50,7 @@ class LoginController extends Controller
             $user = Auth::guard('customer')->user();
 
             if ($user->active) {
-                return redirect()->route('customer.index');
+                return redirect()->route('landingPageCustomer');
             } else {
                 Auth::guard('customer')->logout();
                 Session::flash('error', 'Akun anda belum terverifikasi. Silahkan cek email anda.');
