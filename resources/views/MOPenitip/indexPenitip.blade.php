@@ -57,6 +57,17 @@
                 </form>
                 <!-- /.col -->
             </div>
+            @if(session('error'))
+            <div id="errorAlert" class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            @endif
+
+            @if(session('success'))
+            <div id="successAlert" class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             <!-- row -->
         </div>
         <!-- container -->

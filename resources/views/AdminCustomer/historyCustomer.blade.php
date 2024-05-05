@@ -78,6 +78,7 @@
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Foto Produk</th>
                                             <th class="text-center">Nama Customer</th>
                                             <th class="text-center">Nama Produk</th>
                                             <th class="text-center">Status Pesanan Customer</th>
@@ -86,12 +87,19 @@
                                     <tbody>
                                         @forelse ($history as $item)
                                         <tr>
+                                            <td class="text-center">
+                                                @if($item->produk->image != null)
+                                                <img src="/images/{{ $item->produk->image }}" width="100px">
+                                                @else
+                                                <img src="/images/{{ $item->penitip->image }}" width="100px">
+                                                @endif
+                                            </td>
                                             <td class="text-center">{{ $item->customer->nama }}</td>
                                             <td class="text-center">
                                                 @if($item->produk->nama_produk != null)
                                                 {{ $item->produk->nama_produk }}
                                                 @else
-                                                {{$item->produk->penitips->nama_produk_penitip}}
+                                                {{$item->penitip->nama_produk_penitip}}
                                                 @endif
                                             </td>
                                             <td class="text-center">

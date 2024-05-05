@@ -52,7 +52,10 @@
     .isi {
         border-radius: 15px;
         padding: 8px;
+        background-color: #AD343E;
+        color: white;
         border: 1px solid #AD343E;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .profil img {
@@ -188,9 +191,11 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-                                <div class="row mt-2">
+                                <div class="row mt-5">
                                     <div class="col text-center">
-                                        <button type="submit" class="btn-edit mb-2 mt-3">Save</button>
+                                        <button type="submit" class="btn btn-primary">
+                                            Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>

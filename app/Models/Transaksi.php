@@ -10,7 +10,7 @@ class Transaksi extends Model
     use HasFactory;
     protected $table = 'transaksi';
     protected $primaryKey = 'id_transaksi';
-    protected $foreignKey =  ['id_customer', 'id_pegawai', 'id_produk_fk'];
+    protected $foreignKey =  ['id_customer', 'id_pegawai', 'id_produk_fk', 'id_penitip_fk'];
     public $timestamps = false;
 
     protected $fillable = [
@@ -23,6 +23,7 @@ class Transaksi extends Model
         'id_customer',
         'id_pegawai',
         'id_produk_fk',
+        'id_penitip_fk',
     ];
 
     public function customer()
@@ -37,6 +38,11 @@ class Transaksi extends Model
 
     public function produk()
     {
-        return $this->belongsTo(Produk::class, 'id_produk_fk')->with('penitips');;
+        return $this->belongsTo(Produk::class, 'id_produk_fk');
+    }
+
+    public function penitip()
+    {
+        return $this->belongsTo(Penitip::class, 'id_penitip_fk');
     }
 }

@@ -185,49 +185,27 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        function togglePoFields() {
-            if (document.getElementById('status_po').checked) {
-                document.getElementById('tanggal_mulai_po').style.display = 'block';
-                document.getElementById('tanggal_selesai_po').style.display = 'block';
-            } else {
-                document.getElementById('tanggal_mulai_po').style.display = 'none';
-                document.getElementById('tanggal_selesai_po').style.display = 'none';
-            }
-        }
-
-        function toggleTokoFields() {
-            if (document.getElementById('produk_toko').checked) {
-                document.getElementById('toko_fields').style.display = 'block';
-                document.getElementById('stock_produk_field').style.display = 'none';
-            } else {
+        function toggleFields() {
+            if (document.getElementById('produk_penitip').checked) {
+                document.getElementById('penitip_fields').style.display = 'block';
                 document.getElementById('toko_fields').style.display = 'none';
                 document.getElementById('stock_produk_field').style.display = 'block';
+            } else if (document.getElementById('produk_toko').checked) {
+                document.getElementById('penitip_fields').style.display = 'none';
+                document.getElementById('toko_fields').style.display = 'block';
+                document.getElementById('stock_produk_field').style.display = 'none';
             }
         }
-
         document.getElementById('produk_penitip').addEventListener('change', function() {
-            document.getElementById('penitip_fields').style.display = 'block';
-            document.getElementById('stock_produk_field').style.display = 'block';
-            toggleTokoFields();
+            toggleFields();
         });
 
         document.getElementById('produk_toko').addEventListener('change', function() {
-            document.getElementById('penitip_fields').style.display = 'none';
-            document.getElementById('stock_produk_field').style.display = 'none';
-            toggleTokoFields();
+            toggleFields();
         });
 
-        document.getElementById('status_ready').addEventListener('change', function() {
-            document.getElementById('tanggal_mulai_po').style.display = 'none';
-            document.getElementById('tanggal_selesai_po').style.display = 'none';
-        });
 
-        document.getElementById('status_po').addEventListener('change', function() {
-            togglePoFields();
-        });
-
-        togglePoFields();
-        toggleTokoFields();
+        toggleFields();
     });
 </script>
 

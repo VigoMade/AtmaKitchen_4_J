@@ -52,7 +52,8 @@
     .isi {
         border-radius: 15px;
         padding: 8px;
-        border: 1px solid #AD343E;
+        background-color: #AD343E;
+        color: white;
     }
 
     .profil img {
@@ -76,23 +77,6 @@
 
 <body>
     <div class="container-fluid px-4 px-md-5 text-lg-start">
-        @if(session('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-        </div>
-        @endif
-
-        @if(session('success'))
-        <div class="alert alert-success" role="alert">
-            {{ session('success') }}
-        </div>
-        @endif
-
-        @if(session('message'))
-        <div class="alert alert-success" role="alert">
-            {{session('message')}}
-        </div>
-        @endif
         <div class="row mt-5">
             <div class="col-lg-6">
                 <div class="container-fluid mt-4 text-center">
@@ -173,8 +157,24 @@
                             <div class="col text-center">
                                 <a class="btn btn-primary" style="text-decoration: none; color: white" href="{{route('customer.edit',$user->id_customer)}}">Edit</a>
                             </div>
-
                         </div>
+                        @if(session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
+                        @if(session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if(session('message'))
+                        <div class="alert alert-success" role="alert">
+                            {{session('message')}}
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

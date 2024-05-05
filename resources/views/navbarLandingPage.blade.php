@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- Boostrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
 
     <style>
+        .nav-item.active .nav-link {
+            color: white !important;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
         .navbar {
             padding: 0 1.5rem;
         }
@@ -94,6 +100,16 @@
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">About</a>
                     </li>
+                    @if(auth()->guard('customer')->check())
+                    <li class="nav-item {{ Request::routeIs('customer.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('customer.index')}}">My Profile</a>
+                    </li>
+                    @endif
+                    @if(auth()->guard('customer')->check())
+                    <li class="nav-item {{ Request::routeIs('historyCustomer.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My History</a>
+                    </li>
+                    @endif
                     <li class="nav-item ">
                         @if(auth()->guard('customer')->check())
                         <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
