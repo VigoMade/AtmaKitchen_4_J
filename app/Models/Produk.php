@@ -36,4 +36,9 @@ class Produk extends Model
     {
         return $this->belongsTo(Resep::class, 'id_resep');
     }
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'produk_id');
+    }
 }

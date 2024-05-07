@@ -46,7 +46,7 @@ class ProdukController extends Controller
             'harga_produk' => 'required',
             'jenis_produk' => 'required',
             'satuan_produk' => 'required',
-            'image' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();
@@ -112,7 +112,7 @@ class ProdukController extends Controller
             'harga_produk' => 'required',
             'jenis_produk' => 'required',
             'satuan_produk' => 'required',
-            'image' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();
