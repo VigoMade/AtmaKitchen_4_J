@@ -1,9 +1,10 @@
-@extends('navbarlandingPage')
+@extends('navbarAdmin')
 
 @section('content')
 <style>
   body {
     background-color: #F5EEDC;
+    /* background-image: url('/images/bg1.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -76,7 +77,7 @@
 
 <div class="container">
   <div class="center-container">
-    <h2><b>W E L C O M E</b></h2>
+    <h2><b>MANEJEMEN PEGAWAI</b></h2>
   </div>
 
   <div class="container">
@@ -85,13 +86,13 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ asset('images/customer3.png') }}" class="img-fluid rounded-start" style="width: 250px; height: 200px; margin-right:80px;" alt="...">
+              <img src="{{ asset('images/admin2.png') }}" class="img-fluid rounded-start" style="width: 150px; height: 250px; margin-left:50px;" alt="...">
 
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title" style="color: #AD343E; font-weight: bold;">Customer</h5>
-                <p class="card-text" style="color: #AD343E;"> Salam hangat dari toko roti kami! Temukan kelezatan tiada tara dari koleksi roti segar kami. Mari nikmati setiap gigitan dengan kepuasan yang tak terlupakan. Selamat berbelanja!</p>
+                <h5 class="card-title" style="color: #AD343E; font-weight: bold;">A D M I N</h5>
+                <p class="card-text" style="color: #AD343E;">Sebagai admin di toko roti online, tanggung jawab Anda meliputi manajemen pesanan, pengelolaan stok, pemeliharaan situs web, pelayanan pelanggan, keuangan, pengemasan dan pengiriman, pemasaran, administrasi, dan pemeliharaan database pelanggan. Anda perlu memiliki keterampilan multitasking, komunikasi yang baik, ketelitian dalam detail, dan pemahaman tentang industri roti dan belanja online.</p>
 
               </div>
             </div>
@@ -125,8 +126,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <h3 class="mb-3" style="color: #AD343E; font-family: 'Playfair Display', serif;">Our Menu</h3>
-
+          <h3 class="mb-3" style="color: #AD343E;">Jobdesc Detail</h3>
         </div>
         <div class="col-6 text-right">
           <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="prev">
@@ -142,32 +142,29 @@
               <div class="carousel-item active">
                 <div class="row">
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <a href="#">
-                        <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapislegit.jpeg') }}" />
-                      </a>
-
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header"> Mengelola Produk</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Legit</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan produk, mengubah produk, menghapus produk, menampilkan produk, mencari produk.</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">
+                        <Main></Main> Mengelola Resep
+                      </div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan resep, mengubah resep, menghapus resep, menampilkan resep, mencari resep.
+                        </p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Mengelola Bahan Baku</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan bahan baku, mengubah bahan baku, menghapus bahan baku, menampilkan bahan baku, mencari bahan baku.</p>
                       </div>
                     </div>
                   </div>
@@ -176,63 +173,23 @@
               <div class="carousel-item">
                 <div class="row">
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/mandarin.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Mencari Data Customer</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Mandarin Cake</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Mencari data customer yang sudah login</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Hampers</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan hampers, mengubah hampers, menghapus hampers, menampilkan hampers, mencari hampers.
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti sosis.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Sosis</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti keju.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Keju</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/milkbun.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Milkbun</h4>
-
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -241,6 +198,7 @@
       </div>
     </div>
   </section>
+
 
 
 

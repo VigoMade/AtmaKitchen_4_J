@@ -16,6 +16,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
 
     <style>
+        .nav-item.active .nav-link {
+            color: white !important;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .navbar {
+            padding: 0 1.5rem;
+        }
+
+        .navbar-brand {
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
         .navbar-light .navbar-nav .nav-link {
             color: #FFFFFF;
         }
@@ -34,6 +56,8 @@
             background-color: transparent;
             border: 2px solid white;
             color: white;
+            padding: 0.5rem 0.5rem;
+            font-size: 0.8rem;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
@@ -54,16 +78,6 @@
             color: white;
             font-size: 2.5rem;
         }
-
-        body {
-            background-image: url('/images/bg1.jpg');
-        }
-
-        .nav-item.active .nav-link {
-            color: white !important;
-            font-weight: bold;
-            text-decoration: underline;
-        }
     </style>
 </head>
 
@@ -77,19 +91,30 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item {{ Request::is('produks') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('produks')}}">Produk</a>
+                    <li class="nav-item {{ Request::routeIs('landingPageAdmin') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('landingPageAdmin') }}">Home</a>
                     </li>
-                    <li class="nav-item {{ Request::is('reseps') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/reseps')}}">Resep</a>
+                    <li class="nav-item {{ Request::routeIs('produks.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('produks.index')}}">Produk</a>
                     </li>
-                    <li class="nav-item {{ Request::is('bahanBaku') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/bahanBaku')}}">Bahan Baku</a>
+                    <li class="nav-item {{ Request::routeIs('reseps.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('reseps.index')}}">Resep</a>
                     </li>
-                    <li class="nav-item {{ Request::is('hampers') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{url('/hampers')}}">Hampers</a>
+                    <li class="nav-item {{ Request::routeIs('bahanBaku.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('bahanBaku.index')}}">Bahan Baku</a>
+                    </li>
+                    <li class="nav-item {{ Request::routeIs('hampers.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('hampers.index')}}">Hampers</a>
+                    </li>
+                    <li class="nav-item ">
+                        @if(auth()->guard('pegawai')->check())
+                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                        @else
+                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                        @endif
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>

@@ -21,26 +21,30 @@ class RegisterController extends Controller
 
     public function actionRegister(Request $request)
     {
-        $str = Str::random(100);
-        $user = Customer::create([
-            'email' => $request->email,
-            'noTelpon' => $request->noTelpon,
-            'nama' => $request->nama,
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'verify_key' => $str,
-        ]);
+        try {
+            $str = Str::random(100);
+            $user = Customer::create([
+                'email' => $request->email,
+                'noTelpon' => $request->noTelpon,
+                'nama' => $request->nama,
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                'verify_key' => $str,
+            ]);
 
-        $details = [
-            'username' => $request->username,
-            'website' => 'Atma Kitchen',
-            'datetime' => date('Y-m-d H:i:s'),
-            'url' => request()->getHttpHost() . '/register/verify/' . $str
-        ];
+            $details = [
+                'username' => $request->username,
+                'website' => 'Atma Kitchen',
+                'datetime' => date('Y-m-d H:i:s'),
+                'url' => request()->getHttpHost() . '/register/verify/' . $str
+            ];
 
-        Mail::to($request->email)->send(new MailSend($details));
-        Session::flash('message', 'Link Verifikasi telah dikirim ke email anda. Silahkan Cek email anda untuk mengaktifkan akun');
-        return redirect('register');
+            Mail::to($request->email)->send(new MailSend($details));
+            Session::flash('message', 'Link Verifikasi telah dikirim ke email anda. Silahkan Cek email anda untuk mengaktifkan akun');
+            return redirect('register');
+        } catch (\Exception $e) {
+            return redirect('register')->with('error', 'Gagal  Register');
+        }
     }
 
     public function verify($verify_key)

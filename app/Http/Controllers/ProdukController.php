@@ -21,28 +21,6 @@ class ProdukController extends Controller
         return view('AdminProduk.indexProduk', compact('produk'));
     }
 
-    public function index_mobile()
-    {
-        $produk = Produk::all();
-        return response([
-            'message'=> 'Retrieve All Success',
-            'data' => $produk,
-            ],200);
-    }
-
-    public function getImage($filename)
-    {
-        $path = public_path('images/' . $filename);
-
-        if (file_exists($path)) {
-            // Jika gambar ada, kirimkan respons dengan file gambar
-            return response()->file($path);
-        } else {
-            // Jika gambar tidak ditemukan, kirimkan respons 404
-            abort(404);
-        }
-    }
-
     /** 
      * create
      *
@@ -134,7 +112,7 @@ class ProdukController extends Controller
             'harga_produk' => 'required',
             'jenis_produk' => 'required',
             'satuan_produk' => 'required',
-            'image' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();

@@ -1,13 +1,14 @@
-@extends('navbarlandingPage')
+@extends('navbarOwner')
 
 @section('content')
 <style>
   body {
     background-color: #F5EEDC;
     background-size: cover;
+    font-family: 'Playfair Display', serif;
     background-repeat: no-repeat;
-
   }
+
 
   .center-container {
     display: flex;
@@ -53,6 +54,8 @@
     font-family: 'Playfair Display', serif;
   }
 
+
+
   .btn-edit {
     display: block;
     border-radius: 10px;
@@ -66,6 +69,19 @@
     font-family: 'Playfair Display', serif;
   }
 
+  .btn-primary {
+    background-color: #AD343E;
+    /* Ubah warna latar belakang tombol */
+    border-color: #AD343E;
+    /* Ubah warna pinggiran tombol */
+    color: #fff;
+    /* Sesuaikan warna teks dengan kebutuhan Anda */
+  }
+
+
+
+
+
   .btn-edit:hover {
     background-color: transparent;
     border-color: #AD343E;
@@ -76,7 +92,7 @@
 
 <div class="container">
   <div class="center-container">
-    <h2><b>W E L C O M E</b></h2>
+    <h2><b>MANEJEMEN PEGAWAI</b></h2>
   </div>
 
   <div class="container">
@@ -85,13 +101,13 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ asset('images/customer3.png') }}" class="img-fluid rounded-start" style="width: 250px; height: 200px; margin-right:80px;" alt="...">
+              <img src="{{ asset('images/owner3.png') }}" class="img-fluid rounded-start" style="width: 200px; height: 200px; margin-right:80px;" alt="...">
 
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title" style="color: #AD343E; font-weight: bold;">Customer</h5>
-                <p class="card-text" style="color: #AD343E;"> Salam hangat dari toko roti kami! Temukan kelezatan tiada tara dari koleksi roti segar kami. Mari nikmati setiap gigitan dengan kepuasan yang tak terlupakan. Selamat berbelanja!</p>
+                <h5 class="card-title" style="color: #AD343E; font-weight: bold;">O W N E R</h5>
+                <p class="card-text" style="color: #AD343E;"> Sebagai owner atma kitchen, tugasnya meliputi berbagai aspek manajemen, pengembangan bisnis, dan meliputi proses pengajian dalam toko.</p>
 
               </div>
             </div>
@@ -125,8 +141,7 @@
     <div class="container">
       <div class="row">
         <div class="col-6">
-          <h3 class="mb-3" style="color: #AD343E; font-family: 'Playfair Display', serif;">Our Menu</h3>
-
+          <h3 class="mb-3" style="color: #AD343E;">Jobdesc Detail</h3>
         </div>
         <div class="col-6 text-right">
           <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="prev">
@@ -142,32 +157,26 @@
               <div class="carousel-item active">
                 <div class="row">
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <a href="#">
-                        <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapislegit.jpeg') }}" />
-                      </a>
-
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Pencatatan Pengeluaran Lainnya</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Legit</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan pencatatan pengeluaran lainnya, mengubah pencatatan pengeluaran lainnya ,menghapus pencatatan pengeluaran lainnya, menampilkan pencatatan pengeluaran lainnya, mencari pencatatan pengeluaran lainnya.</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Pencatan Pembelian Bahan Baku</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan pembelian bahan baku, mengubah pembelian bahan baku, menghapus pembelian bahan baku, menampilkan pembelian bahan baku, mencari pembelian bahan baku.</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Mengelola Data Karyawan </div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan data karyawan, mengubah data karyawan,menghapus data karyawan, menampilkan data karyawan, mencari data karyawan.</p>
                       </div>
                     </div>
                   </div>
@@ -176,71 +185,42 @@
               <div class="carousel-item">
                 <div class="row">
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/mandarin.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Mencari Data Customer</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Mandarin Cake</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan pengubahan pada presensi serta menampilkan presensi karyawan.</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Mengelola Data Jabatan</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan data jabatan, mengubah data jabatan, menghapus data jabatan, menampilkan data jabatan, mencari data jabatan.</p>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
+                    <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
+                      <div class="card-header">Mengelola Data Penitip</div>
                       <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan penitip, mengubah penitip, menghapus penitip, menampilkan penitip, mencari penitip.
+                        <p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti sosis.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Sosis</h4>
 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti keju.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Keju</h4>
 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/milkbun.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Milkbun</h4>
 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+</div>
+</section>
 
 
 
@@ -249,8 +229,9 @@
 
 
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
-  @endsection
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+@endsection

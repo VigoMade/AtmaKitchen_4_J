@@ -42,7 +42,7 @@ class PenitipController extends Controller
             'nama_produk_penitip' => 'required',
             'jumlah_produk_penitip' => 'required|numeric',
             'jenis_produk_penitip' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();
@@ -94,7 +94,7 @@ class PenitipController extends Controller
             'nama_produk_penitip' => 'required',
             'jumlah_produk_penitip' => 'required|numeric',
             'jenis_produk_penitip' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();

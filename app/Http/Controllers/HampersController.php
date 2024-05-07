@@ -15,7 +15,7 @@ class HampersController extends Controller
      */
     public function index()
     {
-        $hampers = Hampers::orderBy('id_hampers','desc')->paginate(5);
+        $hampers = Hampers::orderBy('id_hampers', 'desc')->paginate(5);
         return view('AdminHampers.indexHampers', compact('hampers'));
     }
 
@@ -26,7 +26,7 @@ class HampersController extends Controller
      */
     public function create()
     {
-         return view('AdminHampers.createHampers');
+        return view('AdminHampers.createHampers');
     }
 
     /**
@@ -45,7 +45,7 @@ class HampersController extends Controller
         ]);
 
         $input = $request->all();
-   
+
         if ($image = $request->file('image')) {
             $destinationPath = 'images/';
             $gambarPoster = date('YmdHis') . "." . $image->getClientOriginalExtension();
@@ -53,12 +53,12 @@ class HampersController extends Controller
             $input['image'] = $gambarPoster;
         }
 
-        Hampers::create($input);
 
         try {
-            return redirect()->route('hampers.index');
+            Hampers::create($input);
+            return redirect()->route('hampers.index')->with(['success' => 'Data Berhasil Ditambah!']);
         } catch (Exception $e) {
-            return redirect()->route('hampers.index');
+            return redirect()->route('hampers.index')->with(['error' => 'Data Gagal Ditambah! Error: ' . $e->getMessage()]);
         }
     }
 
@@ -101,10 +101,13 @@ class HampersController extends Controller
         } else {
             unset($input['image']);
         }
+        try {
+            $hamper->update($input);
 
-        $hamper->update($input);
-
-        return redirect()->route('hampers.index')->with(['success' => 'Data Berhasil Diubah!']);
+            return redirect()->route('hampers.index')->with(['success' => 'Data Berhasil Diubah!']);
+        } catch (Exception $e) {
+            return redirect()->route('hampers.index')->with(['error' => 'Data Gagal Diubah! Error: ' . $e->getMessage()]);
+        }
     }
 
     /**
@@ -120,15 +123,17 @@ class HampersController extends Controller
         return redirect()->route('hampers.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 
-    public function show(Request $request){
+    public function show(Request $request)
+    {
         $search = $request->search;
-        $hampers = Hampers::where('nama_hampers','like', '%' . $search . "%")->paginate(5);
+        $hampers = Hampers::where('nama_hampers', 'like', '%' . $search . "%")->paginate(5);
         return view('AdminHampers.indexHampers', compact('hampers'));
     }
 
-     public function search(Request $request){
+    public function search(Request $request)
+    {
         $search = $request->search;
-        $hampers = Hampers::where('nama_hampers','like', '%' . $search . "%")->paginate(5);
+        $hampers = Hampers::where('nama_hampers', 'like', '%' . $search . "%")->paginate(5);
         return view('AdminHampers.indexHampers', compact('hampers'));
     }
 }

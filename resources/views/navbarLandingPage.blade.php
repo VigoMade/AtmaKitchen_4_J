@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
+    <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- Boostrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -16,6 +16,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
 
     <style>
+        .nav-item.active .nav-link {
+            color: white !important;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .navbar {
+            padding: 0 1.5rem;
+        }
+
+        .navbar-brand {
+            margin-right: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: white;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
         .navbar-light .navbar-nav .nav-link {
             color: #FFFFFF;
         }
@@ -34,6 +56,8 @@
             background-color: transparent;
             border: 2px solid white;
             color: white;
+            padding: 0.5rem 0.5rem;
+            font-size: 0.8rem;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
@@ -67,8 +91,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" href="#!">Home</a>
+                    <li class="nav-item {{ Request::routeIs('landingPageCustomer') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('landingPageCustomer') }}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">Menu</a>
@@ -76,8 +100,22 @@
                     <li class="nav-item">
                         <a class="nav-link mx-2" href="#!">About</a>
                     </li>
-                    <li class="nav-item ms-3">
-                        <a class="btn  btn-rounded" href="{{url('/login')}}">Sign in</a>
+                    @if(auth()->guard('customer')->check())
+                    <li class="nav-item {{ Request::routeIs('customer.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('customer.index')}}">My Profile</a>
+                    </li>
+                    @endif
+                    @if(auth()->guard('customer')->check())
+                    <li class="nav-item {{ Request::routeIs('historyCustomer.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My History</a>
+                    </li>
+                    @endif
+                    <li class="nav-item ">
+                        @if(auth()->guard('customer')->check())
+                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                        @else
+                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                        @endif
                     </li>
                 </ul>
             </div>
