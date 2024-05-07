@@ -49,7 +49,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('pembelianBB.update',['id_pembelian' =>$pembelianBB->id_pembelian, 'id_bahanBaku' => $pembelianBB->id_bahan_baku])}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pembelianBB.update',['id_pembelian' =>$pembelianBB->id_pembelian, 'id_bahanBaku' => $pembelianBB->id_bahan_baku])}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">

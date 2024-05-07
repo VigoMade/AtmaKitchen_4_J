@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('pengeluaranLainnya.store')}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pengeluaranLainnya.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
