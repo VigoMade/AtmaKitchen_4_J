@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('pegawai.update',$pegawai->id_pegawai)}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pegawai.update',$pegawai->id_pegawai)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">
@@ -163,10 +163,12 @@
 
 </body>
 <script>
-    document.getElementById('id_role_select').addEventListener('change', function() {
-        var selectedValue = this.value;
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var selectedValue = document.getElementById('id_role_select').value;
         var usernameField = document.getElementById('username_field');
         var passwordField = document.getElementById('password_field');
+
 
         if (selectedValue === '') {
             usernameField.style.display = 'none';
@@ -175,7 +177,23 @@
             usernameField.style.display = 'block';
             passwordField.style.display = 'block';
         }
+
+
+        document.getElementById('id_role_select').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var usernameField = document.getElementById('username_field');
+            var passwordField = document.getElementById('password_field');
+
+            if (selectedValue === '') {
+                usernameField.style.display = 'none';
+                passwordField.style.display = 'none';
+            } else {
+                usernameField.style.display = 'block';
+                passwordField.style.display = 'block';
+            }
+        });
     });
 </script>
+
 
 @endsection

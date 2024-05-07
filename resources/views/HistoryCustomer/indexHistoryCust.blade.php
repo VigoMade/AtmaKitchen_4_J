@@ -90,14 +90,14 @@
                                     <tr>
                                         @forelse($user as $item)
                                         <td class="text-center">
-                                            @if($item->id_produk_fk != null)
+                                            @if($item->produk->image != null)
                                             <img src="/images/{{ $item->produk->image }}" width="100px">
                                             @else
                                             <img src="/images/{{ $item->penitip->image }}" width="100px">
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($item->id_produk_fk != null)
+                                            @if($item->produk->nama_produk != null)
                                             {{ $item->produk->nama_produk }}
                                             @else
                                             {{$item->penitip->nama_produk_penitip}}

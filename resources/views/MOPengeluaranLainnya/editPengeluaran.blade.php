@@ -55,12 +55,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('penitip.store')}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pengeluaranLainnya.update',$pengeluaran->id_pengeluaran)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Nama Pengeluaran Lainnya</label>
-                                        <input type="text" class="form-control @error('nama_pengeluaran_lainnya') is-invalid @enderror" name="nama_pengeluaran_lainnya" value="{{ old('nama_pengeluaran_lainnya') }}" placeholder="Masukkan nama_pengeluaran_lainnya">
+                                        <input type="text" class="form-control @error('nama_pengeluaran_lainnya') is-invalid @enderror" name="nama_pengeluaran_lainnya" value="{{ old('nama_pengeluaran_lainnya',$pengeluaran->nama_pengeluaran_lainnya) }}" placeholder="Masukkan nama_pengeluaran_lainnya">
                                         @error('nama_pengeluaran_lainnya')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -71,7 +72,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Biaya Pengeluaran Lainnya</label>
-                                        <input type="text" class="form-control @error('biaya_pengeluaran_lainnya') is-invalid @enderror" name="biaya_pengeluaran_lainnya" value="{{old('biaya_pengeluaran_lainnya') }}" placeholder="Masukkan Nama Produk Penitip">
+                                        <input type="text" class="form-control @error('biaya_pengeluaran_lainnya') is-invalid @enderror" name="biaya_pengeluaran_lainnya" value="{{old('biaya_pengeluaran_lainnya',$pengeluaran->biaya_pengeluaran_lainnya) }}" placeholder="Masukkan Nama Produk Penitip">
                                         @error('biaya_pengeluaran_lainnya')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -80,14 +81,14 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="font-weightbold">Tanggal Pengeluaran Lainnya</label>
-                                        <input type="number" class="form-control @error('tanggal_pengeluaran_lainnya') is-invalid @enderror" name="tanggal_pengeluaran_lainnya" value="{{old('tanggal_pengeluaran_lainnya') }}" placeholder="Masukkan Jumlah Produk Penitip">
+                                        <input type="datetime-local" class="form-control @error('tanggal_pengeluaran_lainnya') is-invalid @enderror" name="tanggal_pengeluaran_lainnya" value="{{old('tanggal_pengeluaran_lainnya',$pengeluaran->tanggal_pengeluaran_lainnya) }}" placeholder="Masukkan Jumlah Produk Penitip">
                                         @error('tanggal_pengeluaran_lainnya')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                    
+
 
                                 </div>
                                 <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>

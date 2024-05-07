@@ -50,7 +50,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('produks.update',$produk->id_produk)}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('produks.update',$produk->id_produk)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
@@ -114,7 +114,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6" id="tanggal_mulai_po" style="display: none;">
                                             <label>Tanggal Mulai PO</label>
-                                            <input type="date" class="form-control @error('tanggal_mulai_po') is-invalid @enderror" name="tanggal_mulai_po" value="{{ old('tanggal_mulai_po',$produk->tanggal_mulai_po) }}" placeholder="Masukkan Tanggal Mulai PO">
+                                            <input type="datetime-local" class="form-control @error('tanggal_mulai_po') is-invalid @enderror" name="tanggal_mulai_po" value="{{ old('tanggal_mulai_po',$produk->tanggal_mulai_po) }} placeholder=" Masukkan Tanggal Mulai PO">
                                             @error('tanggal_mulai_po')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -122,7 +122,7 @@
 
                                         <div class="form-group col-md-6" id="tanggal_selesai_po" style="display: none;">
                                             <label>Tanggal Selesai PO</label>
-                                            <input type="date" class="form-control @error('tanggal_selesai_po') is-invalid @enderror" name="tanggal_selesai_po" value="{{ old('tanggal_selesai_po',$produk->tanggal_selesai_po) }}" placeholder="Masukkan Tanggal Selesai PO">
+                                            <input type="datetime-local" class="form-control @error('tanggal_selesai_po') is-invalid @enderror" name="tanggal_selesai_po" value="{{ old('tanggal_selesai_po',$produk->tanggal_selesai_po) }}" placeholder="Masukkan Tanggal Selesai PO">
                                             @error('tanggal_selesai_po')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -185,49 +185,27 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        function togglePoFields() {
-            if (document.getElementById('status_po').checked) {
-                document.getElementById('tanggal_mulai_po').style.display = 'block';
-                document.getElementById('tanggal_selesai_po').style.display = 'block';
-            } else {
-                document.getElementById('tanggal_mulai_po').style.display = 'none';
-                document.getElementById('tanggal_selesai_po').style.display = 'none';
-            }
-        }
-
-        function toggleTokoFields() {
-            if (document.getElementById('produk_toko').checked) {
-                document.getElementById('toko_fields').style.display = 'block';
-                document.getElementById('stock_produk_field').style.display = 'none';
-            } else {
+        function toggleFields() {
+            if (document.getElementById('produk_penitip').checked) {
+                document.getElementById('penitip_fields').style.display = 'block';
                 document.getElementById('toko_fields').style.display = 'none';
                 document.getElementById('stock_produk_field').style.display = 'block';
+            } else if (document.getElementById('produk_toko').checked) {
+                document.getElementById('penitip_fields').style.display = 'none';
+                document.getElementById('toko_fields').style.display = 'block';
+                document.getElementById('stock_produk_field').style.display = 'none';
             }
         }
-
         document.getElementById('produk_penitip').addEventListener('change', function() {
-            document.getElementById('penitip_fields').style.display = 'block';
-            document.getElementById('stock_produk_field').style.display = 'block';
-            toggleTokoFields();
+            toggleFields();
         });
 
         document.getElementById('produk_toko').addEventListener('change', function() {
-            document.getElementById('penitip_fields').style.display = 'none';
-            document.getElementById('stock_produk_field').style.display = 'none';
-            toggleTokoFields();
+            toggleFields();
         });
 
-        document.getElementById('status_ready').addEventListener('change', function() {
-            document.getElementById('tanggal_mulai_po').style.display = 'none';
-            document.getElementById('tanggal_selesai_po').style.display = 'none';
-        });
 
-        document.getElementById('status_po').addEventListener('change', function() {
-            togglePoFields();
-        });
-
-        togglePoFields();
-        toggleTokoFields();
+        toggleFields();
     });
 </script>
 

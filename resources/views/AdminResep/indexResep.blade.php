@@ -54,7 +54,7 @@
                         <input type="text" class="form-control" name="search" placeholder="Cari BahanBaku...">
                         <button class="btn btn-outline-primary" type="submit">Cari</button>
                     </div>
-            </form>
+                </form>
                 <!-- /.col -->
             </div>
             <!-- row -->
@@ -97,7 +97,7 @@
                                             <td class="text-center">{{ $resep->total_penggunaan_bahan }}</td>
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('reseps.destroy',$resep->id_detail_resep_bahan)}}" method="POST">
-                                                    <a href="{{ route('reseps.edit',['id_detail_resep_bahan' =>$resep->id_detail_resep_bahan ,'id_resep' => $resep->id_resep, 'id_bahanBaku' => $resep->id_bahan_baku]) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                    <a href="{{ route('reseps.edit',['id_detail_resep_bahan' =>$resep->id_detail_resep_bahan ,'id_resep' => $resep->id_resep]) }}" class="btn btn-sm btn-primary">Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>

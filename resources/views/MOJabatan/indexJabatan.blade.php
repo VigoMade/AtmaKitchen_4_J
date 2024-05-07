@@ -60,6 +60,17 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        @if(session('error'))
+                        <div id="errorAlert" class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
+                        @if(session('success'))
+                        <div id="successAlert" class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
                         <div class="card-body">
                             <a href="{{route('jabatan.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Jabatan</a>
                             <div class="table-responsive p-0">
