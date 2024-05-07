@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('penitip.update',$penitip->id_penitip)}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('penitip.update',$penitip->id_penitip)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">
@@ -88,7 +88,7 @@
                                         </div>
                                         @enderror
                                     </div>
-                                    
+
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Jenis Produk Penitip</label>
                                         <input type="text" class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip" value="{{old('jenis_produk_penitip',$penitip->jenis_produk_penitip) }}" placeholder="Masukkan Jenis Produk Penitip">

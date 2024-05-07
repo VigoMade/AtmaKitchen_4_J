@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('pegawai.update',$pegawai->id_pegawai)}}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pegawai.update',$pegawai->id_pegawai)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">

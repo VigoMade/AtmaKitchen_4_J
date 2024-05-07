@@ -82,7 +82,7 @@
         <div class="row mt-5">
             <div class="col-lg-6">
                 <div class="container-fluid mt-4 text-center">
-                    <form action="{{ route('customer.update', $user->id_customer) }}" method="POST" enctype="multipart/form-data">
+                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('customer.update', $user->id_customer) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="container-fluid mt-5 isi text-center" style="margin-top: 40px;">

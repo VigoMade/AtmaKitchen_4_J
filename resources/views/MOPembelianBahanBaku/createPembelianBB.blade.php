@@ -43,7 +43,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('pembelianBB.store')}}" method="POST" enctype="multipart/form-data">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pembelianBB.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label class="font-weight-bold" for="id_bahan_baku">Masukkan Bahan Baku</label>

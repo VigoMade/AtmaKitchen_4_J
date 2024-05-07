@@ -49,9 +49,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{route('hampers.update',$hamper->id_hampers)}}"method="POST" enctype="multipart/form-data">
-                           @csrf
-                           @method('PUT')
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('hampers.update',$hamper->id_hampers)}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Hampers</label>
                                 <input type="text" class="form-control @error('nama_hampers') is-invalid @enderror" name="nama_hampers" value="{{ old('nama_hampers',$hamper->nama_hampers) }}" placeholder="Masukkan Nama Hampers">
