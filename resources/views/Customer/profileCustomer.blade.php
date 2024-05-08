@@ -88,17 +88,16 @@
                         </div>
                         <div class="row">
                             <div class="col text-center">
-                                @if ($user->image == null)
                                 <div class="profil">
-                                    <img src="{{ url('images/20240416153955.jpeg') }}" alt="">
+                                    @if ($user->image)
+                                    <img src="{{ Storage::url($user->image) }}" alt="profile">
+                                    @else
+                                    <img src="{{ asset('images/20240416153955.jpeg') }}" alt="default-profile">
+                                    @endif
                                 </div>
-                                @else
-                                <div class="profil">
-                                    <img src="/images/{{ $user->image }}" alt="profile">
-                                </div>
-                                @endif
                             </div>
                         </div>
+
                         <div class="row mt-3 text-center">
                             <div class="col">
                                 <h4>{{$user->nama}}</h4>

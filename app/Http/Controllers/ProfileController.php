@@ -6,6 +6,7 @@ use App\Models\Customer;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -21,6 +22,8 @@ class ProfileController extends Controller
         return view('Customer.editProfileCustomer', compact('user'));
     }
 
+
+
     public function update(Request $request, $id)
     {
         $user = Customer::find($id);
@@ -34,10 +37,15 @@ class ProfileController extends Controller
 
         $input = $request->all();
         if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
-            $fotoProduk = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $fotoProduk);
-            $input['image'] = $fotoProduk;
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $path = $image->storeAs('images', $imageName, 'public');
+            $input['image'] = $path;
+
+
+            if ($user->image !== null && Storage::disk('public')->exists($user->image)) {
+                Storage::disk('public')->delete($user->image);
+            }
         } else {
             unset($input['image']);
         }
