@@ -55,7 +55,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('reseps.update', ['id_detail_resep_bahan' =>$resepDetail->id_detail_resep_bahan,'id_resep' => $resepDetail->id_resep, 'id_bahanBaku' => $resepDetail->id_bahan_baku]) }}" method="POST" enctype="multipart/form-data">
+                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('reseps.update', ['id_detail_resep_bahan' =>$resepDetail->id_detail_resep_bahan,'id_resep' => $resepDetail->id_resep, 'id_bahanBaku' => $resepDetail->id_bahan_baku]) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-row">

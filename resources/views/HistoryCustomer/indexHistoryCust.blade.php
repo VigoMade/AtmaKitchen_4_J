@@ -83,6 +83,7 @@
                                     <tr>
                                         <th class="text-center">Foto Produk</th>
                                         <th class="text-center">Nama Produk</th>
+                                        <th class="text-center">Total Pembayaran Ku</th>
                                         <th class="text-center">Status Pesanan Customer</th>
                                     </tr>
                                 </thead>
@@ -102,6 +103,9 @@
                                             @else
                                             {{$item->penitip->nama_produk_penitip}}
                                             @endif
+                                        </td>
+                                        <td class="text-center">
+                                            {{$item->total_pembayaran}}
                                         </td>
                                         <td class="text-center">
                                             @if($item->status == 'Selesai')
