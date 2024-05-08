@@ -49,8 +49,15 @@
                     </ol>
                     <li class="breadcrumb-item active">Show Pengeluaran Lainnya</li>
                 </div>
+                <form action="{{route('pengeluaranLainnya.search')}}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Cari Pengeluaran....">
+                        <button class="btn btn-outline-primary" type="submit">Cari</button>
+                    </div>
+                </form>
                 <!-- /.col -->
             </div>
+
             <!-- row -->
         </div>
         <!-- container -->
