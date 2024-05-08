@@ -94,7 +94,7 @@
                                     <tbody>
                                         @forelse ($customer as $item)
                                         <tr>
-                                            <td class="text-center"><img src="/images/{{ $item->image }}" width="100px"></td>
+                                            <td class="text-center"><img src="{{ Storage::url($item->image) }}" alt="profile" width="100px"></td>
                                             <td class="text-center">{{ $item->nama }}</td>
                                             <td class="text-center">{{ $item->email }}</td>
                                             <td class="text-center">{{ $item->noTelpon }}</td>

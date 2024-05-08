@@ -106,6 +106,15 @@
                     <li class="nav-item {{ Request::routeIs('hampers.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('hampers.index')}}">Hampers</a>
                     </li>
+
+                    <li class="nav-item {{ Request::routeIs('dataCust.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('dataCust.index')}}">Data Customer</a>
+                    </li>
+
+                    <li class="nav-item {{ Request::routeIs('history.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('history.index')}}">History Customer</a>
+                    </li>
+
                     <li class="nav-item ">
                         @if(auth()->guard('pegawai')->check())
                         <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
