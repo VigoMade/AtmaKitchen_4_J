@@ -117,7 +117,13 @@
                                                 {{$item->nama_produk}}
                                                 @endif
                                             </td>
-                                            <td class="text-center">{{$item->jenis_produk}}</td>
+                                            <td class="text-center">
+                                                @if($item->penitips != null && $item->penitips->id_penitip != null)
+                                                {{$item->penitips->jenis_produk_penitip}}
+                                                @else
+                                                {{$item->jenis_produk}}
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 @if($item->stock_produk == null)
                                                 --

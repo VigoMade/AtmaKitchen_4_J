@@ -85,8 +85,8 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label class="font-weight-bold">Jumlah Pembelian Bahan Baku</label>
-                                        <input type="number" class="form-control @error('total_penambahan') is-invalid @enderror" name="total_penambahan" value="{{ old('total_penambahan',$pembelianBB->bahanBaku->takaran_bahan_baku_tersedia) }}" placeholder="Masukkan Jumlah Bahan Baku">
-                                        @error('total_penambahan')
+                                        <input type="number" class="form-control @error('jumlah_bb_dibeli') is-invalid @enderror" name="jumlah_bb_dibeli" value="{{ old('jumlah_bb_dibeli',$pembelianBB->jumlah_bb_dibeli) }}" placeholder="Masukkan Jumlah Bahan Baku">
+                                        @error('jumlah_bb_dibeli')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

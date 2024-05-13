@@ -90,14 +90,21 @@
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                        <label class="font-weightbold">Jenis Produk Penitip</label>
-                                        <input type="text" class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip" value="{{old('jenis_produk_penitip',$penitip->jenis_produk_penitip) }}" placeholder="Masukkan Jenis Produk Penitip">
+                                        <label class="font-weight-bold">Jenis Produk Penitip</label>
+                                        <select class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip">
+                                            <option value="">Pilih Jenis Produk Penitip</option>
+                                            <option value="Roti" {{ old('jenis_produk_penitip', $penitip->jenis_produk_penitip) == 'Roti' ? 'selected' : '' }}>Roti</option>
+                                            <option value="Cake" {{ old('jenis_produk_penitip', $penitip->jenis_produk_penitip) == 'Cake' ? 'selected' : '' }}>Cake</option>
+                                            <option value="Minuman" {{ old('jenis_produk_penitip', $penitip->jenis_produk_penitip) == 'Minuman' ? 'selected' : '' }}>Minuman</option>
+                                            <option value="Other" {{ old('jenis_produk_penitip', $penitip->jenis_produk_penitip) == 'Other' ? 'selected' : '' }}>Other</option>
+                                        </select>
                                         @error('jenis_produk_penitip')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
+
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Foto Produk Penitip</label>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{old('image') }}">

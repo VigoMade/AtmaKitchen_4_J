@@ -16,7 +16,8 @@ class PembelianBB extends Model
     protected $fillable = [
         'harga_bahan_baku',
         'tanggal_pembelian',
-        'id_bahan_baku'
+        'jumlah_bb_dibeli',
+        'id_bahan_baku',
     ];
 
     public function bahanBaku()

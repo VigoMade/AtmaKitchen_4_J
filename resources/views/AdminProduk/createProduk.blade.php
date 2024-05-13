@@ -94,6 +94,21 @@
                                         </div>
                                         @enderror
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weight-bold">Jenis Produk Penitip</label>
+                                        <select class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip">
+                                            <option value="">Pilih Jenis Produk </option>
+                                            <option value="Roti" {{ old('jenis_produk') == 'Roti' ? 'selected' : '' }}>Roti</option>
+                                            <option value="Cake" {{ old('jenis_produk') == 'Cake' ? 'selected' : '' }}>Cake</option>
+                                            <option value="Minuman" {{ old('jenis_produk') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
+                                            <option value="Other" {{ old('jenis_produk') == 'Other' ? 'selected' : '' }}>Other</option>
+                                        </select>
+                                        @error('jenis_produk_penitip')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
                                     <label class="font-weight-bold">Nama Produk Toko</label>
                                     <input type="text" class="form-control @error('nama_produk') is-invalid @enderror" name="nama_produk" value="{{ old('nama_produk') }}" placeholder="Masukkan Nama Produk Toko">
                                     @error('nama_produk')
@@ -150,13 +165,6 @@
                                         <label class="font-weight-bold">Stock Produk</label>
                                         <input type="number" class="form-control @error('stock_produk') is-invalid @enderror" name="stock_produk" value="{{ old('stock_produk') }}" placeholder="Masukkan Stock Produk">
                                         @error('stock_produk')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label class="font-weight-bold">Jenis Produk</label>
-                                        <input type="text" class="form-control @error('jenis_produk') is-invalid @enderror" name="jenis_produk" value="{{ old('jenis_produk') }}" placeholder="Masukkan Jenis Produk">
-                                        @error('jenis_produk')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>

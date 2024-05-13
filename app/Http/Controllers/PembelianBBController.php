@@ -26,13 +26,13 @@ class PembelianBBController extends Controller
         $this->validate($request, [
             'harga_bahan_baku' => 'required',
             'tanggal_pembelian' => 'required',
+            'jumlah_bb_dibeli' => 'required',
             'id_bahan_baku' => 'required',
         ]);
         $id_bahan_baku = $request->input('id_bahan_baku');
-        $total_penambahan = $request->input('total_penambahan');
         $bahanBaku = BahanBaku::find($id_bahan_baku);
         if ($bahanBaku) {
-            $bahanBaku->takaran_bahan_baku_tersedia += $total_penambahan;
+            $bahanBaku->takaran_bahan_baku_tersedia += $request->jumlah_bb_dibeli;
             $bahanBaku->save();
         }
         try {
@@ -55,19 +55,22 @@ class PembelianBBController extends Controller
         $this->validate($request, [
             'harga_bahan_baku' => 'required',
             'tanggal_pembelian' => 'required',
+            'jumlah_bb_dibeli' => 'required',
             'id_bahan_baku' => 'required',
         ]);
         $pembelianBB = PembelianBB::find($id);
         if ($pembelianBB) {
-             $total_penambahan = $request->input('total_penambahan');
+            $total_penambahan = $pembelianBB->jumlah_bb_dibeli;
             $pembelianBB->update($request->all());
             $bahanBaku = BahanBaku::find($id_bahan_baku);
             if ($bahanBaku) {
-                if( $bahanBaku->takaran_bahan_baku_tersedia > $request->total_penambahan){
-                    $bahanBaku->takaran_bahan_baku_tersedia -= $request->total_penambahan;
+                if ($total_penambahan > $request->jumlah_bb_dibeli) {
+                    $temp = $total_penambahan - $request->jumlah_bb_dibeli;
+                    $bahanBaku->takaran_bahan_baku_tersedia -= $temp;
                     $bahanBaku->save();
-                }else{
-                    $bahanBaku->takaran_bahan_baku_tersedia += $request->total_penambahan;
+                } else {
+                    $temp = $request->jumlah_bb_dibeli -  $total_penambahan;
+                    $bahanBaku->takaran_bahan_baku_tersedia += $temp;
                     $bahanBaku->save();
                 }
 
