@@ -65,6 +65,20 @@ Route::get('/landingPageOwner', function () {
     return view('landingPageOwner');
 })->name('landingPageOwner');
 
+Route::get('/informasiUmum', function () {
+    return view('Katalog.informasiUmum');
+})->name('informasiUmum');
+
+Route::get('/aboutUs', function () {
+    return view('Katalog.aboutUs');
+})->name('aboutUs');
+
+Route::get('/store', function () {
+    return view('Katalog.store');
+})->name('store');
+
+
+
 //logout
 Route::get('/logout', [LoginController::class, 'actionLogout'])->name('actionLogout');
 
