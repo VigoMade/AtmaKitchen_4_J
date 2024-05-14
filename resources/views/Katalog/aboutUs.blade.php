@@ -1,4 +1,4 @@
-@extends('navbarHome')
+@extends('navbarLandingPage')
 
 @section('content')
 <style>
@@ -9,20 +9,23 @@
   }
 
   .flex-container {
-  display: flex;
-}
+    display: flex;
+  }
 
-.vision-mission {
-  flex: 1; /* Membagi ruang secara merata dengan gambar */
-}
+  .vision-mission {
+    flex: 1;
+    /* Membagi ruang secara merata dengan gambar */
+  }
 
-.container {
-  flex: 1; /* Membagi ruang secara merata dengan elemen visi dan misi */
-}
+  .container {
+    flex: 1;
+    /* Membagi ruang secara merata dengan elemen visi dan misi */
+  }
 
-.smaller-image {
-  max-width: 200px; /* Ukuran maksimum gambar */
-}
+  .smaller-image {
+    max-width: 200px;
+    /* Ukuran maksimum gambar */
+  }
 
 
   .center-container {
@@ -84,17 +87,18 @@
   }
 
   /* CSS */
-.smaller-image {
-  max-width: 400px; 
-  max-height: 800px; 
-    margin-left: 180px; /* Jarak ke kanan dari elemen lain */
+  .smaller-image {
+    max-width: 400px;
+    max-height: 800px;
+    margin-left: 180px;
+    /* Jarak ke kanan dari elemen lain */
 
-}
+  }
 
   .carousel-item img {
     width: 100%;
-    height: 300px; 
-    object-fit: cover; 
+    height: 300px;
+    object-fit: cover;
   }
 
   .btn-edit:hover {
@@ -107,27 +111,27 @@
 
 <div class="container">
   <div class="center-container">
-<h2 style="text-align: center; margin-top: 20px; text-decoration: underline; text-decoration-style: solid;"><b>About Us</b></h2>
-</div>
-
-<div class="flex-container">
-  <div class="vision-mission">
-    <h3>Visi Kami</h3>
-    <ul>
-      <li>Membuat produk-produk Atma Kitchen menjadi pilihan utama masyarakat Indonesia dalam memenuhi kebutuhan sehari-hari mereka di dapur.</li>
-    </ul>
-    <h3>Misi Kami</h3>
-    <ul>
-      <li>Terus mengembangkan produk-produk berkualitas tinggi, bergizi, dan sehat yang sesuai dengan selera Indonesia.</li>
-      <li>Terus membuka toko baru untuk dapat diakses secara luas di seluruh wilayah.</li>
-      <li>Terus meningkatkan kualitas sumber daya manusia dengan meningkatkan kesejahteraan dan kompetensi untuk memberikan pelayanan yang prima kepada pelanggan.</li>
-    </ul>
+    <h2 style="text-align: center; margin-top: 20px; text-decoration: underline; text-decoration-style: solid;"><b>About Us</b></h2>
   </div>
 
-  <div class="container">
-    <img src="{{ asset('images/store 1.jpeg') }}" class="d-block w-100 smaller-image" alt="...">
+  <div class="flex-container">
+    <div class="vision-mission">
+      <h3>Visi Kami</h3>
+      <ul>
+        <li>Membuat produk-produk Atma Kitchen menjadi pilihan utama masyarakat Indonesia dalam memenuhi kebutuhan sehari-hari mereka di dapur.</li>
+      </ul>
+      <h3>Misi Kami</h3>
+      <ul>
+        <li>Terus mengembangkan produk-produk berkualitas tinggi, bergizi, dan sehat yang sesuai dengan selera Indonesia.</li>
+        <li>Terus membuka toko baru untuk dapat diakses secara luas di seluruh wilayah.</li>
+        <li>Terus meningkatkan kualitas sumber daya manusia dengan meningkatkan kesejahteraan dan kompetensi untuk memberikan pelayanan yang prima kepada pelanggan.</li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <img src="{{ asset('images/store 1.jpeg') }}" class="d-block w-100 smaller-image" alt="...">
+    </div>
   </div>
-</div>
 
 
   @endsection

@@ -78,6 +78,64 @@
             color: white;
             font-size: 2.5rem;
         }
+
+        .footer-link {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer .input-group .form-control {
+            background-color: #AD343E;
+            border-color: #FFFFFF;
+        }
+
+        .footer .input-group .btn {
+            background-color: #FFFFFF;
+            color: #AD343E;
+        }
+
+        .foot {
+            background-color: #AD343E;
+            color: white;
+            padding: 3rem 0;
+            margin-left: -197px;
+            width: 130.3% !important;
+        }
+
+        @media (max-width: 720px) {
+
+            .foot {
+                margin-top: 150px;
+                margin-left: -100px;
+
+                background-color: #AD343E;
+                color: white;
+                padding: 3rem 0;
+
+                width: 140% !important;
+            }
+
+        }
+
+        @media (max-width: 1000px) {
+
+            .foot {
+                margin-top: 150px;
+                margin-left: -93px;
+
+                background-color: #AD343E;
+                color: white;
+                padding: 3rem 0;
+
+                width: 140% !important;
+            }
+
+        }
     </style>
 </head>
 
@@ -94,12 +152,19 @@
                     <li class="nav-item {{ Request::routeIs('landingPageCustomer') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('landingPageCustomer') }}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" href="#!">Menu</a>
+                    <li class="nav-item {{ Request::is('informasiUmum') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('informasiUmum')}}">Menu</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" href="#!">About</a>
+                    <li class="nav-item {{ Request::is('aboutUs') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('aboutUs') }}">About</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="btn btn-rounded" href="{#}"> Cart  <img src="{{ asset('images/cart.png') }}" alt="Deskripsi Gambar" style="margin-right: 5px; width: 20px;">
+                        </a>
+                    </li>
+                    <span style="margin-right: 10px;"></span>
+
                     @if(auth()->guard('customer')->check())
                     <li class="nav-item {{ Request::routeIs('customer.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('customer.index')}}">My Profile</a>
@@ -130,4 +195,49 @@
     </script>
 </body>
 
+<footer class="w-100 foot" >
+    <div class="container">
+        <div class="row gy-4 gx-5">
+            <div class="col-lg-4 col-md-6">
+                <h5 class="h1 text-white">Atma Kitchen</h5>
+                <p class="small text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <p class="small text-white mb-0">&copy; 2024. All rights reserved. <a href="#" class="footer-link">Bootstrapious.com</a></p>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="text-white mb-3">Quick links</h5>
+                <ul class="list-unstyled text-white">
+                    <li><a href="#" class="footer-link">Home</a></li>
+                    <li><a href="#" class="footer-link">About</a></li>
+                    <li><a href="#" class="footer-link">Get started</a></li>
+                    <li><a href="#" class="footer-link">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <h5 class="text-white mb-3">Services</h5>
+                <ul class="list-unstyled text-white">
+                    <li><a href="#" class="footer-link">Catering</a></li>
+                    <li><a href="#" class="footer-link">Delivery</a></li>
+                    <li><a href="#" class="footer-link">Custom Orders</a></li>
+                    <li><a href="#" class="footer-link">Special Events</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h5 class="text-white mb-3">Newsletter</h5>
+                <p class="small text-white">Stay updated with our latest news and offers.</p>
+                <form action="#">
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="email" placeholder="Your email" aria-label="Your email" aria-describedby="button-addon2">
+                        <button class="btn btn-primary" id="button-addon2" type="button"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+                <div class="social-icons">
+                    <a href="#" class="footer-link me-2"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-link me-2"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-link me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>

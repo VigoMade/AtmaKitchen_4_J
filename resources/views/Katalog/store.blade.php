@@ -1,4 +1,4 @@
-@extends('navbarHome')
+@extends('landingPage')
 
 @section('content')
 <style>
@@ -53,9 +53,11 @@
   }
 
   .carousel-inner img {
-        width: 100%; /* Menggunakan lebar gambar yang sesuai dengan tinggi */
-        height: 100%; /* Mengisi tinggi carousel dengan gambar */
-    }
+    width: 100%;
+    /* Menggunakan lebar gambar yang sesuai dengan tinggi */
+    height: 100%;
+    /* Mengisi tinggi carousel dengan gambar */
+  }
 
   .btn-edit {
     display: block;
@@ -73,8 +75,10 @@
   /* Menyesuaikan lebar dan tinggi gambar dalam carousel */
   .carousel-item img {
     width: 100%;
-    height: 300px; /* Sesuaikan tinggi sesuai kebutuhan */
-    object-fit: cover; /* Mengatur gambar agar tetap sesuai dengan ukuran carousel */
+    height: 300px;
+    /* Sesuaikan tinggi sesuai kebutuhan */
+    object-fit: cover;
+    /* Mengatur gambar agar tetap sesuai dengan ukuran carousel */
   }
 
   .btn-edit:hover {
@@ -88,12 +92,12 @@
 <div class="container">
   <div class="center-container">
     <h2 style="text-align: center; margin-top: 20px;"><b>Our Store</b></h2>
-         <p style="text-align: justify;">Selamat datang di Atma Kitchen, destinasi utama bagi para pecinta kue dan roti di Yogyakarta. Di sini, kami menghadirkan pengalaman berbelanja yang unik dengan fokus pada kualitas dan kelezatan. Dari kue-kue klasik yang melekat di kenangan hingga kreasi inovatif yang memikat lidah, kami memiliki berbagai pilihan yang cocok untuk semua selera. Setiap hari, kami menyajikan roti segar dan kue-kue yang dipanggang dengan cinta oleh para ahli kami, memberikan Anda kesempatan untuk merasakan kelezatan yang tak terlupakan.</p>
+    <p style="text-align: justify;">Selamat datang di Atma Kitchen, destinasi utama bagi para pecinta kue dan roti di Yogyakarta. Di sini, kami menghadirkan pengalaman berbelanja yang unik dengan fokus pada kualitas dan kelezatan. Dari kue-kue klasik yang melekat di kenangan hingga kreasi inovatif yang memikat lidah, kami memiliki berbagai pilihan yang cocok untuk semua selera. Setiap hari, kami menyajikan roti segar dan kue-kue yang dipanggang dengan cinta oleh para ahli kami, memberikan Anda kesempatan untuk merasakan kelezatan yang tak terlupakan.</p>
 
-</div>
+  </div>
 
-<div class="container">
-</div>
+  <div class="container">
+  </div>
 
 
   <div class="row">
@@ -126,4 +130,4 @@
 
 
 
-  @endsection
+@endsection

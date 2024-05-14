@@ -7,6 +7,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\HistoryAdminController;
 use App\Http\Controllers\HistoryCustomerController;
+use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PembelianBBController;
@@ -133,3 +134,7 @@ Route::resource('/gaji', GajiController::class);
 Route::resource('/customer', ProfileController::class);
 Route::resource('/historyCustomer', HistoryCustomerController::class);
 Route::get('/historyCustomer/search', [HistoryCustomerController::class, 'search'])->name('historyCustomer.search');
+
+
+//Informari
+Route::get('/informasiProduk/{jenis_produk}', [KatalogController::class, 'show'])->name('informasiProduk.show');
