@@ -7,6 +7,7 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\HistoryAdminController;
 use App\Http\Controllers\HistoryCustomerController;
+use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PembelianBBController;
@@ -65,6 +66,20 @@ Route::get('/landingPageOwner', function () {
     return view('landingPageOwner');
 })->name('landingPageOwner');
 
+Route::get('/informasiUmum', function () {
+    return view('Katalog.informasiUmum');
+})->name('informasiUmum');
+
+Route::get('/aboutUs', function () {
+    return view('Katalog.aboutUs');
+})->name('aboutUs');
+
+Route::get('/store', function () {
+    return view('Katalog.store');
+})->name('store');
+
+
+
 //logout
 Route::get('/logout', [LoginController::class, 'actionLogout'])->name('actionLogout');
 
@@ -119,3 +134,7 @@ Route::resource('/gaji', GajiController::class);
 Route::resource('/customer', ProfileController::class);
 Route::resource('/historyCustomer', HistoryCustomerController::class);
 Route::get('/historyCustomer/search', [HistoryCustomerController::class, 'search'])->name('historyCustomer.search');
+
+
+//Informari
+Route::get('/informasiProduk/{jenis_produk}', [KatalogController::class, 'show'])->name('informasiProduk.show');

@@ -84,6 +84,10 @@ class ProdukController extends Controller
             $image->move($destinationPath, $fotoProduk);
             $input['image'] = $fotoProduk;
         }
+        if ($request->id_penitip != null) {
+            $pentip = Penitip::find($request->id_penitip);
+            $input['jenis_produk'] = $pentip->jenis_produk_penitip;;
+        }
 
         try {
             Produk::create($input);
