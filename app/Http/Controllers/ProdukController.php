@@ -124,7 +124,11 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $this->validate($request, [
             'harga_produk' => 'required',
-            'jenis_produk' => 'required',
+            'jenis_produk' => function ($attribute, $value, $fail) use ($request) {
+                if ($request->id_penitip == null && empty($value)) {
+                    $fail('The ' . $attribute . ' field is required.');
+                }
+            },
             'satuan_produk' => 'required',
             'image' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
@@ -157,6 +161,16 @@ class ProdukController extends Controller
             unset($input['image']);
         }
 
+        if ($request->id_penitip == null) {
+            $this->validate($request, [
+                'jenis_produk' => 'required',
+            ]);
+        }
+
+        if ($request->id_penitip != null) {
+            $pentip = Penitip::find($request->id_penitip);
+            $input['jenis_produk'] = $pentip->jenis_produk_penitip;;
+        }
 
         try {
             $produk->update($input);
