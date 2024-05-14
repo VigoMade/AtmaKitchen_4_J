@@ -89,14 +89,21 @@
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                        <label class="font-weightbold">Jenis Produk Penitip</label>
-                                        <input type="text" class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip" value="{{old('jenis_produk_penitip') }}" placeholder="Masukkan Jenis Produk Penitip">
+                                        <label class="font-weight-bold">Jenis Produk Penitip</label>
+                                        <select class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip">
+                                            <option value="">Pilih Jenis Produk Penitip</option>
+                                            <option value="bread" {{ old('jenis_produk_penitip') == 'bread' ? 'selected' : '' }}>Bread</option>
+                                            <option value="cake" {{ old('jenis_produk_penitip') == 'cake' ? 'selected' : '' }}>Cake</option>
+                                            <option value="drink" {{ old('jenis_produk_penitip') == 'drink' ? 'selected' : '' }}>Drink</option>
+                                            <option value="Other" {{ old('jenis_produk_penitip') == 'other' ? 'selected' : '' }}>Other</option>
+                                        </select>
                                         @error('jenis_produk_penitip')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
+
                                     <div class="form-group col-md-12">
                                         <label class="font-weightbold">Foto Produk Penitip</label>
                                         <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{old('image') }}">

@@ -85,7 +85,8 @@
                                         <tr>
                                             <th class="text-center">Nama Bahan Baku</th>
                                             <th class="text-center">Harga Bahan Baku</th>
-                                            <th class="text-center">Jumlah Stock Baku</th>
+                                            <th class="text-center">Penambahan Bahan Baku</th>
+                                            <th class="text-center">Jumlah Stock Bahan Baku</th>
                                             <th class="text-center">Tanggal Pembelian Bahan Baku</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
@@ -95,6 +96,7 @@
                                             @forelse($pembelianBB as $item)
                                             <td class="text-center">{{$item->bahanBaku->nama_bahan_baku}}</td>
                                             <td class="text-center">{{$item->harga_bahan_baku}}</td>
+                                            <td class="text-center">{{$item->jumlah_bb_dibeli}}</td>
                                             <td class="text-center">{{$item->bahanBaku->takaran_bahan_baku_tersedia}}</td>
                                             <td class="text-center">{{$item->tanggal_pembelian}}</td>
                                             <td class="text-center">

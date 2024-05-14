@@ -44,8 +44,12 @@ class ProdukController extends Controller
     {
         $this->validate($request, [
             'harga_produk' => 'required',
-            'jenis_produk' => 'required',
             'satuan_produk' => 'required',
+            'jenis_produk' => function ($attribute, $value, $fail) use ($request) {
+                if ($request->id_penitip == null && empty($value)) {
+                    $fail('The ' . $attribute . ' field is required.');
+                }
+            },
             'image' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
@@ -66,6 +70,12 @@ class ProdukController extends Controller
             if (empty($input[$column])) {
                 $input[$column] = null;
             }
+        }
+
+        if ($request->id_penitip == null) {
+            $this->validate($request, [
+                'jenis_produk' => 'required',
+            ]);
         }
 
         if ($image = $request->file('image')) {
