@@ -92,10 +92,10 @@
                                         <label class="font-weight-bold">Jenis Produk Penitip</label>
                                         <select class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip">
                                             <option value="">Pilih Jenis Produk Penitip</option>
-                                            <option value="Roti" {{ old('jenis_produk_penitip') == 'Roti' ? 'selected' : '' }}>Roti</option>
-                                            <option value="Cake" {{ old('jenis_produk_penitip') == 'Cake' ? 'selected' : '' }}>Cake</option>
-                                            <option value="Minuman" {{ old('jenis_produk_penitip') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
-                                            <option value="Other" {{ old('jenis_produk_penitip') == 'Other' ? 'selected' : '' }}>Other</option>
+                                            <option value="bread" {{ old('jenis_produk_penitip') == 'bread' ? 'selected' : '' }}>Bread</option>
+                                            <option value="cake" {{ old('jenis_produk_penitip') == 'cake' ? 'selected' : '' }}>Cake</option>
+                                            <option value="drink" {{ old('jenis_produk_penitip') == 'drink' ? 'selected' : '' }}>Drink</option>
+                                            <option value="Other" {{ old('jenis_produk_penitip') == 'other' ? 'selected' : '' }}>Other</option>
                                         </select>
                                         @error('jenis_produk_penitip')
                                         <div class="invalid-feedback">
