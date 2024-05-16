@@ -3,7 +3,7 @@
 @section('content')
 <style>
   body {
-    background-color: #F5EEDC;
+    background-color: #ede6e3;
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -85,13 +85,16 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ asset('images/customer3.png') }}" class="img-fluid rounded-start" style="width: 250px; height: 200px; margin-right:80px;" alt="...">
+              <img src="{{ asset('images/customer3.png') }}" class="img-fluid rounded-start"
+                style="width: 250px; height: 200px; margin-right:80px;" alt="...">
 
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title" style="color: #AD343E; font-weight: bold;">Customer</h5>
-                <p class="card-text" style="color: #AD343E;"> Salam hangat dari toko roti kami! Temukan kelezatan tiada tara dari koleksi roti segar kami. Mari nikmati setiap gigitan dengan kepuasan yang tak terlupakan. Selamat berbelanja!</p>
+                <p class="card-text" style="color: #AD343E;"> Salam hangat dari toko roti kami! Temukan kelezatan tiada
+                  tara dari koleksi roti segar kami. Mari nikmati setiap gigitan dengan kepuasan yang tak terlupakan.
+                  Selamat berbelanja!</p>
 
               </div>
             </div>
@@ -129,10 +132,12 @@
 
         </div>
         <div class="col-6 text-right">
-          <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+          <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;"
+            href="#carouselExampleIndicators2" role="button" data-slide="prev">
             <i class="fa fa-arrow-left"></i>
           </a>
-          <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="next">
+          <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;"
+            href="#carouselExampleIndicators2" role="button" data-slide="next">
             <i class="fa fa-arrow-right"></i>
           </a>
         </div>

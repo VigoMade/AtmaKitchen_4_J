@@ -2,7 +2,8 @@
 @section('content')
 <style>
     body {
-        background-color: #F9F9F7;
+        background-color: #ede6e3;
+
     }
 
     .content-header {
@@ -69,17 +70,18 @@
                     <div class="card">
                         <div class="card-body">
                             @if(session('error'))
-                            <div id="errorAlert" class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
+                                <div id="errorAlert" class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
                             @endif
 
                             @if(session('success'))
-                            <div id="successAlert" class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
+                                <div id="successAlert" class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
                             @endif
-                            <a href="{{route('produks.create')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Produk</a>
+                            <a href="{{route('produks.create')}}"
+                                class="btn btn-md btn-success mb-3 btn-tambah-resep">Tambah Produk</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -101,80 +103,83 @@
                                     </thead>
                                     <tbody>
                                         @forelse($produk as $item)
-                                        <tr>
-                                            <td class="text-center">{{$item->tipe_produk}}</td>
-                                            <td class="text-center">
-                                                @if($item->penitips != null && $item->penitips->id_penitip != null)
-                                                <img src="/images/{{ $item->penitips->image }}" width="100px">
-                                                @else
-                                                <img src="/images/{{ $item->image }}" width="100px">
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->penitips != null && $item->penitips->id_penitip != null)
-                                                {{$item->penitips->nama_produk_penitip}}
-                                                @else
-                                                {{$item->nama_produk}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->penitips != null && $item->penitips->id_penitip != null)
-                                                {{$item->penitips->jenis_produk_penitip}}
-                                                @else
-                                                {{$item->jenis_produk}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->stock_produk == null)
-                                                --
-                                                @else
-                                                {{$item->stock_produk}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->kuota == null)
-                                                --
-                                                @else
-                                                {{$item->kuota}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->tanggal_mulai_po == null)
-                                                --
-                                                @else
-                                                {{$item->tanggal_mulai_po}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">
-                                                @if($item->tanggal_selesai_po == null)
-                                                --
-                                                @else
-                                                {{$item->tanggal_selesai_po}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">{{$item->harga_produk}}</td>
-                                            <td class="text-center">{{$item->satuan_produk}}</td>
-                                            <td class="text-center">
-                                                @if($item->id_resep == null)
-                                                --
-                                                @else
-                                                {{$item->reseps->nama_resep}}
-                                                @endif
-                                            </td>
-                                            <td class="text-center">{{$item->status}}</td>
-                                            <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('produks.destroy', $item->id_produk)}}" method="POST">
-                                                    <a href="{{route('produks.edit',$item->id_produk)}}" class="btn btn-sm btn-primary">EDIT</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td class="text-center">{{$item->tipe_produk}}</td>
+                                                <td class="text-center">
+                                                    @if($item->penitips != null && $item->penitips->id_penitip != null)
+                                                        <img src="/images/{{ $item->penitips->image }}" width="100px">
+                                                    @else
+                                                        <img src="/images/{{ $item->image }}" width="100px">
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($item->penitips != null && $item->penitips->id_penitip != null)
+                                                        {{$item->penitips->nama_produk_penitip}}
+                                                    @else
+                                                        {{$item->nama_produk}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($item->penitips != null && $item->penitips->id_penitip != null)
+                                                        {{$item->penitips->jenis_produk_penitip}}
+                                                    @else
+                                                        {{$item->jenis_produk}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($item->stock_produk == null)
+                                                        --
+                                                    @else
+                                                        {{$item->stock_produk}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($item->kuota == null)
+                                                        --
+                                                    @else
+                                                        {{$item->kuota}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($item->tanggal_mulai_po == null)
+                                                        --
+                                                    @else
+                                                        {{$item->tanggal_mulai_po}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if($item->tanggal_selesai_po == null)
+                                                        --
+                                                    @else
+                                                        {{$item->tanggal_selesai_po}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">{{$item->harga_produk}}</td>
+                                                <td class="text-center">{{$item->satuan_produk}}</td>
+                                                <td class="text-center">
+                                                    @if($item->id_resep == null)
+                                                        --
+                                                    @else
+                                                        {{$item->reseps->nama_resep}}
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">{{$item->status}}</td>
+                                                <td class="text-center">
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                        action="{{route('produks.destroy', $item->id_produk)}}"
+                                                        method="POST">
+                                                        <a href="{{route('produks.edit', $item->id_produk)}}"
+                                                            class="btn btn-sm btn-primary">EDIT</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @empty
-                                        <div class="alert alert-danger">
-                                            Data Produk belum tersedia
-                                        </div>
+                                            <div class="alert alert-danger">
+                                                Data Produk belum tersedia
+                                            </div>
                                         @endforelse
                                     </tbody>
                                 </table>

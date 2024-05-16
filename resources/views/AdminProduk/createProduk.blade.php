@@ -43,7 +43,17 @@
             </div>
         </div>
     </div>
+ @if(session('error'))
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
 
+                            @if(session('success'))
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -95,15 +105,15 @@
                                         @enderror
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label class="font-weight-bold">Jenis Produk Penitip</label>
-                                        <select class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip">
+                                        <label class="font-weight-bold">Jenis Produk</label>
+                                        <select class="form-control @error('jenis_produk') is-invalid @enderror" name="jenis_produk">
                                             <option value="">Pilih Jenis Produk </option>
                                             <option value="bread" {{ old('jenis_produk') == 'bread' ? 'selected' : '' }}>Bread</option>
                                             <option value="cake" {{ old('jenis_produk') == 'cake' ? 'selected' : '' }}>Cake</option>
                                             <option value="drink" {{ old('jenis_produk') == 'drink' ? 'selected' : '' }}>Drink</option>
                                             <option value="Other" {{ old('jenis_produk') == 'other' ? 'selected' : '' }}>Other</option>
                                         </select>
-                                        @error('jenis_produk_penitip')
+                                        @error('jenis_produk')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

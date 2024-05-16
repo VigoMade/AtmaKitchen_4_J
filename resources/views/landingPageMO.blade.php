@@ -3,7 +3,8 @@
 @section('content')
 <style>
   body {
-    background-color: #F5EEDC;
+    background-color: #ede6e3;
+
     /* background-image: url('/images/bg1.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
@@ -85,13 +86,17 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ asset('images/mo.png') }}" class="img-fluid rounded-start" style="width: 250px; height: 250px; margin-right:80px;" alt="...">
+              <img src="{{ asset('images/mo.png') }}" class="img-fluid rounded-start"
+                style="width: 250px; height: 250px; margin-right:80px;" alt="...">
 
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <h5 class="card-title" style="color: #AD343E; font-weight: bold;">Manajer Operasional</h5>
-                <p class="card-text" style="color: #AD343E;">pelanggan, keuangan, pengemasan dan pengiriman, pemasaran, administrasi, dan pemeliharaan database pelanggan. Anda perlu memiliki keterampilan multitasking, komunikasi yang baik, ketelitian dalam detail, dan pemahaman tentang industri roti dan belanja online.</p>
+                <p class="card-text" style="color: #AD343E;">pelanggan, keuangan, pengemasan dan pengiriman, pemasaran,
+                  administrasi, dan pemeliharaan database pelanggan. Anda perlu memiliki keterampilan multitasking,
+                  komunikasi yang baik, ketelitian dalam detail, dan pemahaman tentang industri roti dan belanja online.
+                </p>
 
               </div>
             </div>
@@ -128,10 +133,12 @@
           <h3 class="mb-3" style="color: #AD343E;">Jobdesc Detail</h3>
         </div>
         <div class="col-6 text-right">
-          <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+          <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;"
+            href="#carouselExampleIndicators2" role="button" data-slide="prev">
             <i class="fa fa-arrow-left"></i>
           </a>
-          <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="next">
+          <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;"
+            href="#carouselExampleIndicators2" role="button" data-slide="next">
             <i class="fa fa-arrow-right"></i>
           </a>
         </div>
@@ -144,7 +151,9 @@
                     <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                       <div class="card-header">Pencatatan Pengeluaran Lainnya</div>
                       <div class="card-body">
-                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan pencatatan pengeluaran lainnya, mengubah pencatatan pengeluaran lainnya ,menghapus pencatatan pengeluaran lainnya, menampilkan pencatatan pengeluaran lainnya, mencari pencatatan pengeluaran lainnya.</p>
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan pencatatan pengeluaran
+                          lainnya, mengubah pencatatan pengeluaran lainnya ,menghapus pencatatan pengeluaran lainnya,
+                          menampilkan pencatatan pengeluaran lainnya, mencari pencatatan pengeluaran lainnya.</p>
                       </div>
                     </div>
                   </div>
@@ -152,7 +161,9 @@
                     <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                       <div class="card-header">Pencatan Pembelian Bahan Baku</div>
                       <div class="card-body">
-                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan pembelian bahan baku, mengubah pembelian bahan baku, menghapus pembelian bahan baku, menampilkan pembelian bahan baku, mencari pembelian bahan baku.</p>
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan pembelian bahan baku, mengubah
+                          pembelian bahan baku, menghapus pembelian bahan baku, menampilkan pembelian bahan baku,
+                          mencari pembelian bahan baku.</p>
                       </div>
                     </div>
                   </div>
@@ -160,7 +171,8 @@
                     <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                       <div class="card-header">Mengelola Data Karyawan </div>
                       <div class="card-body">
-                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan data karyawan, mengubah data karyawan,menghapus data karyawan, menampilkan data karyawan, mencari data karyawan.</p>
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan data karyawan, mengubah data
+                          karyawan,menghapus data karyawan, menampilkan data karyawan, mencari data karyawan.</p>
                       </div>
                     </div>
                   </div>
@@ -172,7 +184,8 @@
                     <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                       <div class="card-header">Mencari Data Customer</div>
                       <div class="card-body">
-                        <p class="card-text" style="color: #AD343E;">Melakukan pengubahan pada presensi serta menampilkan presensi karyawan.</p>
+                        <p class="card-text" style="color: #AD343E;">Melakukan pengubahan pada presensi serta
+                          menampilkan presensi karyawan.</p>
                       </div>
                     </div>
                   </div>
@@ -180,7 +193,8 @@
                     <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                       <div class="card-header">Mengelola Data Jabatan</div>
                       <div class="card-body">
-                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan data jabatan, mengubah data jabatan, menghapus data jabatan, menampilkan data jabatan, mencari data jabatan.</p>
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan data jabatan, mengubah data
+                          jabatan, menghapus data jabatan, menampilkan data jabatan, mencari data jabatan.</p>
                       </div>
                     </div>
                   </div>
@@ -188,7 +202,8 @@
                     <div class="card text-white bg-white mb-3" style="max-width: 18rem;">
                       <div class="card-header">Mengelola Data Penitip</div>
                       <div class="card-body">
-                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan penitip, mengubah penitip, menghapus penitip, menampilkan penitip, mencari penitip.
+                        <p class="card-text" style="color: #AD343E;">Melakukan penambahan penitip, mengubah penitip,
+                          menghapus penitip, menampilkan penitip, mencari penitip.
                         <p>
                       </div>
                     </div>

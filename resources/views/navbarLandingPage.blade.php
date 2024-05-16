@@ -155,6 +155,9 @@
                     <li class="nav-item {{ Request::is('informasiUmum') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('informasiUmum')}}">Menu</a>
                     </li>
+                     <li class="nav-item {{ Request::is('store') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('store')}}">Store</a>
+                    </li>
                     <li class="nav-item {{ Request::is('aboutUs') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('aboutUs') }}">About</a>
                     </li>
