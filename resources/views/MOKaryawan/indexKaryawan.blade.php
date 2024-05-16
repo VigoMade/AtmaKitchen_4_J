@@ -106,7 +106,7 @@
                                         @forelse($pegawai as $item)
                                         <tr>
                                             <td class="text-center">@if($item->foto)
-                                                <img src="/images/{{$item->foto}}" width="100px" alt="foto">
+                                                <img src="{{ Storage::url($item->foto) }}" width="100px" alt="profile">
                                                 @else
                                                 <div class="alert alert-danger">
                                                     Tidak ada foto

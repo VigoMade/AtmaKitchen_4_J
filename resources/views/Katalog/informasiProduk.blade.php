@@ -107,30 +107,22 @@
     <div class="container">
         <div class="row">
             @forelse($jenis as $item)
-                <div class="col-md-4 mb-3">
-                    <div class="card mx-auto" style="width: 20rem; cursor: pointer; padding: 10px;">
-                        <div class="card-body">
-                            @if($item->penitips != null && $item->penitips->id_penitip != null)
-                                <img src="/images/{{ $item->penitips->image }}" class="d-block w-100" alt="...">
-                            @else
-                                <img src="/images/{{ $item->image }}" class="d-block w-100" alt="...">
-                            @endif
-                            @if($item->penitips != null && $item->penitips->id_penitip != null)
-                                <p style="text-align: center;"><b>{{$item->penitips->nama_produk_penitip}}</b></p>
-                            @else
-                                <p style="text-align: center;"><b>{{$item->nama_produk}}</b></p>
-                            @endif
-                            <p class="card-text text-center">Rp. {{$item->harga_produk}}</p>
-                            <a href="#" class="btn btn-block" style="background-color: #AD343E; color: white;">Add Cart</a>
-                        </div>
+            <div class="col-md-4 mb-3">
+                <div class="card mx-auto" style="width: 20rem; cursor: pointer; padding: 10px;">
+                    <div class="card-body">
+                        <img src="{{ Storage::url($item->image) }}" class="d-block w-100" alt="profile">
+                        <p style="text-align: center;"><b>{{$item->nama_produk}}</b></p>
+                        <p class="card-text text-center">Rp. {{$item->harga_produk}}</p>
+                        <a href="{{route('detailProduk.showById', $item->id_produk)}}" class="btn btn-block" style="background-color: #AD343E; color: white;">Lihat Detail</a>
                     </div>
                 </div>
+            </div>
             @empty
-                <div class="col-md-4 mb-3">
-                    <div class="alert alert-danger">
-                        Produk Yang Kamu Cari belum Tersedia
-                    </div>
+            <div class="col-md-4 mb-3">
+                <div class="alert alert-danger">
+                    Produk Yang Kamu Cari belum Tersedia
                 </div>
+            </div>
             @endforelse
         </div>
     </div>
@@ -148,16 +140,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-2EEThxCer39xQ+lfDX6PCYdMWihzD8xwQ/pG2QCX7+FXerLZ6l6bSQpD1FzvQZ3Y"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-        integrity="sha384-D3GUgXaIue2jK3+8vooaP9Xo+R3qDjq0ydNyoE8i7eIcTZ98HYdy9vP27f5L "
-        crossorigin=" anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-2EEThxCer39xQ+lfDX6PCYdMWihzD8xwQ/pG2QCX7+FXerLZ6l6bSQpD1FzvQZ3Y" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-D3GUgXaIue2jK3+8vooaP9Xo+R3qDjq0ydNyoE8i7eIcTZ98HYdy9vP27f5L " crossorigin=" anonymous"></script>
 
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-G4Ffs47F3JGVmGvNJxha7PEWiIBkLlFge1rOMu0fYbVoFhYK0z35qW1aaG1xaxMz"
-        crossorigin="anonymous"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-G4Ffs47F3JGVmGvNJxha7PEWiIBkLlFge1rOMu0fYbVoFhYK0z35qW1aaG1xaxMz" crossorigin="anonymous"></script>
 
 
     @endsection

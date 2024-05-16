@@ -82,10 +82,10 @@
                                         <label class="font-weight-bold">Jenis Produk</label>
                                         <select class="form-control @error('jenis_produk') is-invalid @enderror" name="jenis_produk">
                                             <option value="">Pilih Jenis Produk </option>
-                                            <option value="Bread" {{ old('jenis_produk', $produk->jenis_produk) == 'bread' ? 'selected' : '' }}>Bread</option>
-                                            <option value="Cake" {{ old('jenis_produk', $produk->jenis_produk) == 'cake' ? 'selected' : '' }}>Cake</option>
-                                            <option value="Drink" {{ old('jenis_produk', $produk->jenis_produk) == 'drink' ? 'selected' : '' }}>Drink</option>
-                                            <option value="Other" {{ old('jenis_produk', $produk->jenis_produk) == 'other' ? 'selected' : '' }}>Other</option>
+                                            <option value="bread" {{ old('jenis_produk', $produk->jenis_produk) == 'bread' ? 'selected' : '' }}>Bread</option>
+                                            <option value="cake" {{ old('jenis_produk', $produk->jenis_produk) == 'cake' ? 'selected' : '' }}>Cake</option>
+                                            <option value="drink" {{ old('jenis_produk', $produk->jenis_produk) == 'drink' ? 'selected' : '' }}>Drink</option>
+                                            <option value="other" {{ old('jenis_produk', $produk->jenis_produk) == 'other' ? 'selected' : '' }}>Other</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -124,7 +124,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6" id="tanggal_mulai_po" style="display: none;">
                                             <label>Tanggal Mulai PO</label>
-                                            <input type="datetime-local" class="form-control @error('tanggal_mulai_po') is-invalid @enderror" name="tanggal_mulai_po" value="{{ old('tanggal_mulai_po',$produk->tanggal_mulai_po) }} placeholder=" Masukkan Tanggal Mulai PO">
+                                            <input type="datetime-local" class="form-control @error('tanggal_mulai_po') is-invalid @enderror" name="tanggal_mulai_po" value="{{ old('tanggal_mulai_po',$produk->tanggal_mulai_po) }}" placeholder="Masukkan Tanggal Mulai PO">
                                             @error('tanggal_mulai_po')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -198,6 +198,15 @@
                 document.getElementById('toko_fields').style.display = 'block';
                 document.getElementById('stock_produk_field').style.display = 'none';
             }
+
+            // Menampilkan atau menyembunyikan field tanggal mulai dan tanggal selesai
+            if (document.getElementById('status_po').checked) {
+                document.getElementById('tanggal_mulai_po').style.display = 'block';
+                document.getElementById('tanggal_selesai_po').style.display = 'block';
+            } else {
+                document.getElementById('tanggal_mulai_po').style.display = 'none';
+                document.getElementById('tanggal_selesai_po').style.display = 'none';
+            }
         }
         document.getElementById('produk_penitip').addEventListener('change', function() {
             toggleFields();
@@ -207,9 +216,17 @@
             toggleFields();
         });
 
+        document.getElementById('status_ready').addEventListener('change', function() {
+            toggleFields();
+        });
+
+        document.getElementById('status_po').addEventListener('change', function() {
+            toggleFields();
+        });
 
         toggleFields();
     });
 </script>
+
 
 @endsection

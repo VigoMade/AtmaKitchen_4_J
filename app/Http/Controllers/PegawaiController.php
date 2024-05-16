@@ -54,10 +54,10 @@ class PegawaiController extends Controller
         $input = $request->all();
 
         if ($image = $request->file('foto')) {
-            $destinationPath = 'images/';
+            $destinationPath = 'public/images';
             $fotoPegawai = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $fotoPegawai);
-            $input['foto'] = $fotoPegawai;
+            $image->storeAs($destinationPath, $fotoPegawai);
+            $input['foto'] = 'storage/images/' . $fotoPegawai;
         }
 
         if ($request->input('id_role') === '') {
@@ -121,10 +121,14 @@ class PegawaiController extends Controller
 
         $input = $request->all();
         if ($image = $request->file('foto')) {
-            $destinationPath = 'images/';
+            if ($pegawai->foto && file_exists(storage_path('app/public/' . str_replace('storage/', '', $pegawai->foto)))) {
+                unlink(storage_path('app/public/' . str_replace('storage/', '', $pegawai->foto)));
+            }
+
+            $destinationPath = 'public/images';
             $fotoPegawai = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $fotoPegawai);
-            $input['foto'] = $fotoPegawai;
+            $image->storeAs($destinationPath, $fotoPegawai);
+            $input['foto'] = 'images/' . $fotoPegawai;
         } else {
             unset($input['foto']);
         }

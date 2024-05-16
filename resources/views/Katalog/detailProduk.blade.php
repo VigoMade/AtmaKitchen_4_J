@@ -154,36 +154,23 @@
 
     .navbar {
         width: 100%;
-        /* Tetapkan lebar 100% */
         height: 80px;
-        /* Tetapkan tinggi */
         background-color: #333;
-        /* Warna latar belakang */
         color: white;
-        /* Warna teks */
         position: fixed;
-        /* Tetapkan posisi tetap */
         top: 0;
-        /* Atur posisi di bagian atas halaman */
         left: 0;
-        /* Atur posisi di bagian kiri halaman */
         z-index: 1000;
-        /* Tetapkan z-index agar navbar tampil di atas konten lain */
     }
 
     .image-container {
         background-size: cover;
-        /* Untuk memastikan gambar selalu menutupi area kontainer */
         background-position: center;
-        /* Untuk mengatur posisi gambar */
         background-repeat: no-repeat;
-        /* Untuk menghindari pengulangan gambar */
         width: 100%;
-        /* Lebar sesuai dengan parent (card) */
         height: 100%;
-        /* Atur tinggi gambar sesuai kebutuhan Anda */
         border-radius: 8px;
-        /* Atur sudut bulat jika diperlukan */
+        background-image: url('{{ Storage::url($produk->image) }}');
     }
 
     .btn {
@@ -269,27 +256,28 @@
                 <div class="card mt-4">
                     <div class="card-body">
                         <div class="grid">
-                            <div class="image-container"
-                                style="background-image: url('{{ asset('images/mandarin.jpeg') }}');">
+                            <div class="image-container">
                             </div>
 
                             <div>
                                 <h2 class="product-title">Detail Produk</h2>
                                 <div class="tags">
                                     <span class="tag">Status</span>
-                                    <span class="tag">Open Order</span>
+                                    <span class="tag">{{$produk->status}}</span>
                                 </div>
                                 <p class="price-label">Harga Produk</p>
-                                <p class="price"><b>Rp. 1.000.000</b></p>
+                                <p class="price"><b>Rp.{{$produk->harga_produk}}0</b></p>
                                 <dl class="details">
                                     <div class="detail-item">
                                         <dt class="detail-title">Nama Produk</dt>
-                                        <dd class="detail-description">Mandarin Cake</dd>
+                                        <dd class="detail-description">{{$produk->nama_produk}}</dd>
                                     </div>
                                     <div class="detail-item">
+                                        @if($produk->status == 'PO')
                                         <dt class="detail-title">Tanggal Pre Order </dt>
-                                        <dd class="detail-description"> Open : 01-01-2023</dd>
-                                        <dd class="detail-description"> Close : 01-01-2023</dd>
+                                        <dd class="detail-description"> Open : {{$produk->tanggal_mulai_po}}</dd>
+                                        <dd class="detail-description"> Close : {{$produk->tanggal_selesai_po}}</dd>
+                                        @endif
                                     </div>
                                     <div class="detail-item">
                                         <dt class="detail-title">Deskripsi</dt>
@@ -297,10 +285,21 @@
                                     </div>
                                     <div class="detail-item">
                                         <dt class="detail-title">Satuan</dt>
-                                        <dd class="detail-description">1 Loyang</dd>
+                                        <dd class="detail-description">{{$produk->satuan_produk}}</dd>
                                     </div>
+                                    @if($produk->tipe_produk == 'Produk Penitip')
                                     <div class="detail-item">
                                         <dt class="detail-title">Stock</dt>
+                                        <dd class="detail-description">{{$produk->stock_produk}}</dd>
+                                    </div>
+                                    @endif
+                                    @if($produk->tipe_produk == 'Produk Toko')
+                                    <div class="detail-item">
+                                        <dt class="detail-title">Kuota</dt>
+                                        <dd class="detail-description">{{$produk->kuota}}</dd>
+                                    </div>
+                                    @endif
+                                    <div class="detail-item">
                                         <dd class="detail-description">10</dd>
 
                                     </div>
@@ -313,6 +312,7 @@
                                         <dt class="detail-title">Total Bayar</dt>
                                         <dd class="detail-description">Rp. 1.000.000</dd>
                                     </div>
+
 
                             </div>
 
