@@ -57,18 +57,6 @@
                 </form>
                 <!-- /.col -->
             </div>
-            @if(session('error'))
-            <div id="errorAlert" class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-            @endif
-
-            @if(session('success'))
-            <div id="successAlert" class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
-            <!-- row -->
         </div>
         <!-- container -->
     </div>
@@ -105,7 +93,7 @@
                                     <tbody>
                                         <tr>
                                             @forelse($penitips as $item)
-                                            <td class="text-center"><img src="/images/{{ $item->image }}" width="100px"></td>
+                                            <td class="text-center"> <img src="{{ Storage::url($item->image) }}" width="100px" alt="profile"></td>
                                             <td class="text-center">{{$item->nama_penitip}}</td>
                                             <td class="text-center">{{$item->nama_produk_penitip}}</td>
                                             <td class="text-center">{{$item->jumlah_produk_penitip}}</td>

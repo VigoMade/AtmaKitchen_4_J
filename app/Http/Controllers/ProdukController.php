@@ -79,10 +79,10 @@ class ProdukController extends Controller
         }
 
         if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
+            $destinationPath = 'public/images';
             $fotoProduk = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $fotoProduk);
-            $input['image'] = $fotoProduk;
+            $image->storeAs($destinationPath, $fotoProduk);
+            $input['image'] = 'images/' . $fotoProduk;
         }
         if ($request->id_penitip != null) {
             $pentip = Penitip::find($request->id_penitip);
@@ -153,10 +153,14 @@ class ProdukController extends Controller
 
         $input = $request->all();
         if ($image = $request->file('image')) {
-            $destinationPath = 'images/';
+            if ($produk->image && file_exists(storage_path('app/public/' . str_replace('storage/', '', $produk->image)))) {
+                unlink(storage_path('app/public/' . str_replace('storage/', '', $produk->image)));
+            }
+
+            $destinationPath = 'public/images';
             $fotoProduk = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $fotoProduk);
-            $input['image'] = $fotoProduk;
+            $image->storeAs($destinationPath, $fotoProduk);
+            $input['image'] = 'images/' . $fotoProduk;
         } else {
             unset($input['image']);
         }

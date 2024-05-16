@@ -146,3 +146,4 @@ Route::get('/historyCustomer/search', [HistoryCustomerController::class, 'search
 
 //Informari
 Route::get('/informasiProduk/{jenis_produk}', [KatalogController::class, 'show'])->name('informasiProduk.show');
+Route::get('/detailProduk/{id_produk}', [KatalogController::class, 'showById'])->name('detailProduk.showById');

@@ -26,7 +26,7 @@ class PenitipController extends Controller
      */
     public function create()
     {
-         return view('MOPenitip.createPenitip');
+        return view('MOPenitip.createPenitip');
     }
 
     /**
@@ -49,10 +49,10 @@ class PenitipController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $destinationPath = 'images/';
+            $destinationPath = 'public/images';
             $gambarPoster = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $gambarPoster);
-            $input['image'] = $gambarPoster;
+            $image->storeAs($destinationPath, $gambarPoster);
+            $input['image'] = 'images/' . $gambarPoster;
         }
 
         $input['pembagian_komisi'] = 0;
@@ -98,15 +98,17 @@ class PenitipController extends Controller
         ]);
 
         $input = $request->all();
+        if ($image = $request->file('image')) {
+            if ($penitip->image && file_exists(storage_path('app/public/' . str_replace('storage/', '', $penitip->image)))) {
+                unlink(storage_path('app/public/' . str_replace('storage/', '', $penitip->image)));
+            }
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $destinationPath = 'images/';
+            $destinationPath = 'public/images';
             $gambarPoster = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $gambarPoster);
-            $input['image'] = $gambarPoster;
+            $image->storeAs($destinationPath, $gambarPoster);
+            $input['image'] = 'images/' . $gambarPoster;
         } else {
-            unset($input['image']);
+            unset($input['foto']);
         }
 
         $penitip->update($input);
@@ -130,14 +132,14 @@ class PenitipController extends Controller
     public function show(Request $request)
     {
         $search = $request->search;
-        $penitips = Penitip::where('nama_penitip','like', '%' . $search . "%")->paginate(5);
+        $penitips = Penitip::where('nama_penitip', 'like', '%' . $search . "%")->paginate(5);
         return view('MOPenitip.indexPenitip', compact('penitips'));
     }
 
     public function search(Request $request)
     {
         $search = $request->search;
-        $penitips = Penitip::where('nama_penitip','like', '%' . $search . "%")->paginate(5);
+        $penitips = Penitip::where('nama_penitip', 'like', '%' . $search . "%")->paginate(5);
         return view('MOPenitip.indexPenitip', compact('penitips'));
     }
 }
