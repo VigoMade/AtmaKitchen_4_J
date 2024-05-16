@@ -34,7 +34,6 @@
         /* Ukuran maksimum gambar */
     }
 
-
     .center-container {
         display: flex;
         justify-content: space-around;
@@ -57,64 +56,132 @@
         max-height: 600px;
         margin-left: 180px;
         /* Jarak ke kanan dari elemen lain */
+    }
 
+    .counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .counter button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 0 10px;
+        background-color: #AD343E;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .counter span {
+        font-size: 1.5rem;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .counter button:hover {
+        background-color: #8b282f;
+    }
+
+    .modal .btn-primary {
+        background-color: #AD343E;
+    }
+
+    .modal .btn-primary:hover {
+        background-color: #8b282f;
     }
 </style>
 
 <div class="container">
     <div class="center-container">
         <h2 style="text-align: center; margin-top: 20px; text-decoration: underline; text-decoration-style: solid;">
-            <b>About
-                Us</b>
+            <b>List Cart</b>
         </h2>
     </div>
 
-    <div style="border-bottom: 1px solid #EBE9F6">
-        <div class="bg-white">
-            <div
-                class="mx-auto grid max-w-2xl grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-8  px-6 py-8 lg:max-w-7xl lg:px-8 items-center">
-                <div class="grid grid-cols-1 grid-rows-1">
-                    <img src="{{ asset('images/store 1.jpeg') }}" class="bg-gray-100 rounded-lg">
-                </div>
-                <div class="col-span-3">
-                    </h2>
-                    <div class="mt-2">
-                        <span
-                            class="inline-block rounded-full px-3 py-1 text-base bg-[#F1FCFF] mr-2 mb-2 text-[#64CEEF]">Penjual
-                            : Gabriel Allba</span>
-                    </div>
-                    <div class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3">
-                        <div>
-                            <p>Tanggal Mulai Lelang</p>
-                            <p class="text-gray-500">17 Mei 2023 10.00</p>
-                        </div>
-                        <div>
-                            <p>Tanggal Lelang Berakhir</p>
-                            <p class="text-gray-500">17 Mei 2023 10.00</p>
-                        </div>
-                        <div>
-                            <p>Harga dasar</p>
-                        </div>
-                        <div>
-                            <p>Pemenang</p>
-                            <p class="text-gray-500">Kamu</p>
-                            <p class="text-[#7964EF]">Rp. 660.000.000</p>
-                        </div>
-                        <div>
-                            <p>Penawaran tertinggi kamu</p>
-                            <p class="text-gray-500">Rp. 250.000.000</p>
-                        </div>
-                        <div>
-                            <p style="cursor: pointer"
-                                class="text-center flex w-full justify-center rounded-md bg-[#7964EF] p-2 text-white hover:shadow-lg hover:shadow-[#7964EF] transition-all upload-button">
-                                Upload Bukti Transfer</p>
+    <table class="table" style="margin-bottom:100px;">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Nama Produk</th>
+                <th scope="col">Jumlah</th>
+                <th scope="col">Total</th>
+                <th scope="col">Bayar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"><img src="{{ asset('images/hampers2.jpg') }}" alt="Iklan 3"
+                        style="width: 150px; height: auto;" /></th>
+                <td>Hampers</td>
+                <td>1 Paket A</td>
+                <td>Rp. 700.000</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        data-bs-whatever="@mdo">Pay Now</button>
 
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="recipient-name" class="col-form-label">Nama Bank</label>
+                                            <input type="text" class="form-control" id="recipient-name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="photo-upload" class="col-form-label">Upload Photo:</label>
+                                            <input type="file" class="form-control" id="photo-upload" name="photo"
+                                                accept="image/*">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </td>
+            </tr>
 
+            <tr>
+                <td colspan="5">
+                    <div class="counter">
+                        <button onclick="decrement()">Kurang</button>
+                        <span id="count">0</span>
+                        <button onclick="increment()">Tambah</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let count = 0;
+
+        function increment() {
+            count++;
+            document.getElementById('count').innerText = count;
+        }
+
+        function decrement() {
+            if (count > 0) {
+                count--;
+                document.getElementById('count').innerText = count;
+            }
+        }
+    </script>
 
     @endsection

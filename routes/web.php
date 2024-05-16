@@ -86,6 +86,10 @@ Route::get('/pembayaran', function () {
     return view('pembayaran');
 })->name('pembayaran');
 
+Route::get('/indexKonfirmasi', function () {
+    return view('MOKonfirmasi.indexKonfirmasi');
+});
+
 
 
 //logout
