@@ -3,7 +3,8 @@
 @section('content')
 <style>
     body {
-        background-color: #FFFFFF;
+        background-color: #ede6e3;
+
         background-size: cover;
         background-repeat: no-repeat;
     }
@@ -221,6 +222,42 @@
 
 
     }
+
+    .counter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .counter button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 0 10px;
+        background-color: #AD343E;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .counter span {
+        font-size: 1.5rem;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    .counter button:hover {
+        background-color: #8b282f;
+    }
+
+    .modal .btn-primary {
+        background-color: #AD343E;
+    }
+
+    .modal .btn-primary:hover {
+        background-color: #8b282f;
+    }
 </style>
 
 <body>
@@ -265,27 +302,56 @@
                                     <div class="detail-item">
                                         <dt class="detail-title">Stock</dt>
                                         <dd class="detail-description">10</dd>
+
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="counter" style="margin-right: 10px;">
+                                            <button onclick="decrement()">-</button>
+                                            <span id="count">0</span>
+                                            <button onclick="increment()">+</button>
+                                        </div>
+                                        <dt class="detail-title">Total Bayar</dt>
+                                        <dd class="detail-description">Rp. 1.000.000</dd>
                                     </div>
 
-
-                                </dl>
                             </div>
+
+
+                            </dl>
+                        </div>
+                        <div class="detail-item">
+                            <a href="#" class="btn btn-buy-now">Buy Now</a>
                         </div>
 
-
-                    </div>
-                    <div class="detail-item">
-                        <a href="#" class="btn btn-buy-now">Buy Now</a>
-                    </div>
-
-                    <div class="detail-item">
-                        <a href="#" class="btn btn-add-cart">Add Cart</a>
+                        <div class="detail-item">
+                            <a href="#" class="btn btn-add-cart">Add Cart</a>
+                        </div>
                     </div>
                 </div>
+
+
             </div>
+
+        </div>
 
 </body>
 </div>
+
+<script>
+    let count = 0;
+
+    function increment() {
+        count++;
+        document.getElementById('count').innerText = count;
+    }
+
+    function decrement() {
+        if (count > 0) {
+            count--;
+            document.getElementById('count').innerText = count;
+        }
+    }
+</script>
 
 
 
