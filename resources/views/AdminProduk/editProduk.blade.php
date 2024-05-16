@@ -80,7 +80,7 @@
                                 <div class="form-group" id="toko_fields" style="display: none;">
                                     <div class="form-group col-md-12">
                                         <label class="font-weight-bold">Jenis Produk</label>
-                                        <select class="form-control @error('jenis_produk_penitip') is-invalid @enderror" name="jenis_produk_penitip">
+                                        <select class="form-control @error('jenis_produk') is-invalid @enderror" name="jenis_produk">
                                             <option value="">Pilih Jenis Produk </option>
                                             <option value="Bread" {{ old('jenis_produk', $produk->jenis_produk) == 'bread' ? 'selected' : '' }}>Bread</option>
                                             <option value="Cake" {{ old('jenis_produk', $produk->jenis_produk) == 'cake' ? 'selected' : '' }}>Cake</option>

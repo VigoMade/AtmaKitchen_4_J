@@ -3,7 +3,7 @@
 @section('content')
 <style>
   body {
-    background-color: #FFFFFF;
+    background-color: #ede6e3;
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -123,38 +123,38 @@
     </button>
   </div>
 
-  <h2 style="text-align: center; margin-top: 20px;"><b>OUR MENU</b></h2>
-
+  <h2 style="text-align: center; margin-top: 20px; text-decoration: underline; text-decoration-style: solid;"><b>OUR
+      CATEGORIES</b></h2>
 
   <div class="container">
     <div class="d-flex justify-content-center">
       <div id="breadCard" class="card mx-2" style="width: 20rem; cursor: pointer;">
         <div class="card-body">
-          <img src="{{ asset('images/brownies.jpeg') }}" class="d-block w-100" alt="...">
+          <img src="{{ asset('images/milkbun.jpeg') }}" class="d-block w-100" alt="...">
           <p style="text-align: center;"><b>Breads</b></p>
         </div>
       </div>
       <div id="cakesCard" class="card mx-2" style="width: 20rem;">
         <div class="card-body">
-          <img src="{{ asset('images/brownies.jpeg') }}" class="d-block w-100" alt="...">
+          <img src="{{ asset('images/spikoe.jpeg') }}" class="d-block w-100" alt="...">
           <p style="text-align: center;"><b>Cakes</b></p>
         </div>
       </div>
       <div id="drinkCard" class="card mx-2" style="width: 20rem;">
         <div class="card-body">
-          <img src="{{ asset('images/brownies.jpeg') }}" class="d-block w-100" alt="...">
+          <img src="{{ asset('images/minuman2.jpg') }}" class="d-block w-100" alt="...">
           <p style="text-align: center;"><b>Drinks</b></p>
         </div>
       </div>
-      <div class="card mx-2" style="width: 20rem;">
+      <div id="drinkCard" class="card mx-2" style="width: 20rem;">
         <div class="card-body">
-          <img src="{{ asset('images/brownies.jpeg') }}" class="d-block w-100" alt="...">
+          <img src="{{ asset('images/hampers3.jpg') }}" class="d-block w-100" alt="...">
           <p style="text-align: center;"><b>Hampers</b></p>
         </div>
       </div>
       <div id="otherCard" class="card mx-2" style="width: 20rem;">
         <div class="card-body">
-          <img src="{{ asset('images/brownies.jpeg') }}" class="d-block w-100" alt="...">
+          <img src="{{ asset('images/kentang1.jpg') }}" class="d-block w-100" alt="...">
           <p style="text-align: center;"><b>Others</b></p>
         </div>
       </div>
@@ -167,20 +167,20 @@
 
 
   <script>
-    document.getElementById('breadCard').addEventListener('click', function() {
-      window.location.href = "{{ route('informasiProduk.show',['jenis_produk' => 'Bread']) }}";
+    document.getElementById('breadCard').addEventListener('click', function () {
+      window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'Bread']) }}";
     });
 
-    document.getElementById('cakesCard').addEventListener('click', function() {
-      window.location.href = "{{ route('informasiProduk.show',['jenis_produk' => 'cake']) }}";
+    document.getElementById('cakesCard').addEventListener('click', function () {
+      window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'cake']) }}";
     });
 
-    document.getElementById('drinkCard').addEventListener('click', function() {
-      window.location.href = "{{ route('informasiProduk.show',['jenis_produk' => 'drink']) }}";
+    document.getElementById('drinkCard').addEventListener('click', function () {
+      window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'drink']) }}";
     });
 
-    document.getElementById('otherCard').addEventListener('click', function() {
-      window.location.href = "{{ route('informasiProduk.show',['jenis_produk' => 'other']) }}";
+    document.getElementById('otherCard').addEventListener('click', function () {
+      window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'other']) }}";
     });
   </script>
 
@@ -188,10 +188,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-2EEThxCer39xQ+lfDX6PCYdMWihzD8xwQ/pG2QCX7+FXerLZ6l6bSQpD1FzvQZ3Y" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-D3GUgXaIue2jK3+8vooaP9Xo+R3qDjq0ydNyoE8i7eIcTZ98HYdy9vP27f5L " crossorigin=" anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-2EEThxCer39xQ+lfDX6PCYdMWihzD8xwQ/pG2QCX7+FXerLZ6l6bSQpD1FzvQZ3Y"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-D3GUgXaIue2jK3+8vooaP9Xo+R3qDjq0ydNyoE8i7eIcTZ98HYdy9vP27f5L " crossorigin=" anonymous"></script>
 
-  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-G4Ffs47F3JGVmGvNJxha7PEWiIBkLlFge1rOMu0fYbVoFhYK0z35qW1aaG1xaxMz" crossorigin="anonymous"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-G4Ffs47F3JGVmGvNJxha7PEWiIBkLlFge1rOMu0fYbVoFhYK0z35qW1aaG1xaxMz"
+    crossorigin="anonymous"></script>
 
 
   @endsection

@@ -78,6 +78,14 @@ Route::get('/store', function () {
     return view('Katalog.store');
 })->name('store');
 
+Route::get('/detailProduk', function () {
+    return view('Katalog.detailProduk');
+})->name('detailProduk');
+
+Route::get('/pembayaran', function () {
+    return view('pembayaran');
+})->name('pembayaran');
+
 
 
 //logout
