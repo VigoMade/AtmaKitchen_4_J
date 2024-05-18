@@ -21,7 +21,14 @@ class ProdukControllerM extends Controller
     {
         try {
             // Mengambil produk dengan jenis produk tertentu dan memuat data penitip terkait
-            $produks = Produk::with('penitips')->where('jenis_produk', $title)->get();
+            $produks = Produk::where('jenis_produk', $title)
+            ->orWhereHas('penitips', function($query) use ($title) {
+                $query->where('jenis_produk_penitip', $title);
+            })
+            ->with('penitips')
+            ->get();
+        
+            
 
             // Memformat data produk
             $formattedProduks = $produks->map(function ($produk) {
@@ -30,36 +37,36 @@ class ProdukControllerM extends Controller
                     return [
                         'id_produk' => $produk->id_produk,
                         'nama_produk' => $produk->penitips->nama_produk_penitip ?? "",
-                        'jenis_produk' => $produk->jenis_produk,
-                        'harga_produk' => $produk->harga_produk,
-                        'satuan_produk' => $produk->satuan_produk,
+                        'jenis_produk' => $produk->penitips->jenis_produk_penitip ?? "",
+                        'harga_produk' => $produk->harga_produk ?? 0,
+                        'satuan_produk' => $produk->satuan_produk ?? "",
                         'stock_produk' => $produk->stock_produk ?? 0,
                         'tanggal_mulai_po' => $produk->tanggal_mulai_po ? $produk->tanggal_mulai_po : null,
                         'tanggal_selesai_po' => $produk->tanggal_selesai_po ? $produk->tanggal_selesai_po : null,
                         'kuota' => $produk->kuota ?? 0,
                         'id_penitip' => $produk->id_penitip,
                         'id_resep' => $produk->id_resep,
-                        'status' => $produk->status,
+                        'status' => $produk->status ?? "",
                         'image' => $produk->penitips->image ?? "",
-                        'tipe_produk' => $produk->tipe_produk,
+                        'tipe_produk' => $produk->tipe_produk ?? "",
                     ];
                 } else {
                     // Jika produk tidak memiliki penitip
                     return [
                         'id_produk' => $produk->id_produk,
                         'nama_produk' => $produk->nama_produk ?? "",
-                        'jenis_produk' => $produk->jenis_produk,
-                        'harga_produk' => $produk->harga_produk,
-                        'satuan_produk' => $produk->satuan_produk,
-                        'stock_produk' => $produk->stock_produk ?? 0,
+                        'jenis_produk' => $produk->jenis_produk ?? "",
+                        'harga_produk' => $produk->harga_produk ?? 0,
+                        'satuan_produk' => $produk->satuan_produk ?? "",
+                        'stock_produk' => $produk->kuota ?? 0,
                         'tanggal_mulai_po' => $produk->tanggal_mulai_po ? $produk->tanggal_mulai_po : null,
                         'tanggal_selesai_po' => $produk->tanggal_selesai_po ? $produk->tanggal_selesai_po : null,
                         'kuota' => $produk->kuota ?? 0,
                         'id_penitip' => $produk->id_penitip,
                         'id_resep' => $produk->id_resep,
-                        'status' => $produk->status,
+                        'status' => $produk->status ?? "" ,
                         'image' => $produk->image ?? "",
-                        'tipe_produk' => $produk->tipe_produk,
+                        'tipe_produk' => $produk->tipe_produk ?? "",
                     ];
                 }
             });
@@ -99,7 +106,7 @@ class ProdukControllerM extends Controller
                         'id_resep' => $produk->id_resep,
                         'status' => $produk->status,
                         'image' => $produk->penitips->image ?? "",
-                        'tipe_produk' => $produk->tipe_produk,
+                        'tipe_produk' => $produk->tipe_produk ?? "",
                     ];
                 } else {
                     // Jika produk tidak memiliki penitip
@@ -151,39 +158,40 @@ class ProdukControllerM extends Controller
             } else {
                 // Format the products data
                 $formattedProduks = $produks->map(function ($produk) {
-                    if ($produk->id_penitip) {
+                    if($produk->id_penitip){
                         return [
                             'id_produk' => $produk->id_produk,
                             'nama_produk' => $produk->penitips->nama_produk_penitip ?? "",
-                            'jenis_produk' => $produk->jenis_produk,
-                            'harga_produk' => $produk->harga_produk,
-                            'satuan_produk' => $produk->satuan_produk,
+                            'jenis_produk' => $produk->jenis_produk ?? "",
+                            'harga_produk' => $produk->harga_produk ?? 0,
+                            'satuan_produk' => $produk->satuan_produk ?? "",
                             'stock_produk' => $produk->stock_produk ?? 0,
                             'tanggal_mulai_po' => $produk->tanggal_mulai_po ? $produk->tanggal_mulai_po : null,
                             'tanggal_selesai_po' => $produk->tanggal_selesai_po ? $produk->tanggal_selesai_po : null,
                             'kuota' => $produk->kuota ?? 0,
                             'id_penitip' => $produk->id_penitip,
                             'id_resep' => $produk->id_resep,
-                            'status' => $produk->status,
+                            'status' => $produk->status ?? "",
                             'image' => $produk->penitips->image ?? "",
-                            'tipe_produk' => $produk->tipe_produk,
+                            'tipe_produk' => $produk->tipe_produk ?? "",
                         ];
                     } else {
+                        // Jika produk tidak memiliki penitip
                         return [
                             'id_produk' => $produk->id_produk,
                             'nama_produk' => $produk->nama_produk ?? "",
-                            'jenis_produk' => $produk->jenis_produk,
-                            'harga_produk' => $produk->harga_produk,
-                            'satuan_produk' => $produk->satuan_produk,
+                            'jenis_produk' => $produk->jenis_produk ?? "",
+                            'harga_produk' => $produk->harga_produk ?? 0,
+                            'satuan_produk' => $produk->satuan_produk ?? "",
                             'stock_produk' => $produk->stock_produk ?? 0,
                             'tanggal_mulai_po' => $produk->tanggal_mulai_po ? $produk->tanggal_mulai_po : null,
                             'tanggal_selesai_po' => $produk->tanggal_selesai_po ? $produk->tanggal_selesai_po : null,
                             'kuota' => $produk->kuota ?? 0,
                             'id_penitip' => $produk->id_penitip,
                             'id_resep' => $produk->id_resep,
-                            'status' => $produk->status,
+                            'status' => $produk->status ?? "" ,
                             'image' => $produk->image ?? "",
-                            'tipe_produk' => $produk->tipe_produk,
+                            'tipe_produk' => $produk->tipe_produk ?? "",
                         ];
                     }
                 });

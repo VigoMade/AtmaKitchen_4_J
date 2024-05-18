@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\PresensiController;
 use App\Http\Controllers\Api\ProdukControllerM;
 use App\Http\Controllers\Api\PegawaiControllerM;
 use App\Http\Controllers\Api\HistoriController;
+use App\Http\Controllers\Api\HampersControllerM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,10 +31,10 @@ Route::get('/presensi', [PresensiController::class, 'index']);
 Route::post('/presensi', [PresensiController::class, 'store']);
 Route::get('/produk/{title}', [ProdukControllerM::class, 'index_mobile']);
 Route::get('/produks', [ProdukControllerM::class, 'getSpecialProduk']);
-// Route::get('/produk/{filename}', [ProdukControllerM::class, 'getImage']);
 Route::get('/pegawai', [PegawaiControllerM::class, 'index_mobile']);
 Route::get('/history/{id}', [HistoriController::class, 'index']);
 Route::get('/history_/{search}', [HistoriController::class, 'search']);
+Route::get('/hampers', [HampersControllerM::class, 'getHampers']);
 
 
 
