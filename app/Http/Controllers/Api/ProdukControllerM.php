@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
 use App\Models\Penitip;
 use App\Models\Produk;
@@ -26,7 +27,7 @@ class ProdukControllerM extends Controller
             // Memformat data produk
             $formattedProduks = $produks->map(function ($produk) {
                 // Jika produk memiliki penitip
-                if($produk->id_penitip){
+                if ($produk->id_penitip) {
                     return [
                         'id_produk' => $produk->id_produk,
                         'nama_produk' => $produk->penitips->nama_produk_penitip ?? "",
@@ -69,7 +70,6 @@ class ProdukControllerM extends Controller
                 'message' => 'Retrieve All Success',
                 'data' => $formattedProduks,
             ], 200);
-
         } catch (Exception $e) {
             // Menangani pengecualian dan mengembalikan response error
             return response([
@@ -79,12 +79,13 @@ class ProdukControllerM extends Controller
         }
     }
 
-    public function getProdukbyid($id){
+    public function getProdukbyid($id)
+    {
         try {
             // Mengambil produk dengan jenis produk tertentu dan memuat data penitip terkait
-            $produks = Produk::with('penitips')->where('id_produk', $id)->get();
-                // Jika produk memiliki penitip
-                if($produk->id_penitip){
+            $produk = Produk::with('penitips')->where('id_produk', $id)->get();
+            $formattedProduks = $produk->map(function ($produk) {
+                if ($produk->id_penitip) {
                     return [
                         'id_produk' => $produk->id_produk,
                         'nama_produk' => $produk->penitips->nama_produk_penitip ?? "",
@@ -120,13 +121,12 @@ class ProdukControllerM extends Controller
                         'tipe_produk' => $produk->tipe_produk,
                     ];
                 }
-
+            });
             // Mengembalikan response JSON
             return response([
                 'message' => 'Retrieve All Success',
                 'data' => $formattedProduks,
             ], 200);
-
         } catch (Exception $e) {
             // Menangani pengecualian dan mengembalikan response error
             return response([
@@ -136,12 +136,13 @@ class ProdukControllerM extends Controller
         }
     }
 
-    public function getSpecialProduk(){
+    public function getSpecialProduk()
+    {
 
         try {
-            
+
             $produks = Produk::with('penitips')->get();
-                
+
             // Check if $produks is empty
             if ($produks->isEmpty()) {
                 // $produks kosong
@@ -187,7 +188,7 @@ class ProdukControllerM extends Controller
                         ];
                     }
                 });
-        
+
                 // Return the response with formatted data
                 return response()->json([
                     'message' => 'Retrieve All Success',
@@ -201,7 +202,6 @@ class ProdukControllerM extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
-        
     }
 
     // public function getSpecialProduk(){
@@ -214,7 +214,7 @@ class ProdukControllerM extends Controller
     //             ->orderByDesc('total_pembelian')
     //             ->take(5)
     //             ->get();
-                
+
     //             dd($produks);
     //         // Check if $produks is empty
     //         if ($produks->isEmpty()) {
@@ -261,7 +261,7 @@ class ProdukControllerM extends Controller
     //                     ];
     //                 }
     //             });
-        
+
     //             // Return the response with formatted data
     //             return response()->json([
     //                 'message' => 'Retrieve All Success',
@@ -275,7 +275,7 @@ class ProdukControllerM extends Controller
     //             'error' => $e->getMessage(),
     //         ], 500);
     //     }
-        
+
     // }
 
 }
