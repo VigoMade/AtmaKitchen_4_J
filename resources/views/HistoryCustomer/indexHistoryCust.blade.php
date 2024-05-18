@@ -91,17 +91,18 @@
                                     <tr>
                                         @forelse($user as $item)
                                         <td class="text-center">
-                                            @if($item->id_produk_fk != null)
-                                            <img src="/images/{{ $item->produk->image }}" width="100px">
+                                            @if($item->id_penitip_fk != null)
+                                            <img src="{{ Storage::url($item->penitip->image) }}" width="100px">
                                             @else
-                                            <img src="/images/{{ $item->penitip->image }}" width="100px">
+                                            <img src="{{ Storage::url($item->produk->image) }}" width="100px">
+
                                             @endif
                                         </td>
                                         <td class="text-center">
-                                            @if($item->id_produk_fk != null)
-                                            {{ $item->produk->nama_produk }}
+                                            @if($item->id_penitip_fk != null)
+                                            {{ $item->penitip->nama_produk_penitip}}
                                             @else
-                                            {{$item->penitip->nama_produk_penitip}}
+                                            {{ $item->produk->nama_produk}}
                                             @endif
                                         </td>
                                         <td class="text-center">
@@ -133,6 +134,7 @@
         </div>
         <!-- row -->
     </div>
+    <hr style="margin-top: 50px;">
     <!-- container -->
     </div>
 </body>
