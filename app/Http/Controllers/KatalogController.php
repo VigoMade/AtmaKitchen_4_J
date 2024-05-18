@@ -8,6 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 class KatalogController extends Controller
 {
+
+    public function index()
+    {
+        $produk = DB::table('produk')
+            ->leftJoin('penitip', 'produk.id_penitip', '=', 'penitip.id_penitip')
+            ->select(
+                DB::raw('COALESCE(produk.nama_produk, penitip.nama_produk_penitip) AS nama_produk'),
+                DB::raw('COALESCE(produk.jenis_produk, penitip.jenis_produk_penitip) AS jenis_produk'),
+                'produk.harga_produk',
+                'produk.id_produk',
+                DB::raw('COALESCE(produk.image, penitip.image) AS image')
+            )->get();
+        return view('landingPageCustomer', compact('produk'));
+    }
     public function show($jenis_produk)
     {
         $query = DB::table('produk')

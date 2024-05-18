@@ -1,4 +1,4 @@
-@extends('navbarLogin')
+@extends('navbarLandingPage')
 
 @section('content')
 <style>

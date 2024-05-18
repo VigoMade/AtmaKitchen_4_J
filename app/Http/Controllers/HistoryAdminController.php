@@ -9,7 +9,8 @@ class HistoryAdminController extends Controller
 {
     public function index()
     {
-        $history = Transaksi::orderBy('id_transaksi', 'desc')->paginate(5);
+        $history = Transaksi::orderBy('id_transaksi', 'desc')->whereIn('status', ['Selesai'])
+            ->paginate(5);
         return view('AdminCustomer.historyCustomer', compact('history'));
     }
 }

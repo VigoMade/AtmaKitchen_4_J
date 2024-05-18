@@ -12,7 +12,9 @@ class HistoryCustomerController extends Controller
     public function index()
     {
         $userId = Auth::guard('customer')->id();
-        $user = Transaksi::where('id_customer', $userId)->paginate(5);
+        $user = Transaksi::where('id_customer', $userId)
+            ->whereIn('status', ['Pending', 'Selesai'])
+            ->paginate(5);
         return view('HistoryCustomer.indexHistoryCust', compact('user'));
     }
 

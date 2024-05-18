@@ -107,6 +107,13 @@
             width: 130.3% !important;
         }
 
+        .nav-item.active .btn.btn-rounded {
+            background-color: white;
+            border-color: #AD343E;
+            color: #AD343E;
+        }
+
+
         @media (max-width: 720px) {
 
             .foot {
@@ -155,18 +162,12 @@
                     <li class="nav-item {{ Request::is('informasiUmum') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('informasiUmum')}}">Menu</a>
                     </li>
-                     <li class="nav-item {{ Request::is('store') ? 'active' : '' }}">
+                    <li class="nav-item {{ Request::is('store') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('store')}}">Store</a>
                     </li>
                     <li class="nav-item {{ Request::is('aboutUs') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('aboutUs') }}">About</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="btn btn-rounded" href="{#}"> Cart  <img src="{{ asset('images/cart.png') }}" alt="Deskripsi Gambar" style="margin-right: 5px; width: 20px;">
-                        </a>
-                    </li>
-                    <span style="margin-right: 10px;"></span>
 
                     @if(auth()->guard('customer')->check())
                     <li class="nav-item {{ Request::routeIs('customer.*') ? 'active' : '' }}">
@@ -174,10 +175,23 @@
                     </li>
                     @endif
                     @if(auth()->guard('customer')->check())
+                    <li class="nav-item {{ Request::routeIs('alamat.*') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{route('alamat.index')}}">My Address</a>
+                    </li>
+                    @endif
+                    @if(auth()->guard('customer')->check())
                     <li class="nav-item {{ Request::routeIs('historyCustomer.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My History</a>
                     </li>
                     @endif
+
+                    @if(auth()->guard('customer')->check())
+                    <li class="nav-item {{ Request::routeIs('transaksi.*') ? 'active' : '' }}">
+                        <a class="btn btn-rounded" href="{{route('transaksi.index')}}"> Cart <img src="{{ asset('images/cart.png') }}" alt="Deskripsi Gambar" style="margin-right: 5px; width: 20px;">
+                        </a>
+                    </li>
+                    @endif
+                    <span style="margin-right: 10px;"></span>
                     <li class="nav-item ">
                         @if(auth()->guard('customer')->check())
                         <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
@@ -198,7 +212,7 @@
     </script>
 </body>
 
-<footer class="w-100 foot" >
+<footer class="w-100 foot">
     <div class="container">
         <div class="row gy-4 gx-5">
             <div class="col-lg-4 col-md-6">
@@ -243,4 +257,5 @@
         </div>
     </div>
 </footer>
+
 </html>

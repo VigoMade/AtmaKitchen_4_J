@@ -105,31 +105,11 @@
   </div>
 
 
-
-  <!-- <div style="display: flex;">
-    <div style="flex: 1; display: flex; justify-content: center;">
-        <img src="{{ asset('images/admin2.png') }}" class="img-fluid rounded-start" alt="Admin Image" style="max-width: 300px; height: 400px; margin-left:200px" />
-    </div>
-
-    <div style="flex: 1;">
-        <div class="card" style="margin-top:90px;">
-            <div class="card-body">
-                <h5 class="card-title" style="color: #AD343E; font-weight: bold;">A D M I N</h5>
-                <p class="card-text" style="color: #AD343E;">Sebagai admin di toko roti online, tanggung jawab Anda meliputi manajemen pesanan, pengelolaan stok, pemeliharaan situs web, pelayanan pelanggan, keuangan, pengemasan dan pengiriman, pemasaran, administrasi, dan pemeliharaan database pelanggan. Anda perlu memiliki keterampilan multitasking, komunikasi yang baik, ketelitian dalam detail, dan pemahaman tentang industri roti dan belanja online.</p>
-                
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-
   <section class="pt-5 pb-5">
     <div class="container">
       <div class="row">
         <div class="col-6">
           <h3 class="mb-3" style="color: #AD343E; font-family: 'Playfair Display', serif;">Our Menu</h3>
-
         </div>
         <div class="col-6 text-right">
           <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;"
@@ -144,109 +124,38 @@
         <div class="col-12">
           <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <a href="#">
-                        <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapislegit.jpeg') }}" />
-                      </a>
+              @php
+        $chunks = $produk->chunk(3);
+      @endphp
+              @foreach($chunks as $chunkIndex => $chunk)
+        <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+          <div class="row">
+          @foreach($chunk as $item)
+      <div class="col-md-4 mb-3">
+        <div class="card">
+        <img class="img-fluid" alt="100%x280" src="{{ Storage::url($item->image) }}"
+        style="width: 100%; height: 280px;" />
 
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Legit</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/mandarin.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Mandarin Cake</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti sosis.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Sosis</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti keju.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Keju</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/milkbun.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Milkbun</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="card-body">
+        <h4 class="card-title" style="color: #AD343E;">{{ $item->nama_produk }}</h4>
+        </div>
+        </div>
+      </div>
+    @endforeach
+          </div>
+        </div>
+      @endforeach
+              @if($produk->isEmpty())
+        <div class="carousel-item active">
+          <p>No data</p>
+        </div>
+      @endif
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
 
 
 
