@@ -300,31 +300,22 @@
                                     </div>
                                     @endif
                                     <div class="detail-item">
-                                        <dd class="detail-description">10</dd>
-
-                                    </div>
-                                    <div class="detail-item">
+                                        <dt class="detail-title">Total Bayar</dt>
+                                        <dd class="detail-description">Rp. 1.000.000</dd>
                                         <div class="counter" style="margin-right: 10px;">
                                             <button onclick="decrement()">-</button>
                                             <span id="count">0</span>
                                             <button onclick="increment()">+</button>
                                         </div>
-                                        <dt class="detail-title">Total Bayar</dt>
-                                        <dd class="detail-description">Rp. 1.000.000</dd>
                                     </div>
-
-
                             </div>
-
-
                             </dl>
                         </div>
                         <div class="detail-item">
-                            <a href="#" class="btn btn-buy-now">Buy Now</a>
-                        </div>
-
-                        <div class="detail-item">
                             <a href="#" class="btn btn-add-cart">Add Cart</a>
+                        </div>
+                        <div class="detail-item">
+                            <a href="#" class="btn btn-buy-now">Buy Now</a>
                         </div>
                     </div>
                 </div>
