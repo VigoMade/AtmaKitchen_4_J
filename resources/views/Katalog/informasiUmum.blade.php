@@ -167,19 +167,19 @@
 
 
   <script>
-    document.getElementById('breadCard').addEventListener('click', function() {
+    document.getElementById('breadCard').addEventListener('click', function () {
       window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'Bread']) }}";
     });
 
-    document.getElementById('cakesCard').addEventListener('click', function() {
+    document.getElementById('cakesCard').addEventListener('click', function () {
       window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'cake']) }}";
     });
 
-    document.getElementById('drinkCard').addEventListener('click', function() {
+    document.getElementById('drinkCard').addEventListener('click', function () {
       window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'drink']) }}";
     });
 
-    document.getElementById('otherCard').addEventListener('click', function() {
+    document.getElementById('otherCard').addEventListener('click', function () {
       window.location.href = "{{ route('informasiProduk.show', ['jenis_produk' => 'other']) }}";
     });
   </script>
@@ -188,10 +188,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-2EEThxCer39xQ+lfDX6PCYdMWihzD8xwQ/pG2QCX7+FXerLZ6l6bSQpD1FzvQZ3Y" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-D3GUgXaIue2jK3+8vooaP9Xo+R3qDjq0ydNyoE8i7eIcTZ98HYdy9vP27f5L " crossorigin=" anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-2EEThxCer39xQ+lfDX6PCYdMWihzD8xwQ/pG2QCX7+FXerLZ6l6bSQpD1FzvQZ3Y"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+    integrity="sha384-D3GUgXaIue2jK3+8vooaP9Xo+R3qDjq0ydNyoE8i7eIcTZ98HYdy9vP27f5L " crossorigin=" anonymous"></script>
 
-  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-G4Ffs47F3JGVmGvNJxha7PEWiIBkLlFge1rOMu0fYbVoFhYK0z35qW1aaG1xaxMz" crossorigin="anonymous"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-G4Ffs47F3JGVmGvNJxha7PEWiIBkLlFge1rOMu0fYbVoFhYK0z35qW1aaG1xaxMz"
+    crossorigin="anonymous"></script>
 
 
   @endsection

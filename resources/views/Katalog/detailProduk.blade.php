@@ -274,30 +274,31 @@
                                     </div>
                                     <div class="detail-item">
                                         @if($produk->status == 'PO')
-                                        <dt class="detail-title">Tanggal Pre Order </dt>
-                                        <dd class="detail-description"> Open : {{$produk->tanggal_mulai_po}}</dd>
-                                        <dd class="detail-description"> Close : {{$produk->tanggal_selesai_po}}</dd>
+                                            <dt class="detail-title">Tanggal Pre Order </dt>
+                                            <dd class="detail-description"> Open : {{$produk->tanggal_mulai_po}}</dd>
+                                            <dd class="detail-description"> Close : {{$produk->tanggal_selesai_po}}</dd>
                                         @endif
                                     </div>
                                     <div class="detail-item">
                                         <dt class="detail-title">Deskripsi</dt>
-                                        <dd class="detail-description">kue enak mantal nanti munucl resep di sini</dd>
+                                        <dd class="detail-description">Anak Cantik, Baik Hati, Siapa pun angkut akuuuu
+                                        </dd>
                                     </div>
                                     <div class="detail-item">
                                         <dt class="detail-title">Satuan</dt>
                                         <dd class="detail-description">{{$produk->satuan_produk}}</dd>
                                     </div>
                                     @if($produk->tipe_produk == 'Produk Penitip')
-                                    <div class="detail-item">
-                                        <dt class="detail-title">Stock</dt>
-                                        <dd class="detail-description">{{$produk->stock_produk}}</dd>
-                                    </div>
+                                        <div class="detail-item">
+                                            <dt class="detail-title">Stock</dt>
+                                            <dd class="detail-description">{{$produk->stock_produk}}</dd>
+                                        </div>
                                     @endif
                                     @if($produk->tipe_produk == 'Produk Toko')
-                                    <div class="detail-item">
-                                        <dt class="detail-title">Kuota</dt>
-                                        <dd class="detail-description">{{$produk->kuota}}</dd>
-                                    </div>
+                                        <div class="detail-item">
+                                            <dt class="detail-title">Kuota</dt>
+                                            <dd class="detail-description">{{$produk->kuota}}</dd>
+                                        </div>
                                     @endif
                                     <div class="detail-item">
                                         <dt class="detail-title">Total Bayar</dt>

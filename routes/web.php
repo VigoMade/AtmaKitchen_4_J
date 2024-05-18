@@ -93,6 +93,11 @@ Route::get('/indexKonfirmasi', function () {
     return view('MOKonfirmasi.indexKonfirmasi');
 });
 
+Route::get('/createAlamat', [AlamatController::class, 'create'])->name('alamat.create');
+Route::post('/storeAlamat', [AlamatController::class, 'store'])->name('alamat.store');
+
+
+
 
 
 //logout
@@ -160,3 +165,11 @@ Route::get('/detailProduk/{id_produk}', [KatalogController::class, 'showById'])-
 Route::resource('/transaksi', TransaksiController::class);
 Route::get('/alamat', [AlamatController::class, 'index'])->name('alamat.index');
 Route::delete('/alamat/{id_alamat}', [AlamatController::class, 'destroy'])->name('alamat.delete');
+Route::get('/createAlamat', [AlamatController::class, 'create'])->name('alamat.create');
+Route::put('/alamat/{id_alamat}', [AlamatController::class, 'update'])->name('alamat.update');
+Route::post('/storeAlamat', [AlamatController::class, 'store'])->name('alamat.store');
+
+Route::get('/alamat/{id_alamat}', [AlamatController::class, 'edit'])->name('alamat.edit');
+
+
+
