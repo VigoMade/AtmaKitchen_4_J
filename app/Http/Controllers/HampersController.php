@@ -41,7 +41,7 @@ class HampersController extends Controller
             'nama_hampers' => 'required',
             'deskripsi_hampers' => 'required',
             'harga_hampers' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();
@@ -89,7 +89,7 @@ class HampersController extends Controller
             'nama_hampers' => 'required',
             'deskripsi_hampers' => 'required',
             'harga_hampers' => 'required|numeric',
-            'image' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();

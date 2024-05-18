@@ -11,25 +11,32 @@ use Exception;
 
 class HistoriController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        
-        // $userId = Auth::guard('customer')->id();
-        $transaksi = Transaksi::with('produk')->get();
+        $userId = Auth::guard('customer')->id();
+        $transaksi = Transaksi::with('produk', 'penitip')
+                        ->where(function($query) use ($id) {
+                            $query->where('id_customer', $id)
+                                  ->orWhere('id_pegawai', $id);
+                        })
+                        ->get();
+                        
         if ($transaksi->isNotEmpty()) {
             $transaksiData = $transaksi->map(function ($item) {
-                if($item->id_produk_fk){
+                if($item->id_penitip_fk){
                     return [
                         'id_transaksi' => $item->id_transaksi,
-                        'image' => "20240505222556.jpg",
-                        'nama_produk' => "Lapis Legit",
+                        'id_customer' => $item->id_customer,
+                        'image' => $item->penitip->image,
+                        'nama_produk' => $item->penitip->nama_produk_penitip,
                         'status' => $item->status,
                     ];
                 }else{
                     return [
                         'id_transaksi' => $item->id_transaksi,
-                        'image' => "20240505222649.jpg",
-                        'nama_produk' => "Lapis Surabay",
+                        'id_customer' => $item->id_customer,
+                        'image' => $item->produk->image,
+                        'nama_produk' => $item->produk->nama_produk,
                         'status' => $item->status,
                     ];
                 }
