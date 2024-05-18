@@ -85,8 +85,7 @@
         <div class="card mb-3">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{ asset('images/customer3.png') }}" class="img-fluid rounded-start"
-                style="width: 250px; height: 200px; margin-right:80px;" alt="...">
+              <img src="{{ asset('images/customer3.png') }}" class="img-fluid rounded-start" style="width: 250px; height: 200px; margin-right:80px;" alt="...">
 
             </div>
             <div class="col-md-8">
@@ -132,12 +131,10 @@
 
         </div>
         <div class="col-6 text-right">
-          <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;"
-            href="#carouselExampleIndicators2" role="button" data-slide="prev">
+          <a class="btn btn-primary mb-3 mr-1" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="prev">
             <i class="fa fa-arrow-left"></i>
           </a>
-          <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;"
-            href="#carouselExampleIndicators2" role="button" data-slide="next">
+          <a class="btn btn-primary mb-3" style="background-color: #AD343E; border-color: #AD343E;" href="#carouselExampleIndicators2" role="button" data-slide="next">
             <i class="fa fa-arrow-right"></i>
           </a>
         </div>
@@ -146,97 +143,19 @@
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <a href="#">
-                        <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapislegit.jpeg') }}" />
-                      </a>
-
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Legit</h4>
-
+                  <div class="row">
+                    @forelse($produk as $item)
+                    <div class="col-md-4 mb-3">
+                      <div class="card">
+                        <img class="img-fluid" alt="100%x280" src=" {{ Storage::url($item->image) }}" />
+                        <div class="card-body">
+                          <h4 class="card-title" style="color: #AD343E;">{{$item->nama_produk}}</h4>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/mandarin.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Mandarin Cake</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/brownies.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Brownies</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/lapisurabaya.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Lapis Surabaya</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="row">
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti sosis.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Sosis</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/roti keju.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Roti Keju</h4>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3">
-                    <div class="card">
-                      <img class="img-fluid" alt="100%x280" src="{{ asset('images/milkbun.jpeg') }}" />
-                      <div class="card-body">
-                        <h4 class="card-title" style="color: #AD343E;">Milkbun</h4>
-
-                      </div>
-                    </div>
+                    @empty
+                    <p>No data</p>
+                    @endforelse
                   </div>
                 </div>
               </div>
