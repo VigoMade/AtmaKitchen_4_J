@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminCustomerController;
+use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\GajiController;
 use App\Http\Controllers\JabatanController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\TransaksiController;
+use App\Models\Alamat;
 use App\Models\PengeluaranLainnya;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Penitip;
@@ -152,3 +155,8 @@ Route::get('/historyCustomer/search', [HistoryCustomerController::class, 'search
 Route::get('/informasiProduk', [KatalogController::class, 'index'])->name('landingPageCustomer');
 Route::get('/informasiProduk/{jenis_produk}', [KatalogController::class, 'show'])->name('informasiProduk.show');
 Route::get('/detailProduk/{id_produk}', [KatalogController::class, 'showById'])->name('detailProduk.showById');
+
+//TransCust
+Route::resource('/transaksi', TransaksiController::class);
+Route::get('/alamat', [AlamatController::class, 'index'])->name('alamat.index');
+Route::delete('/alamat/{id_alamat}', [AlamatController::class, 'destroy'])->name('alamat.delete');
