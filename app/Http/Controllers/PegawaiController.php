@@ -48,7 +48,7 @@ class PegawaiController extends Controller
             'nama_pegawai' => 'required',
             'telepon_pegawai' => 'required',
             'email_pegawai' => 'required',
-            'foto' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();
@@ -116,7 +116,7 @@ class PegawaiController extends Controller
             'nama_pegawai' => 'required',
             'telepon_pegawai' => 'required',
             'email_pegawai' => 'required',
-            'foto' => 'image|mimes:jpeg,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,jpg,gif,svg,png|max:2048',
         ]);
 
         $input = $request->all();
