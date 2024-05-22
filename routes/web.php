@@ -89,9 +89,23 @@ Route::get('/pembayaran', function () {
     return view('pembayaran');
 })->name('pembayaran');
 
+Route::get('/nota', function () {
+    return view('nota');
+})->name('nota');
+
 Route::get('/indexKonfirmasi', function () {
     return view('MOKonfirmasi.indexKonfirmasi');
 });
+Route::get('/indexAdminAlamat', function () {
+    return view('AdminAlamat.indexAdminAlamat');
+});
+Route::get('/createJarak', function () {
+    return view('AdminAlamat.createJarak');
+});
+Route::get('/indexKonfirmasiAdmin', function () {
+    return view('AdminKonfirmasi.indexKonfirmasiAdmin');
+});
+
 
 Route::get('/createAlamat', [AlamatController::class, 'create'])->name('alamat.create');
 Route::post('/storeAlamat', [AlamatController::class, 'store'])->name('alamat.store');

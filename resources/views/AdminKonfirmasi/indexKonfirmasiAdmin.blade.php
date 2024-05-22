@@ -68,14 +68,18 @@
                                             <th class="text-center">No Transaksi</th>
 
                                             <th class="text-center">Foto Produk</th>
-                                            <th class="text-center">Nama Porduk</th>
+                                            <th class="text-center">Nama Produk</th>
                                             <th class="text-center">Jumlah </th>
                                             <th class="text-center">Total Bayar</th>
+                                            <th class="text-center">Bukti Transfer</th>
+                                            <th class="text-center">Pembayaran</th>
+
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <tr>
                                             <td class="text-center">101</td>
 
@@ -85,6 +89,11 @@
                                             <td class="text-center">Hampers</td>
                                             <td class="text-center">1 Paket A</td>
                                             <td class="text-center">Rp. 1.000.000</td>
+                                            <td class="text-center"><img src="{{ asset('images/buktiTF.jpg') }}"
+                                                    alt="Iklan 3" style="width: 150px; height: auto;" /></th>
+                                            </td>
+                                            <td class="text-center">Rp. 2.000.000</td>
+
                                             <td class="text-center"><span
                                                     class="badge rounded-pill text-bg-danger"></span>
 
@@ -94,8 +103,7 @@
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
                                                     method="POST">
-                                                    <a href="{{url('/editPenitip')}}"
-                                                        class="btn btn-sm btn-primary">Terima</a>
+                                                    <a href="#" class="btn btn-sm btn-primary">Terima</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
