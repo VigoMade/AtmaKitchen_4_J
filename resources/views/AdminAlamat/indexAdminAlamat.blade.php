@@ -61,36 +61,54 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{url('/createJarak')}}" class="btn btn-md btn-success mb-3 btn-tambah-resep">Input
-                                Jarak</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No Transaksi</th>
                                             <th class="text-center">Nama Produk</th>
-                                            <th class="text-center">Total Harga Pesanan</th>
                                             <th class="text-center">Alamat</th>
-                                            <th class="text-center">Jarak</th>
                                             <th class="text-center">Ongkir</th>
-                                            <th class="text-center">Tota Bayar</th>
+                                            <th class="text-center">Total Harga Pesanan</th>
+                                            <th class="text-center">Jarak</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <tbody>
+                                        @forelse($transaksi as $trans)
                                         <tr>
-                                            <td class="text-center">10</td>
-                                            <td class="text-center">Paket C</td>
-                                            <td class="text-center">Rp. 100.000</td>
-                                            <td class="text-center">Jl. Pemuda Indah</td>
-                                            <td class="text-center">10 km</td>
-                                            <td class="text-center">Rp. 15.000</td>
-                                            <td class="text-center">Rp. 115.000</td>
-
+                                            <td class="text-center">{{$trans->id_transaksi}}</td>
+                                            <td class="text-center">{{$trans->nama_produk}}</td>
+                                            <td class="text-center">{{$trans->alamat_customer}}</td>
+                                            @if($trans->ongkos_kirim == null)
+                                            <td class="text-center">Rp. 0</td>
+                                            @else
+                                            <td class="text-center">Rp. {{$trans->ongkos_kirim}}</td>
+                                            @endif
+                                            <td class="text-center">Rp. {{$trans->total_pembayaran}}</td>
+                                            @if($trans->jarak == null)
+                                            <td class="text-center">--</td>
+                                            @else
+                                            <th class="text-center">{{$trans->jarak}}</th>
+                                            @endif
+                                            <th class="text-center">
+                                                <a href="{{route('createJarak',$trans->id_transaksi)}}" class="btn btn-success">
+                                                    <i class="fas fa-plus"></i>Tambah Jarak
+                                                </a>
+                                            </th>
 
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Belum ada yang belanja!
+                                        </div>
+                                        @endforelse
                                     </tbody>
+
                                 </table>
                             </div>
+                            {{$transaksi->links()}}
                         </div>
                         <!-- body -->
                     </div>

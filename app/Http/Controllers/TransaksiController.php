@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alamat;
+use App\Models\Pemasukan;
 use App\Models\Transaksi;
 use Carbon\Carbon;
 use Exception;
@@ -31,8 +32,7 @@ class TransaksiController extends Controller
                 'pn.nama_penitip'
             )
             ->where('t.id_customer', $user->id_customer)
-            ->where('t.status', 'Di Keranjang')
-            ->paginate(2);
+            ->where('t.status', 'Di Keranjang')->paginate(2);
 
         return view('Transaksi.showAllTransaksi', compact('transaksi', 'alamat', 'user'));
     }
@@ -55,14 +55,17 @@ class TransaksiController extends Controller
                 'pn.nama_penitip'
             )
             ->where('t.id_customer', $user->id_customer)
-            ->where('t.status', 'Di Keranjang')->where('t.id_transaksi', $id)
+            ->where(function ($query) {
+                $query->where('t.status', 'Di Keranjang')
+                    ->orWhere('t.status', 'Menunggu Pembayaran');
+            })->where('t.id_transaksi', $id)
             ->first();
         return view('Transaksi.pembayaranPage', compact('transaksi', 'alamat', 'user'));
     }
 
     public function update(Request $request, $id)
     {
-        $transaksi = Transaksi::find($id);
+        $transaksi = Transaksi::Where('id_transaksi', $id)->first();
         $user = Auth::guard('customer')->user();
         $alamat = Alamat::where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
         $beliData = $request->all();
@@ -85,7 +88,12 @@ class TransaksiController extends Controller
             unset($beliData['bukti_bayar']);
         }
         $beliData['id_customer'] = $user->id_customer;
-        $beliData['status'] = 'Menunggu Konfirmasi';
+        $beliData['id_alamat'] = $alamat->id_alamat;
+        if ($transaksi->status == 'Menunggu Pembayaran') {
+            $beliData['status'] = 'Sudah Dibayar';
+        } else {
+            $beliData['status'] = 'Perlu Jarak';
+        }
         $beliData['tanggal_transaksi'] = Carbon::now();
         $beliData['tanggal_pembayaran'] = Carbon::now();
         $beliData['jumlah_produk'] = $transaksi->jumlah_produk;

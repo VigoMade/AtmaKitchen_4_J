@@ -11,7 +11,7 @@ class Transaksi extends Model
     protected $table = 'transaksi';
     protected $primaryKey = 'id_transaksi';
     protected $keyType = "string";
-    protected $foreignKey =  ['id_customer', 'id_pegawai', 'id_produk_fk', 'id_penitip_fk'];
+    protected $foreignKey =  ['id_customer', 'id_pegawai', 'id_produk_fk', 'id_penitip_fk,id_alamat'];
     public $timestamps = false;
 
     protected $fillable = [
@@ -27,6 +27,8 @@ class Transaksi extends Model
         'id_produk_fk',
         'id_penitip_fk',
         'bukti_bayar',
+        'jarak',
+        'id_alamat'
     ];
 
     public function customer()
@@ -47,5 +49,10 @@ class Transaksi extends Model
     public function penitip()
     {
         return $this->belongsTo(Penitip::class, 'id_penitip_fk');
+    }
+
+    public function jarak()
+    {
+        return $this->belongsTo(Alamat::class, 'id_alamat');
     }
 }

@@ -73,12 +73,7 @@
                                 <input type="hidden" name="jumlah_produk" value="{{ $transaksi->jumlah_produk }}">
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="font-weight-bold">Ongkos Kirim</label>
-                                    <input type="number" class="form-control" name="ongkos_kirim" value="{{ $transaksi->ongkos_kirim }}" disabled>
-                                    <input type="hidden" name="ongkos_kirim" value="{{ $transaksi->ongkos_kirim }}">
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label class="font-weight-bold">Total Harga</label>
                                     <input type="number" class="form-control" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}" disabled>
                                     <input type="hidden" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}">
