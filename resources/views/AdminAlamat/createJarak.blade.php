@@ -49,14 +49,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="#" method="POST" enctype="multipart/form-data">
+                        <form onsubmit="return confirm('Apakah anda Yakin?');" action="{{route('updateJarak',$transaksi->id_transaksi)}}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label class="font-weight-bold">Masukan Jarak</label>
-                                <input type="text" class="form-control @error('namaHampers') is-invalid @enderror"
-                                    name="namaHampers" value="{{ old('namaHampers') }}" placeholder="Masukkan Jarak">
-                                @error('namaHampers')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                <input type="number" class="form-control @error('jarak') is-invalid @enderror" name="jarak" value="{{ old('jarak',$transaksi->jarak) }}" placeholder="Masukkan Jarak">
+                                @error('jarak')
+                                <div class="invalid-feedback"> {{ $message }}</div>
                                 @enderror
                             </div>
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>

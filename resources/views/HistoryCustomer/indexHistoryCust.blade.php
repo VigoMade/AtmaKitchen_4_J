@@ -81,15 +81,18 @@
                             <table class="table table-hover textnowrap">
                                 <thead>
                                     <tr>
+                                        <th class="text-center">No Produk</th>
                                         <th class="text-center">Foto Produk</th>
                                         <th class="text-center">Nama Produk</th>
                                         <th class="text-center">Total Pembayaran Ku</th>
                                         <th class="text-center">Status Pesanan Ku</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         @forelse($user as $item)
+                                        <td class="text-center">{{$item->id_transaksi}}</td>
                                         <td class="text-center">
                                             @if($item->id_penitip_fk != null)
                                             <img src="{{ Storage::url($item->penitip->image) }}" width="100px">
@@ -109,14 +112,25 @@
                                             {{$item->total_pembayaran}}
                                         </td>
                                         <td class="text-center">
-                                            @if($item->status == 'Selesai')
+                                            @if($item->status == 'Diterima')
                                             <span class="badge badge-success">{{ $item->status }}</span>
                                             @elseif($item->status == 'Ditolak')
                                             <span class="badge badge-danger">{{ $item->status }}</span>
+                                            @elseif($item->status == 'Diproses')
+                                            <span class="badge badge-success">{{ $item->status }}</span>
                                             @else
                                             <span class="badge badge-secondary">{{ $item->status }}</span>
                                             @endif
                                         </td>
+                                        @if($item->status == 'Menunggu Pembayaran')
+                                        <td class="text-center">
+                                            <a href="{{route('transaksi.edit',$item->id_transaksi)}}" class="btn btn-primary">Bayar</a>
+                                        </td>
+                                        @else
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-secondary">Lihat Detail</a>
+                                        </td>
+                                        @endif
                                     </tr>
                                 </tbody>
                                 @empty

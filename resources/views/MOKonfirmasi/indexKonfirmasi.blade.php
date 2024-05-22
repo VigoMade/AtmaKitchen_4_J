@@ -61,14 +61,36 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if(session('error'))
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            <script>
+                                setTimeout(function() {
+                                    document.getElementById('errorAlert').style.display = 'none';
+                                }, 5000);
+                            </script>
+                            @endif
+
+                            @if(session('success'))
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            <script>
+                                setTimeout(function() {
+                                    document.getElementById('successAlert').style.display = 'none';
+                                }, 5000);
+                            </script>
+                            @endif
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No Transaksi</th>
-
+                                            <th class="text-center">Nama Customer</th>
+                                            <th class="text-center">Alamat Customer</th>
                                             <th class="text-center">Foto Produk</th>
-                                            <th class="text-center">Nama Porduk</th>
+                                            <th class="text-center">Nama Produk</th>
                                             <th class="text-center">Jumlah </th>
                                             <th class="text-center">Total Bayar</th>
                                             <th class="text-center">Status</th>
@@ -77,34 +99,56 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="text-center">101</td>
-
-                                            <td class="text-center"><img src="{{ asset('images/hampers2.jpg') }}"
-                                                    alt="Iklan 3" style="width: 150px; height: auto;" /></th>
+                                            @forelse($transaksi as $data)
+                                            <td class="text-center">{{$data->id_transaksi}}</td>
+                                            <td class="text-center">{{$data->nama_customer}}</td>
+                                            <td class="text-center">{{$data->alamat_customer}}</td>
+                                            <td class="text-center"><img src="{{ Storage::url($data->image) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
                                             </td>
-                                            <td class="text-center">Hampers</td>
-                                            <td class="text-center">1 Paket A</td>
-                                            <td class="text-center">Rp. 1.000.000</td>
-                                            <td class="text-center"><span
-                                                    class="badge rounded-pill text-bg-danger"></span>
-
-                                                <span class="badge text-bg-secondary">Secondary</span>
-                                                <span class="badge text-bg-success">Success</span>
+                                            <td class="text-center">{{$data->nama_produk}}</td>
+                                            <td class="text-center">{{$data->jumlah_produk}}</td>
+                                            <td class="text-center">Rp. {{$data->total_pemasukan}}</td>
+                                            <td class="text-center">
+                                                @if($data->status == 'Diterima')
+                                                <span class="badge text-bg-success">{{$data->status}}</span>
+                                                @else
+                                                <span class="badge text-bg-info">{{$data->status}}</span>
+                                                @endif
                                             </td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
-                                                    method="POST">
-                                                    <a href="{{url('/editPenitip')}}"
-                                                        class="btn btn-sm btn-primary">Terima</a>
+                                                @if($data->status == 'Diterima')
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('prosses',$data->id_pemasukan)}}">
                                                     @csrf
-                                                    @method('DELETE')
+                                                    @method('PUT')
+                                                    <button class="btn btn-primary">
+                                                        Mulai Proses
+                                                    </button>
+                                                </form>
+                                                @else
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('accept',$data->id_pemasukan)}}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="btn btn-primary">
+                                                        Terima
+                                                    </button>
+                                                </form>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('reject',$data->id_pemasukan)}}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
                                                     <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
                                                 </form>
+                                                @endif
                                             </td>
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Belum ada Pembeli tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{$transaksi->links()}}
                         </div>
                         <!-- body -->
                     </div>

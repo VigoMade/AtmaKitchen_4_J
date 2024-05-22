@@ -9,8 +9,11 @@ use App\Http\Controllers\HampersController;
 use App\Http\Controllers\HistoryAdminController;
 use App\Http\Controllers\HistoryCustomerController;
 use App\Http\Controllers\KatalogController;
+use App\Http\Controllers\KonfirmasiController;
+use App\Http\Controllers\KonfirmasiPembayaranController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembelianBBController;
 use App\Http\Controllers\PengeluaranLainnyaController;
 use App\Http\Controllers\PenitipController;
@@ -96,15 +99,12 @@ Route::get('/nota', function () {
 Route::get('/indexKonfirmasi', function () {
     return view('MOKonfirmasi.indexKonfirmasi');
 });
-Route::get('/indexAdminAlamat', function () {
-    return view('AdminAlamat.indexAdminAlamat');
-});
-Route::get('/createJarak', function () {
-    return view('AdminAlamat.createJarak');
-});
+
+
 Route::get('/indexKonfirmasiAdmin', function () {
     return view('AdminKonfirmasi.indexKonfirmasiAdmin');
 });
+
 
 
 Route::get('/createAlamat', [AlamatController::class, 'create'])->name('alamat.create');
@@ -116,8 +116,6 @@ Route::post('/storeAlamat', [AlamatController::class, 'store'])->name('alamat.st
 
 //logout
 Route::get('/logout', [LoginController::class, 'actionLogout'])->name('actionLogout');
-
-
 
 
 //ADMIN//
@@ -189,3 +187,20 @@ Route::get('/alamatSearch', [AlamatController::class, 'show'])->name('alamat.sea
 
 //Tambah Ke Keranjang
 Route::post('/masukKeranjang', [KatalogController::class, 'store'])->name('masukKeranjang.store');
+
+
+Route::get('/indexJarak', [AlamatController::class, 'indexJarak'])->name('indexJarak');
+Route::get('/createJarak/{id_transaksi}', [AlamatController::class, 'createJarak'])->name('createJarak');
+Route::put('/updateJarak/{id_transaksi}', [AlamatController::class, 'updateJarak'])->name('updateJarak');
+
+Route::get('/konfirmasiPembayaran', [KonfirmasiPembayaranController::class, 'index'])->name('konfirmasiPembayaran.index');
+Route::get('/konfirmasiPembayaran/{id_transaksi}', [KonfirmasiPembayaranController::class, 'create'])->name('konfirmasiPembayaran.create');
+Route::post('/konfirmasiPembayaran/{id_transaksi}', [KonfirmasiPembayaranController::class, 'store'])->name('konfirmasiPembayaran.store');
+
+Route::resource('/pemasukan', PemasukanController::class);
+
+//Konfirmasi MO
+Route::get('/indexKonfirmasi', [KonfirmasiController::class, 'index'])->name('indexKonfirmasi.index');
+Route::put('/reject/{id}', [KonfirmasiController::class, 'reject'])->name('reject');
+Route::put('/accept/{id}', [KonfirmasiController::class, 'accept'])->name('accept');
+Route::put('/prosses/{id}', [KonfirmasiController::class, 'progress'])->name('prosses');

@@ -1,4 +1,4 @@
-@extends('navbarMO')
+@extends('navbarAdmin')
 @section('content')
 <style>
     body {
@@ -61,58 +61,64 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if(session('error'))
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+
+                            @if(session('success'))
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No Transaksi</th>
-
                                             <th class="text-center">Foto Produk</th>
+                                            <th class="text-center">Bukti Transfer</th>
+                                            <th class="text-center">Nama Customer</th>
+                                            <th class="text-center">Alamat</th>
                                             <th class="text-center">Nama Produk</th>
                                             <th class="text-center">Jumlah </th>
                                             <th class="text-center">Total Bayar</th>
-                                            <th class="text-center">Bukti Transfer</th>
-                                            <th class="text-center">Pembayaran</th>
-
-                                            <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @forelse($transaksi as $data)
                                         <tr>
-                                            <td class="text-center">101</td>
+                                            <td class="text-center">{{$data->id_transaksi}}</td>
 
-                                            <td class="text-center"><img src="{{ asset('images/hampers2.jpg') }}"
-                                                    alt="Iklan 3" style="width: 150px; height: auto;" /></th>
+                                            <td class="text-center"><img src="{{ Storage::url($data->image) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
                                             </td>
-                                            <td class="text-center">Hampers</td>
-                                            <td class="text-center">1 Paket A</td>
-                                            <td class="text-center">Rp. 1.000.000</td>
-                                            <td class="text-center"><img src="{{ asset('images/buktiTF.jpg') }}"
-                                                    alt="Iklan 3" style="width: 150px; height: auto;" /></th>
+                                            <td class="text-center"><img src="{{ Storage::url($data->bukti_bayar) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
                                             </td>
-                                            <td class="text-center">Rp. 2.000.000</td>
-
-                                            <td class="text-center"><span
-                                                    class="badge rounded-pill text-bg-danger"></span>
-
-                                                <span class="badge text-bg-secondary">Secondary</span>
-                                                <span class="badge text-bg-success">Success</span>
-                                            </td>
+                                            <td class="text-center">{{$data->nama}}</td>
+                                            <td class="text-center">{{$data->alamat_customer}}</td>
+                                            <td class="text-center">{{$data->nama_produk}}</td>
+                                            <td class="text-center">{{$data->jumlah_produk}}</td>
+                                            <td class="text-center">Rp. {{$data->total_pembayaran}}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
-                                                    method="POST">
-                                                    <a href="#" class="btn btn-sm btn-primary">Terima</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
+                                                    <a href="{{route('konfirmasiPembayaran.create', $data->id_transaksi)}}" class="btn btn-sm btn-primary">Lihat Detail</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
                                                 </form>
                                             </td>
                                         </tr>
+                                        @empty
+                                        <div class="alert alert-danger">
+                                            Belum ada Pembeli tersedia
+                                        </div>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
+                            {{$transaksi->links()}}
                         </div>
                         <!-- body -->
                     </div>

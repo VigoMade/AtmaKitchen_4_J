@@ -154,6 +154,21 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-3 ms-3">
+                                <h4>Saldo Ku</h4>
+                            </div>
+                            <div class="col-2">
+                                <p>:</p>
+                            </div>
+                            <div class="col-5">
+                                @if ($user->saldo_customer == null)
+                                <p>Rp . 0</p>
+                                @else
+                                <p>Rp. {{$user->saldo_customer}}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-3 ms-3">
                                 <h4>Alamat Ku</h4>
                             </div>
                             <div class="col-2">
