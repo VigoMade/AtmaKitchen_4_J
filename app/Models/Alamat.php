@@ -13,7 +13,7 @@ class Alamat extends Model
     protected $foreignKey =  ['id_customer'];
     public $timestamps = false;
 
-    protected $fillable = ['alamat_customer', 'id_customer'];
+    protected $fillable = ['alamat_customer', 'id_customer', 'alamat_aktif'];
 
     public function customer()
     {

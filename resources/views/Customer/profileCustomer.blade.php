@@ -153,6 +153,23 @@
                             </div>
                         </div>
                         <div class="row mt-5">
+                            <div class="col-3 ms-3">
+                                <h4>Alamat Ku</h4>
+                            </div>
+                            <div class="col-2">
+                                <p>:</p>
+                            </div>
+                            <div class="col-5">
+                                @if (!$alamat)
+                                <div class="alert alert-danger" style="width: 380px; height:40px" role="alert">
+                                    <p class="text-center">Silahkan Set Alamat Aktif Terlebih Dahulu!</p>
+                                </div>
+                                @else
+                                <p>{{$alamat->alamat_customer}}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row mt-5">
                             <div class="col text-center">
                                 <a class="btn btn-primary" style="text-decoration: none; color: white" href="{{route('customer.edit',$user->id_customer)}}">Edit</a>
                             </div>

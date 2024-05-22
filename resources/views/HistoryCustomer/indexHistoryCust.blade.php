@@ -62,7 +62,7 @@
                 </div>
                 <form action="{{route('historyCustomer.search')}}" method="GET" class="mb-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari Bahan Baku....">
+                        <input type="text" class="form-control" name="search" placeholder="Cari History....">
                         <button class="btn btn-outline-primary" type="submit">Cari</button>
                     </div>
                 </form>
@@ -84,7 +84,7 @@
                                         <th class="text-center">Foto Produk</th>
                                         <th class="text-center">Nama Produk</th>
                                         <th class="text-center">Total Pembayaran Ku</th>
-                                        <th class="text-center">Status Pesanan Customer</th>
+                                        <th class="text-center">Status Pesanan Ku</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,6 +111,8 @@
                                         <td class="text-center">
                                             @if($item->status == 'Selesai')
                                             <span class="badge badge-success">{{ $item->status }}</span>
+                                            @elseif($item->status == 'Ditolak')
+                                            <span class="badge badge-danger">{{ $item->status }}</span>
                                             @else
                                             <span class="badge badge-secondary">{{ $item->status }}</span>
                                             @endif
