@@ -46,7 +46,7 @@ class ProdukController extends Controller
             'harga_produk' => 'required',
             'satuan_produk' => 'required',
             'jenis_produk' => function ($attribute, $value, $fail) use ($request) {
-                if ($request->id_penitip == null && empty($value)) {
+                if ($request->id_penitip == null && empty ($value)) {
                     $fail('The ' . $attribute . ' field is required.');
                 }
             },
@@ -86,7 +86,8 @@ class ProdukController extends Controller
         }
         if ($request->id_penitip != null) {
             $pentip = Penitip::find($request->id_penitip);
-            $input['jenis_produk'] = $pentip->jenis_produk_penitip;;
+            $input['jenis_produk'] = $pentip->jenis_produk_penitip;
+            ;
         }
 
         try {
@@ -125,7 +126,7 @@ class ProdukController extends Controller
         $this->validate($request, [
             'harga_produk' => 'required',
             'jenis_produk' => function ($attribute, $value, $fail) use ($request) {
-                if ($request->id_penitip == null && empty($value)) {
+                if ($request->id_penitip == null && empty ($value)) {
                     $fail('The ' . $attribute . ' field is required.');
                 }
             },
@@ -173,12 +174,16 @@ class ProdukController extends Controller
 
         if ($request->id_penitip != null) {
             $pentip = Penitip::find($request->id_penitip);
-            $input['jenis_produk'] = $pentip->jenis_produk_penitip;;
+            if ($pentip != null) {
+                return redirect()->route('produks.index')->with('error', 'Jenis produk tidak dapat diubah menjadi Produk Toko jika terdapat Produk penitip.');
+            }
+            $input['jenis_produk'] = $pentip->jenis_produk_penitip;
         }
+
 
         try {
             $produk->update($input);
-            return  redirect()->route('produks.index')->with(['success' => 'Data Berhasil Diubah!']);
+            return redirect()->route('produks.index')->with(['success' => 'Data Berhasil Diubah!']);
         } catch (Exception $e) {
             return redirect()->route('produks.index')->with('error', $e->getMessage());
         }
@@ -193,8 +198,10 @@ class ProdukController extends Controller
     {
         $produk = Produk::find($id);
         $produk->delete();
-        return redirect()->route('produks.index')->with(['success' => 'Data 
-            Berhasil Dihapus!']);
+        return redirect()->route('produks.index')->with([
+            'success' => 'Data 
+            Berhasil Dihapus!'
+        ]);
     }
 
 
