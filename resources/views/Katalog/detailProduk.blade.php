@@ -274,9 +274,9 @@
                                     </div>
                                     <div class="detail-item">
                                         @if($produk->status == 'PO')
-                                            <dt class="detail-title">Tanggal Pre Order </dt>
-                                            <dd class="detail-description"> Open : {{$produk->tanggal_mulai_po}}</dd>
-                                            <dd class="detail-description"> Close : {{$produk->tanggal_selesai_po}}</dd>
+                                        <dt class="detail-title">Tanggal Pre Order </dt>
+                                        <dd class="detail-description"> Open : {{$produk->tanggal_mulai_po}}</dd>
+                                        <dd class="detail-description"> Close : {{$produk->tanggal_selesai_po}}</dd>
                                         @endif
                                     </div>
                                     <div class="detail-item">
@@ -289,61 +289,68 @@
                                         <dd class="detail-description">{{$produk->satuan_produk}}</dd>
                                     </div>
                                     @if($produk->tipe_produk == 'Produk Penitip')
-                                        <div class="detail-item">
-                                            <dt class="detail-title">Stock</dt>
-                                            <dd class="detail-description">{{$produk->stock_produk}}</dd>
-                                        </div>
+                                    <div class="detail-item">
+                                        <dt class="detail-title">Stock</dt>
+                                        <dd class="detail-description">{{$produk->stock_produk}}</dd>
+                                    </div>
                                     @endif
                                     @if($produk->tipe_produk == 'Produk Toko')
-                                        <div class="detail-item">
-                                            <dt class="detail-title">Kuota</dt>
-                                            <dd class="detail-description">{{$produk->kuota}}</dd>
-                                        </div>
-                                    @endif
                                     <div class="detail-item">
-                                        <dt class="detail-title">Total Bayar</dt>
-                                        <dd class="detail-description">Rp. 1.000.000</dd>
-                                        <div class="counter" style="margin-right: 10px;">
-                                            <button onclick="decrement()">-</button>
-                                            <span id="count">0</span>
-                                            <button onclick="increment()">+</button>
-                                        </div>
+                                        <dt class="detail-title">Kuota</dt>
+                                        <dd class="detail-description">{{$produk->kuota}}</dd>
                                     </div>
+                                    @endif
                             </div>
                             </dl>
                         </div>
                         <div class="detail-item">
-                            <a href="#" class="btn btn-add-cart">Add Cart</a>
+                            <a href="#" class="btn btn-add-cart" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Add Cart</a>
                         </div>
                         <div class="detail-item">
                             <a href="#" class="btn btn-buy-now">Buy Now</a>
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #AD343E;">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Cart</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{route('masukKeranjang.store')}}" onsubmit="return confirm('Apakah kamu yakin? Total Bayar yang akan kamu lihat adalah sebelum di masukkan ongkir oleh Admin')" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <input type="hidden" name="id_produk" value="{{ old('id_produk', $produk->id_produk) }}">
+                                        <label for="formFile" class="form-label">Nama Produk</label>
+                                        <input class="form-control" type="text" name="nama_produk" value="{{ old('nama_produk', $produk->nama_produk) }}" readonly>
+                                        <label for="formFile" class="form-label">Harga Produk</label>
+                                        <input class="form-control" type="number" name="harga_produk" value="{{ old('harga_produk', $produk->harga_produk) }}" readonly>
+                                        @if($produk->tipe_produk == 'Produk Penitip')
+                                        <label for="formFile" class="form-label">Stock Produk</label>
+                                        <input class="form-control" type="number" name="stock_produk" value="{{ old('stock_produk', $produk->stock_produk) }}" readonly>
+                                        @else
+                                        <label for="formFile" class="form-label">Kuota Produk</label>
+                                        <input class="form-control" type="number" name="kuota" value="{{ old('kuota', $produk->kuota) }}" readonly>
+                                        @endif
+                                        <label for="formFile" class="form-label">Jumlah Produk yang kamu inginkan?</label>
+                                        <input class="form-control" type="number" name="jumlah_produk" value="{{ old('jumlah_produk')}} " required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Masukkan Keranjang</button>
+                                </div>
+                            </form>
 
-
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
-
 </body>
 </div>
-
-<script>
-    let count = 0;
-
-    function increment() {
-        count++;
-        document.getElementById('count').innerText = count;
-    }
-
-    function decrement() {
-        if (count > 0) {
-            count--;
-            document.getElementById('count').innerText = count;
-        }
-    }
-</script>
 
 
 

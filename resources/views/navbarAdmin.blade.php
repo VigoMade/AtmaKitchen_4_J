@@ -51,6 +51,14 @@
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
+        .dropdown-toggle.active {
+            background-color: white !important;
+            border: 2px solid #AD343E !important;
+            color: #AD343E !important;
+            transform: scale(1.1);
+        }
+
+
 
         .nav-item .btn {
             background-color: transparent;
@@ -115,6 +123,18 @@
                         <a class="nav-link mx-2" href="{{route('history.index')}}">History Customer</a>
                     </li>
 
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="btn btn-rounded dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Konfirmasi
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Jarak</a></li>
+                                <li><a class="dropdown-item" href="#">Pembayaran</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <span style="margin-right: 10px;"></span>
                     <li class="nav-item ">
                         @if(auth()->guard('pegawai')->check())
                         <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
@@ -135,5 +155,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdownToggle = document.querySelector('.dropdown-toggle');
+
+        dropdownToggle.addEventListener('click', function() {
+            var btn = this;
+            if (!btn.classList.contains('active')) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    });
+</script>
 
 </html>

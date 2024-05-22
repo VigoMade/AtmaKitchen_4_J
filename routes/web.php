@@ -168,8 +168,10 @@ Route::delete('/alamat/{id_alamat}', [AlamatController::class, 'destroy'])->name
 Route::get('/createAlamat', [AlamatController::class, 'create'])->name('alamat.create');
 Route::put('/alamat/{id_alamat}', [AlamatController::class, 'update'])->name('alamat.update');
 Route::post('/storeAlamat', [AlamatController::class, 'store'])->name('alamat.store');
-
+Route::put('/alamatAktif/{id_alamat}', [AlamatController::class, 'setAktif'])->name('alamat.setAktif');
 Route::get('/alamat/{id_alamat}', [AlamatController::class, 'edit'])->name('alamat.edit');
+Route::get('/alamatSearch', [AlamatController::class, 'show'])->name('alamat.search');
 
 
-
+//Tambah Ke Keranjang
+Route::post('/masukKeranjang', [KatalogController::class, 'store'])->name('masukKeranjang.store');

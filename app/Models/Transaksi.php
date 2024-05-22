@@ -10,10 +10,12 @@ class Transaksi extends Model
     use HasFactory;
     protected $table = 'transaksi';
     protected $primaryKey = 'id_transaksi';
+    protected $keyType = "string";
     protected $foreignKey =  ['id_customer', 'id_pegawai', 'id_produk_fk', 'id_penitip_fk'];
     public $timestamps = false;
 
     protected $fillable = [
+        'id_transaksi',
         'jumlah_produk',
         'tanggal_transaksi',
         'tanggal_pembayaran',
@@ -24,6 +26,7 @@ class Transaksi extends Model
         'id_pegawai',
         'id_produk_fk',
         'id_penitip_fk',
+        'bukti_bayar',
     ];
 
     public function customer()

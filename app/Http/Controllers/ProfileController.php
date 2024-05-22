@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alamat;
 use App\Models\Customer;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,8 @@ class ProfileController extends Controller
     public function index()
     {
         $user = Auth::guard('customer')->user();
-        return view('Customer.profileCustomer', compact('user'));
+        $alamat = Alamat::where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
+        return view('Customer.profileCustomer', compact('user', 'alamat'));
     }
 
     public function edit($id)

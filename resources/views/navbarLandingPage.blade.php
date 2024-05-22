@@ -181,7 +181,7 @@
                     @endif
                     @if(auth()->guard('customer')->check())
                     <li class="nav-item {{ Request::routeIs('historyCustomer.*') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My History</a>
+                        <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My Transaction</a>
                     </li>
                     @endif
 
