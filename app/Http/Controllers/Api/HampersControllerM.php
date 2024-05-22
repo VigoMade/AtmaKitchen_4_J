@@ -16,7 +16,7 @@ class HampersControllerM extends Controller{
             // Memformat data produk
             $formattedProduks = $hampers->map(function ($hamper) {
                     return [
-                       'id_hampers' => $hamper->id_hampers ?? "",
+                       'id_hampers' => $hamper->id_hampers,
                        'harga_hampers' => $hamper->harga_hampers ?? "",
                        'deskripsi_hampers' => $hamper->deskripsi_hampers ?? "",
                        'nama_hampers' => $hamper->nama_hampers ?? "",
