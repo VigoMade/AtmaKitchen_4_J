@@ -3,7 +3,7 @@
 
 <style>
     body {
-        background-color: #F9F9F7;
+        background-color: #ede6e3;
     }
 
     .content-header {

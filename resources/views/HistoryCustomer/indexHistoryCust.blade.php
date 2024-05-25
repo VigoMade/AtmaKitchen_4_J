@@ -2,7 +2,7 @@
 @section('content')
 <style>
     body {
-        background-color: #F9F9F7;
+        background-color: #ede6e3;
     }
 
     .content-header {
@@ -38,15 +38,15 @@
     <div class="content-header">
         <div class="container-fluid">
             @if(session('error'))
-            <div id="errorAlert" class="alert alert-danger">
-                {{ session('error') }}
-            </div>
+                <div id="errorAlert" class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
             @endif
 
             @if(session('success'))
-            <div id="successAlert" class="alert alert-success">
-                {{ session('success') }}
-            </div>
+                <div id="successAlert" class="alert alert-success">
+                    {{ session('success') }}
+                </div>
             @endif
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -92,52 +92,53 @@
                                 <tbody>
                                     <tr>
                                         @forelse($user as $item)
-                                        <td class="text-center">{{$item->id_transaksi}}</td>
-                                        <td class="text-center">
-                                            @if($item->id_penitip_fk != null)
-                                            <img src="{{ Storage::url($item->penitip->image) }}" width="100px">
-                                            @else
-                                            <img src="{{ Storage::url($item->produk->image) }}" width="100px">
+                                                    <td class="text-center">{{$item->id_transaksi}}</td>
+                                                    <td class="text-center">
+                                                        @if($item->id_penitip_fk != null)
+                                                            <img src="{{ Storage::url($item->penitip->image) }}" width="100px">
+                                                        @else
+                                                            <img src="{{ Storage::url($item->produk->image) }}" width="100px">
 
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            @if($item->id_penitip_fk != null)
-                                            {{ $item->penitip->nama_produk_penitip}}
-                                            @else
-                                            {{ $item->produk->nama_produk}}
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            {{$item->total_pembayaran}}
-                                        </td>
-                                        <td class="text-center">
-                                            @if($item->status == 'Diterima')
-                                            <span class="badge badge-success">{{ $item->status }}</span>
-                                            @elseif($item->status == 'Ditolak')
-                                            <span class="badge badge-danger">{{ $item->status }}</span>
-                                            @elseif($item->status == 'Diproses')
-                                            <span class="badge badge-success">{{ $item->status }}</span>
-                                            @else
-                                            <span class="badge badge-secondary">{{ $item->status }}</span>
-                                            @endif
-                                        </td>
-                                        @if($item->status == 'Menunggu Pembayaran')
-                                        <td class="text-center">
-                                            <a href="{{route('transaksi.edit',$item->id_transaksi)}}" class="btn btn-primary">Bayar</a>
-                                        </td>
-                                        @else
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-secondary">Lihat Detail</a>
-                                        </td>
-                                        @endif
-                                    </tr>
-                                </tbody>
-                                @empty
-                                <div class="alert alert-danger">
-                                    Data History Customer belum tersedia
-                                </div>
-                                @endforelse
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if($item->id_penitip_fk != null)
+                                                            {{ $item->penitip->nama_produk_penitip}}
+                                                        @else
+                                                            {{ $item->produk->nama_produk}}
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{$item->total_pembayaran}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if($item->status == 'Diterima')
+                                                            <span class="badge badge-success">{{ $item->status }}</span>
+                                                        @elseif($item->status == 'Ditolak')
+                                                            <span class="badge badge-danger">{{ $item->status }}</span>
+                                                        @elseif($item->status == 'Diproses')
+                                                            <span class="badge badge-success">{{ $item->status }}</span>
+                                                        @else
+                                                            <span class="badge badge-secondary">{{ $item->status }}</span>
+                                                        @endif
+                                                    </td>
+                                                    @if($item->status == 'Menunggu Pembayaran')
+                                                        <td class="text-center">
+                                                            <a href="{{route('transaksi.edit', $item->id_transaksi)}}"
+                                                                class="btn btn-primary">Bayar</a>
+                                                        </td>
+                                                    @else
+                                                        <td class="text-center">
+                                                            <a href="#" class="btn btn-secondary">Lihat Detail</a>
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            </tbody>
+                                        @empty
+                                            <div class="alert alert-danger">
+                                                Data History Customer belum tersedia
+                                            </div>
+                                        @endforelse
                             </table>
                         </div>
                         {{$user->links()}}

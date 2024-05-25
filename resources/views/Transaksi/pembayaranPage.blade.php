@@ -3,7 +3,7 @@
 
 <style>
     body {
-        background-color: #F9F9F7;
+        background-color: #ede6e3;
     }
 
     .content-header {
@@ -49,7 +49,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('transaksi.update',$transaksi->id_transaksi)}}" method="POST" enctype="multipart/form-data">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                            action="{{route('transaksi.update', $transaksi->id_transaksi)}}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -59,30 +61,37 @@
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Alamat Ku </label>
-                                <input type="text" class="form-control" name="alamat_customer" value="{{ $alamat->alamat_customer }}" disabled>
+                                <input type="text" class="form-control" name="alamat_customer"
+                                    value="{{ $alamat->alamat_customer }}" disabled>
                                 <input type="hidden" name="jumlah_produk" value="{{ $alamat->alamat_customer }}">
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Produk</label>
-                                <input type="text" class="form-control" name="nama_produk" value="{{ $transaksi->nama_produk }}" disabled>
+                                <input type="text" class="form-control" name="nama_produk"
+                                    value="{{ $transaksi->nama_produk }}" disabled>
                                 <input type="hidden" name="nama_produk" value="{{ $transaksi->nama_produk }}">
                             </div>
                             <div class="form-group">
                                 <label class="font-weight-bold">Jumlah Produk</label>
-                                <input type="number" class="form-control" name="jumlah_produk" value="{{ $transaksi->jumlah_produk }}" disabled>
+                                <input type="number" class="form-control" name="jumlah_produk"
+                                    value="{{ $transaksi->jumlah_produk }}" disabled>
                                 <input type="hidden" name="jumlah_produk" value="{{ $transaksi->jumlah_produk }}">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label class="font-weight-bold">Total Harga</label>
-                                    <input type="number" class="form-control" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}" disabled>
-                                    <input type="hidden" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}">
+                                    <input type="number" class="form-control" name="total_pembayaran"
+                                        value="{{ $transaksi->total_pembayaran }}" disabled>
+                                    <input type="hidden" name="total_pembayaran"
+                                        value="{{ $transaksi->total_pembayaran }}">
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="font-weightbold">Upload Bukti Bayar</label>
-                                <input type="file" class="form-control" name="bukti_bayar" id="bukti_bayar" onchange="previewImage(event)">
-                                <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
+                                <input type="file" class="form-control" name="bukti_bayar" id="bukti_bayar"
+                                    onchange="previewImage(event)">
+                                <img id="image-preview" src="#" alt="Image Preview"
+                                    style="display: none; max-width: 100%; margin-top: 10px;">
                             </div>
                             <button type="submit" class="btn btn-md btn-primary d-block mx-auto">Bayar</button>
                         </form>
@@ -96,7 +105,7 @@
 <script>
     function previewImage(event) {
         const reader = new FileReader();
-        reader.onload = function() {
+        reader.onload = function () {
             const output = document.getElementById('image-preview');
             output.src = reader.result;
             output.style.display = 'block';
