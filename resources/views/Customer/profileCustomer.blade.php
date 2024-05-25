@@ -47,6 +47,11 @@
         background-color: #1A5276;
     }
 
+    .btn-green {
+        background-color: green;
+        color: white;
+        border: none;
+    }
 
 
     .isi {
@@ -90,9 +95,9 @@
                             <div class="col text-center">
                                 <div class="profil">
                                     @if ($user->image)
-                                    <img src="{{ Storage::url($user->image) }}" alt="profile">
+                                        <img src="{{ Storage::url($user->image) }}" alt="profile">
                                     @else
-                                    <img src="{{ asset('images/20240416153955.jpeg') }}" alt="default-profile">
+                                        <img src="{{ asset('images/20240416153955.jpeg') }}" alt="default-profile">
                                     @endif
                                 </div>
                             </div>
@@ -146,9 +151,9 @@
                             </div>
                             <div class="col-5">
                                 @if ($user->poin_customer == null)
-                                <p>0</p>
+                                    <p>0</p>
                                 @else
-                                <p>{{$user->poin_customer}}</p>
+                                    <p>{{$user->poin_customer}}</p>
                                 @endif
                             </div>
                         </div>
@@ -161,9 +166,9 @@
                             </div>
                             <div class="col-5">
                                 @if ($user->saldo_customer == null)
-                                <p>Rp . 0</p>
+                                    <p>Rp . 0</p>
                                 @else
-                                <p>Rp. {{$user->saldo_customer}}</p>
+                                    <p>Rp. {{$user->saldo_customer}}</p>
                                 @endif
                             </div>
                         </div>
@@ -176,35 +181,42 @@
                             </div>
                             <div class="col-5">
                                 @if (!$alamat)
-                                <div class="alert alert-danger" style="width: 380px; height:40px" role="alert">
-                                    <p class="text-center">Silahkan Set Alamat Aktif Terlebih Dahulu!</p>
-                                </div>
+                                    <div class="alert alert-danger" style="width: 380px; height:40px" role="alert">
+                                        <p class="text-center">Silahkan Set Alamat Aktif Terlebih Dahulu!</p>
+                                    </div>
                                 @else
-                                <p>{{$alamat->alamat_customer}}</p>
+                                    <p>{{$alamat->alamat_customer}}</p>
                                 @endif
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col text-center">
-                                <a class="btn btn-primary" style="text-decoration: none; color: white" href="{{route('customer.edit',$user->id_customer)}}">Edit</a>
+                                <a class="btn btn-primary" style="text-decoration: none; color: white"
+                                    href="{{route('customer.edit', $user->id_customer)}}">Edit</a>
+                                <a class="btn btn-success" style="text-decoration: none; color: white"
+                                    href="{{ url('/narikSaldo') }}">Tarik Saldo</a>
+
+
+
                             </div>
+
                         </div>
                         @if(session('error'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ session('error') }}
-                        </div>
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
                         @endif
 
                         @if(session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
                         @endif
 
                         @if(session('message'))
-                        <div class="alert alert-success" role="alert">
-                            {{session('message')}}
-                        </div>
+                            <div class="alert alert-success" role="alert">
+                                {{session('message')}}
+                            </div>
                         @endif
                     </div>
                 </div>

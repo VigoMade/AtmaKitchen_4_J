@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- Boostrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.18.0/font/bootstrap-icons.css">
@@ -163,9 +164,12 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light" style="background-color: #AD343E!important;">
         <div class="container">
-            <a class="navbar-brand" href="#"><img id="MDB-logo" src="{{ asset('images/logo4.png') }}" alt="MDB Logo" draggable="false" /></a>
+            <a class="navbar-brand" href="#"><img id="MDB-logo" src="{{ asset('images/logo4.png') }}" alt="MDB Logo"
+                    draggable="false" /></a>
             <h1>Atma Kitchen</h1>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <i class="fas fa-bars" style="color: white;"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -200,33 +204,41 @@
                     </li>
 
                     @if(auth()->guard('customer')->check())
-                    <li class="nav-item {{ Request::routeIs('customer.*') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{route('customer.index')}}">My Profile</a>
-                    </li>
+                        <li class="nav-item {{ Request::routeIs('customer.*') ? 'active' : '' }}">
+                            <a class="nav-link mx-2" href="{{route('customer.index')}}">My Profile</a>
+                        </li>
                     @endif
                     @if(auth()->guard('customer')->check())
-                    <li class="nav-item {{ Request::routeIs('alamat.*') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{route('alamat.index')}}">My Address</a>
-                    </li>
+                        <li class="nav-item {{ Request::routeIs('alamat.*') ? 'active' : '' }}">
+                            <a class="nav-link mx-2" href="{{route('alamat.index')}}">My Address</a>
+                        </li>
                     @endif
                     @if(auth()->guard('customer')->check())
-                    <li class="nav-item {{ Request::routeIs('historyCustomer.*') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My Transaction</a>
-                    </li>
+                        <li class="nav-item {{ Request::routeIs('historyCustomer.*') ? 'active' : '' }}">
+                            <a class="nav-link mx-2" href="{{route('historyCustomer.index')}}">My Transaction</a>
+                        </li>
+                    @endif
+                    @if(auth()->guard('customer')->check())
+                        <li class="nav-item {{ Request::is('indexHistorySaldo') ? 'active' : '' }}">
+                            <a class="nav-link mx-2" href="{{ url('/indexHistorySaldo') }}">History Saldo</a>
+                        </li>
                     @endif
 
+
                     @if(auth()->guard('customer')->check())
-                    <li class="nav-item {{ Request::routeIs('transaksi.*') ? 'active' : '' }}">
-                        <a class="btn btn-rounded" href="{{route('transaksi.index')}}"> Cart <img src="{{ asset('images/cart.png') }}" alt="Deskripsi Gambar" style="margin-right: 5px; width: 20px;">
-                        </a>
-                    </li>
+                        <li class="nav-item {{ Request::routeIs('transaksi.*') ? 'active' : '' }}">
+                            <a class="btn btn-rounded" href="{{route('transaksi.index')}}"> Cart <img
+                                    src="{{ asset('images/cart.png') }}" alt="Deskripsi Gambar"
+                                    style="margin-right: 5px; width: 20px;">
+                            </a>
+                        </li>
                     @endif
                     <span style="margin-right: 10px;"></span>
                     <li class="nav-item ">
                         @if(auth()->guard('customer')->check())
-                        <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
+                            <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
                         @else
-                        <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
+                            <a class="btn btn-rounded" href="{{url('/login')}}">Sign in</a>
                         @endif
                     </li>
                 </ul>
@@ -238,8 +250,9 @@
         @yield('content')
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
 </body>
 
 <footer class="w-100 foot">
@@ -247,8 +260,10 @@
         <div class="row gy-4 gx-5">
             <div class="col-lg-4 col-md-6">
                 <h5 class="h1 text-white">Atma Kitchen</h5>
-                <p class="small text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                <p class="small text-white mb-0">&copy; 2024. All rights reserved. <a href="#" class="footer-link">Bootstrapious.com</a></p>
+                <p class="small text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt.</p>
+                <p class="small text-white mb-0">&copy; 2024. All rights reserved. <a href="#"
+                        class="footer-link">Bootstrapious.com</a></p>
             </div>
             <div class="col-lg-2 col-md-6">
                 <h5 class="text-white mb-3">Quick links</h5>
@@ -273,8 +288,10 @@
                 <p class="small text-white">Stay updated with our latest news and offers.</p>
                 <form action="#">
                     <div class="input-group mb-3">
-                        <input class="form-control" type="email" placeholder="Your email" aria-label="Your email" aria-describedby="button-addon2">
-                        <button class="btn btn-primary" id="button-addon2" type="button"><i class="fas fa-paper-plane"></i></button>
+                        <input class="form-control" type="email" placeholder="Your email" aria-label="Your email"
+                            aria-describedby="button-addon2">
+                        <button class="btn btn-primary" id="button-addon2" type="button"><i
+                                class="fas fa-paper-plane"></i></button>
                     </div>
                 </form>
                 <div class="social-icons">

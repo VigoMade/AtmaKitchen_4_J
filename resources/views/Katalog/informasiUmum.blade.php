@@ -123,10 +123,13 @@
     </button>
   </div>
 
-  <h2 style="text-align: center; margin-top: 20px; text-decoration: underline; text-decoration-style: solid;"><b>OUR
-      CATEGORIES</b></h2>
+  <h2
+    style="text-align: center; margin-top: 20px; text-decoration: underline; text-decoration-style: solid; margin-bottom: 60px;">
+    <b>OUR
+      CATEGORIES</b>
+  </h2>
 
-  <div class="container">
+  <div class="container" style="margin-bottom: 80px;">
     <div class="d-flex justify-content-center">
       <div id="breadCard" class="card mx-2" style="width: 20rem; cursor: pointer;">
         <div class="card-body">

@@ -105,6 +105,18 @@ Route::get('/indexKonfirmasi', function () {
 Route::get('/indexKonfirmasiAdmin', function () {
     return view('AdminKonfirmasi.indexKonfirmasiAdmin');
 });
+Route::get('/indexHistorySaldo', function () {
+    return view('HistoryCustomer.indexHistorySaldo');
+});
+
+Route::get('/narikSaldo', function () {
+    return view('Customer.narikSaldo');
+});
+
+Route::get('/indexKonfirmasiSaldo', function () {
+    return view('AdminKonfirmasi.indexKonfirmasiSaldo');
+})->name('indexKonfirmasiSaldo');
+
 
 
 
