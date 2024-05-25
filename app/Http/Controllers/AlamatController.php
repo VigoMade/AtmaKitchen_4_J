@@ -113,6 +113,7 @@ class AlamatController extends Controller
         $transaksi = DB::table('transaksi as t')
             ->leftJoin('produk as p', 't.id_produk_fk', '=', 'p.id_produk')
             ->leftJoin('penitip as pn', 'p.id_penitip', '=', 'pn.id_penitip')
+            ->leftJoin('hampers as h', 't.id_hampers', '=', 'h.id_hampers')
             ->leftJoin('alamat_customer as a', function ($join) {
                 $join->on('t.id_alamat', '=', 'a.id_alamat')
                     ->where('a.alamat_aktif', '=', 1);
@@ -125,8 +126,10 @@ class AlamatController extends Controller
                 't.jarak',
                 'a.alamat_customer',
                 't.status',
-                DB::raw('COALESCE(p.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
-                DB::raw('COALESCE(p.image, pn.image) AS image'),
+                'h.deskripsi_hampers',
+                'h.id_hampers',
+                DB::raw('COALESCE(h.nama_hampers,p.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
+                DB::raw('COALESCE(h.image,p.image, pn.image) AS image'),
                 'pn.nama_penitip'
             )->where(
                 't.status',

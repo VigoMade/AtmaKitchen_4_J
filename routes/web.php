@@ -12,6 +12,7 @@ use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\KonfirmasiPembayaranController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembelianBBController;
@@ -170,8 +171,11 @@ Route::get('/historyCustomer/search', [HistoryCustomerController::class, 'search
 
 //Informari
 Route::get('/informasiProduk', [KatalogController::class, 'index'])->name('landingPageCustomer');
+Route::get('/showByTanggal', [KatalogController::class, 'showByTanggal'])->name('showByTanggal');
 Route::get('/informasiProduk/{jenis_produk}', [KatalogController::class, 'show'])->name('informasiProduk.show');
 Route::get('/detailProduk/{id_produk}', [KatalogController::class, 'showById'])->name('detailProduk.showById');
+Route::get('/showHampers', [KatalogController::class, 'showHampers'])->name('showHampers');
+Route::get('/showHampers/{id_hampers}', [KatalogController::class, 'showHampersById'])->name('showHampers.showByIdHampers');
 
 //TransCust
 Route::resource('/transaksi', TransaksiController::class);
@@ -187,6 +191,9 @@ Route::get('/alamatSearch', [AlamatController::class, 'show'])->name('alamat.sea
 
 //Tambah Ke Keranjang
 Route::post('/masukKeranjang', [KatalogController::class, 'store'])->name('masukKeranjang.store');
+Route::post('/masukBuy', [KatalogController::class, 'storeBuy'])->name('masukBuy.storeBuy');
+Route::post('/masukKeranjangHampers/{id_hampers}', [KatalogController::class, 'storeHampers'])->name('masukKeranjangHampers.store');
+Route::post('/masukBuyHampers/{id_hampers}', [KatalogController::class, 'storeHampersBuy'])->name('masukBuyHampers.storeBuy');
 
 
 Route::get('/indexJarak', [AlamatController::class, 'indexJarak'])->name('indexJarak');
@@ -204,3 +211,10 @@ Route::get('/indexKonfirmasi', [KonfirmasiController::class, 'index'])->name('in
 Route::put('/reject/{id}', [KonfirmasiController::class, 'reject'])->name('reject');
 Route::put('/accept/{id}', [KonfirmasiController::class, 'accept'])->name('accept');
 Route::put('/prosses/{id}', [KonfirmasiController::class, 'progress'])->name('prosses');
+Route::put('/pickup/{id}', [KonfirmasiController::class, 'pickUp'])->name('pickUp');
+Route::put('/send/{id}', [KonfirmasiController::class, 'send'])->name('send');
+Route::put('/done/{id}', [KonfirmasiController::class, 'done'])->name('done');
+Route::put('/pickUpDone/{id}', [KonfirmasiController::class, 'pickUpDone'])->name('pickUpDone');
+
+//nota
+Route::get('/nota/{id_transaksi}', [NotaController::class, 'index'])->name('nota');

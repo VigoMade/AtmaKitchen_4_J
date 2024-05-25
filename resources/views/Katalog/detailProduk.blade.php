@@ -253,6 +253,11 @@
         <div class="center-container">
             <h2 style="text-decoration: underline;"><b>Our Menu</b></h2>
             <div class="container">
+                @if(session('error'))
+                <div id="errorAlert" class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <div class="card mt-4">
                     <div class="card-body">
                         <div class="grid">
@@ -307,10 +312,11 @@
                             <a href="#" class="btn btn-add-cart" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Add Cart</a>
                         </div>
                         <div class="detail-item">
-                            <a href="#" class="btn btn-buy-now">Buy Now</a>
+                            <a href="#" class="btn btn-buy-now" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Buy Now</a>
                         </div>
                     </div>
                 </div>
+                <!-- Modal 1 -->
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -341,6 +347,48 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Masukkan Keranjang</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal 2 -->
+                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #AD343E;">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail Cart</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="{{route('masukBuy.storeBuy')}}" onsubmit="return confirm('Apakah kamu yakin? Total Bayar yang akan kamu lihat adalah sebelum di masukkan ongkir oleh Admin')" method="POST">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <input type="hidden" name="id_produk" value="{{ old('id_produk', $produk->id_produk) }}">
+                                        <label for="formFile" class="form-label">Nama Produk</label>
+                                        <input class="form-control" type="text" name="nama_produk" value="{{ old('nama_produk', $produk->nama_produk) }}" readonly>
+                                        <label for="formFile" class="form-label">Harga Produk</label>
+                                        <input class="form-control" type="number" name="harga_produk" value="{{ old('harga_produk', $produk->harga_produk) }}" readonly>
+                                        @if($produk->tipe_produk == 'Produk Penitip')
+                                        <label for="formFile" class="form-label">Stock Produk</label>
+                                        <input class="form-control" type="number" name="stock_produk" value="{{ old('stock_produk', $produk->stock_produk) }}" readonly>
+                                        @else
+                                        <label for="formFile" class="form-label">Kuota Produk</label>
+                                        <input class="form-control" type="number" name="kuota" value="{{ old('kuota', $produk->kuota) }}" readonly>
+                                        @endif
+                                        <label for="formFile" class="form-label">Jumlah Produk yang kamu inginkan?</label>
+                                        <input class="form-control" type="number" name="jumlah_produk" value="{{ old('jumlah_produk') }}" required>
+                                        @error('jumlah_produk')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Buy Now</button>
                                 </div>
                             </form>
 

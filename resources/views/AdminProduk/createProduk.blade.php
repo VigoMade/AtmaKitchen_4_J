@@ -43,17 +43,17 @@
             </div>
         </div>
     </div>
- @if(session('error'))
-                            <div id="errorAlert" class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                            @endif
+    @if(session('error'))
+    <div id="errorAlert" class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
 
-                            @if(session('success'))
-                            <div id="successAlert" class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                            @endif
+    @if(session('success'))
+    <div id="successAlert" class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -144,7 +144,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6" class="form-group" id="tanggal_mulai_po" style="display: none;">
                                             <label>Tanggal Mulai PO</label>
-                                            <input type="datetime-local" class="form-control @error('tanggal_mulai_po') is-invalid @enderror" name="tanggal_mulai_po" value="{{ old('tanggal_mulai_po') }}" placeholder="Masukkan Tanggal Mulai PO">
+                                            <input type="date" class="form-control @error('tanggal_mulai_po') is-invalid @enderror" name="tanggal_mulai_po" value="{{ old('tanggal_mulai_po') }}" placeholder="Masukkan Tanggal Mulai PO">
                                             @error('tanggal_mulai_po')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -152,7 +152,7 @@
 
                                         <div class="form-group col-md-6" class="form-group" id="tanggal_selesai_po" style="display: none;">
                                             <label>Tanggal Selesai PO</label>
-                                            <input type="datetime-local" class="form-control @error('tanggal_selesai_po') is-invalid @enderror" name="tanggal_selesai_po" value="{{ old('tanggal_selesai_po') }}" placeholder="Masukkan Tanggal Selesai PO">
+                                            <input type="date" class="form-control @error('tanggal_selesai_po') is-invalid @enderror" name="tanggal_selesai_po" value="{{ old('tanggal_selesai_po') }}" placeholder="Masukkan Tanggal Selesai PO">
                                             @error('tanggal_selesai_po')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
