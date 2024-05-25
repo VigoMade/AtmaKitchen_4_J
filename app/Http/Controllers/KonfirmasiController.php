@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BahanBaku;
 use App\Models\Customer;
 use App\Models\Pemasukan;
 use App\Models\Produk;
@@ -20,6 +21,7 @@ class KonfirmasiController extends Controller
             ->leftJoin('produk as pr', 't.id_produk_fk', '=', 'pr.id_produk')
             ->leftJoin('penitip as pn', 'pr.id_penitip', '=', 'pn.id_penitip')
             ->leftJoin('customer as c', 't.id_customer', '=', 'c.id_customer')
+            ->leftJoin('hampers as h', 't.id_hampers', '=', 'h.id_hampers')
             ->leftJoin('alamat_customer as a', function ($join) {
                 $join->on('a.id_customer', '=', 't.id_customer')
                     ->where('a.alamat_aktif', '=', 1);
@@ -34,12 +36,17 @@ class KonfirmasiController extends Controller
                 't.bukti_bayar',
                 'a.alamat_customer',
                 'c.nama AS nama_customer',
-                DB::raw('COALESCE(pr.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
-                DB::raw('COALESCE(pr.image, pn.image) AS image')
+                'h.deskripsi_hampers',
+                'h.id_hampers',
+                DB::raw('COALESCE(h.nama_hampers, pr.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
+                DB::raw('COALESCE(h.image, pr.image, pn.image) AS image')
             )
-            ->whereIn('t.status', ['Pembayaran valid', 'Diterima'])
+            ->whereIn('t.status', ['Pembayaran valid', 'Diterima', 'Diproses', 'Siap dipickup', 'Sedang dikirim kurir'])
             ->paginate(5);
-        return view('MOKonfirmasi.indexKonfirmasi', compact('transaksi'));
+
+        $bahanBaku = BahanBaku::where('takaran_bahan_baku_tersedia', '<=', 10)->paginate(5);
+
+        return view('MOKonfirmasi.indexKonfirmasi', compact('transaksi', 'bahanBaku'));
     }
 
     public function reject($id)
@@ -118,8 +125,10 @@ class KonfirmasiController extends Controller
             if ($diffInDays >= -3 && $diffInDays <= 3) {
                 $poin *= 2;
             }
+
             $customer->poin_customer += $poin;
             $customer->save();
+            $transaksi->poin_bonus = $poin;
             $transaksi->status = 'Diterima';
             $transaksi->save();
 
@@ -137,8 +146,76 @@ class KonfirmasiController extends Controller
                 ->where('tanggal_pembayaran', $pemasukan->transaksi->tanggal_pembayaran)
                 ->firstOrFail();
             $transaksi->status = 'Diproses';
+            $produk = Produk::find($transaksi->id_produk_fk);
+            if ($produk) {
+                if ($produk->id_penitip) {
+                    $produk->stock_produk -= $transaksi->jumlah_produk;
+                } else {
+                    $produk->kuota -= $transaksi->jumlah_produk;
+                }
+                $produk->save();
+            }
+
             $transaksi->save();
             return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
+        }
+    }
+
+    public function pickUp($id)
+    {
+        try {
+            $pemasukan = Pemasukan::findOrFail($id);
+            $transaksi = Transaksi::where('id_transaksi', $pemasukan->id_transaksi_fk)
+                ->where('tanggal_pembayaran', $pemasukan->transaksi->tanggal_pembayaran)
+                ->firstOrFail();
+            $transaksi->status = 'Siap dipickup';
+            $transaksi->save();
+            return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
+        }
+    }
+
+    public function send($id)
+    {
+        try {
+            $pemasukan = Pemasukan::findOrFail($id);
+            $transaksi = Transaksi::where('id_transaksi', $pemasukan->id_transaksi_fk)
+                ->where('tanggal_pembayaran', $pemasukan->transaksi->tanggal_pembayaran)
+                ->firstOrFail();
+            $transaksi->status = 'Sedang dikirim kurir';
+            $transaksi->save();
+            return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
+        }
+    }
+
+    public function pickUpDone($id)
+    {
+        try {
+            $pemasukan = Pemasukan::findOrFail($id);
+            $transaksi = Transaksi::where('id_transaksi', $pemasukan->id_transaksi_fk)
+                ->where('tanggal_pembayaran', $pemasukan->transaksi->tanggal_pembayaran)
+                ->firstOrFail();
+            $transaksi->status = 'Sudah dipickup';
+            $transaksi->save();
+            return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
+        }
+    }
+
+    public function done($id_transaksi)
+    {
+        try {
+            $transaksi = Transaksi::where('id_transaksi', $id_transaksi)->first();
+            $transaksi->status = 'Selesai';
+            $transaksi->tanggal_selesai = Carbon::now();
+            $transaksi->save();
+            return redirect()->route('historyCustomer.index')->with('success', 'Transaksi berhasil Selesai.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
         }

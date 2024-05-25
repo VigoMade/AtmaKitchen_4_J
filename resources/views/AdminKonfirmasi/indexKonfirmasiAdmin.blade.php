@@ -103,10 +103,7 @@
                                             <td class="text-center">Rp. {{$data->total_pembayaran}}</td>
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{route('konfirmasiPembayaran.create', $data->id_transaksi)}}" class="btn btn-sm btn-primary">Lihat Detail</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
+                                                    <a href="{{route('konfirmasiPembayaran.create', $data->id_transaksi)}}" class="btn btn-sm btn-primary" type="submit">Lihat Detail</a>
                                                 </form>
                                             </td>
                                         </tr>

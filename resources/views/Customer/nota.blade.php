@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice</title>
+    <title>Invoice - Atma Kitchen</title>
+    <link rel="icon" href="{{ asset('images/logo4.png') }}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,46 +86,67 @@
                 <p>Jl. Raya Abadai, Sleman, Yogyakarta</p>
             </div>
             <div class="invoice-details">
-                <p>No Nota : 12345</p>
-                <p>Tanggal Pesan : 2024-05-19</p>
-                <p>Lunas Pada : 2024-06-19</p>
-                <p>Tanggal ambil : 2024-06-19</p>
+                <p>No Nota : {{$transaksi->id_transaksi}}</p>
+                <p>Tanggal Pesan : {{$transaksi->tanggal_transaksi}}</p>
+                <p>Lunas Pada : {{$transaksi->tanggal_pembayaran}}</p>
+                <p>Tanggal ambil : {{$transaksi->tanggal_selesai}}</p>
 
             </div>
         </div>
 
         <div class="invoice-body">
             <div class="billing-details">
-                <h3>Customer: maharaniwatuwaya@gmail/maharanie</h3>
-                <p>Jl. Raya Janti No. 34, Caturtunggal, Depok, Sleman</p>
+                <h3>Customer: {{$user->email}}/{{$user->nama}}</h3>
+                <p>{{$alamat->alamat_customer}}</p>
                 <p>Deliver : Kurir Yummy</p>
 
 
             </div>
             <div class="item">
-                <div>1 Hampers Paket A</div>
-                <div>: 650.000</div>
-                <div>1 Keripik Kentang</div>
-                <div>: 200.000</div>
+                <div>{{$transaksi->nama_produk}}</div>
+                <div>: Rp. {{$transaksi->harga_produk}}</div>
             </div>
             <div class="item">
                 <div>Total</div>
-                <div>: 850.000</div>
+                <div>: Rp. {{$transaksi->harga_produk}}</div>
                 <div>Ongkos Kirim (rad.5 Km)</div>
-                <div>: 10.000</div>
+                <div>: Rp. {{$transaksi->ongkos_kirim}}</div>
                 <div>Total</div>
-                <div>: 860.000</div>
-                <div>Potongan 120 poin </div>
-                <div>: -12.000</div>
+                <div>: Rp. {{$transaksi->total_pembayaran_baru}}</div>
+                <div>
+                    @if($transaksi->poin_digunakan == 0)
+                    Potongan 0 poin
+                    @else
+                    Potongan {{$transaksi->poin_digunakan}} poin
+                    @endif
+                </div>
+                <div>:
+                    @if($transaksi->poin_digunakan == null)
+                    0
+                    @else
+                    - Rp. {{$transaksi->poin_dipake}}
+                    @endif
+                </div>
                 <div>Total </div>
-                <div>: 858.000</div>
+                <div>:
+                    @if($transaksi->poin_digunakan == null)
+                    0
+                    @else
+                    Rp. {{$transaksi->total_setelah_diskon}}
+                    @endif
+                </div>
             </div>
 
             <div class="item">
                 <div>Poin dari pesanan ini</div>
-                <div>: 106</div>
+                <div>: @if($transaksi->poin_bonus == null)
+                    0
+                    @else
+                    {{$transaksi->poin_bonus}}
+                    @endif
+                </div>
                 <div>Total Poin Customer</div>
-                <div>: 210</div>
+                <div>: {{$user->poin_customer}}</div>
             </div>
 
             <div class="invoice-footer">

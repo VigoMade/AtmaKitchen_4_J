@@ -49,16 +49,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('transaksi.update',$transaksi->id_transaksi)}}" method="POST" enctype="multipart/form-data">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('transaksi.update', $transaksi->id_transaksi) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label class="font-weight-bold">Nama </label>
+                                <label class="font-weight-bold">Nama</label>
                                 <input type="text" class="form-control" name="nama" value="{{ $user->nama }}" disabled>
                                 <input type="hidden" name="nama" value="{{ $user->nama }}">
                             </div>
                             <div class="form-group">
-                                <label class="font-weight-bold">Alamat Ku </label>
+                                <label class="font-weight-bold">Alamat Ku</label>
                                 <input type="text" class="form-control" name="alamat_customer" value="{{ $alamat->alamat_customer }}" disabled>
                                 <input type="hidden" name="jumlah_produk" value="{{ $alamat->alamat_customer }}">
                             </div>
@@ -75,16 +75,33 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label class="font-weight-bold">Total Harga</label>
-                                    <input type="number" class="form-control" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}" disabled>
-                                    <input type="hidden" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}">
+                                    <input type="number" class="form-control" id="total_pembayaran" name="total_pembayaran" value="{{ $transaksi->total_pembayaran }}" readonly>
+                                    <input type="hidden" id="total_pembayaran_asli" value="{{ $transaksi->total_pembayaran }}">
                                 </div>
                             </div>
+                            @if($transaksi->status == 'Menunggu Pembayaran')
                             <div class="form-group col-md-12">
-                                <label class="font-weightbold">Upload Bukti Bayar</label>
+                                <label class="font-weight-bold">Poin Kamu Sekarang : {{ $user->poin_customer }}</label>
+                                <input type="number" class="form-control @error('poin_digunakan') is-invalid @enderror" name="poin_digunakan" id="poin_digunakan" value="{{ old('poin_digunakan') }}" placeholder="Masukkan Poin yang mau kamu gunakan">
+                                @error('poin_digunakan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                            @endif
+                            @if($transaksi->status == 'Menunggu Pembayaran')
+                            <div class="form-group col-md-12">
+                                <label class="font-weight-bold">Upload Bukti Bayar</label>
                                 <input type="file" class="form-control" name="bukti_bayar" id="bukti_bayar" onchange="previewImage(event)">
                                 <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; margin-top: 10px;">
                             </div>
+                            @endif
+                            @if($transaksi->status == 'Di Keranjang' || $transaksi->status == 'Perlu Jarak')
+                            <button type="submit" class="btn btn-md btn-primary d-block mx-auto">Beli</button>
+                            @else
                             <button type="submit" class="btn btn-md btn-primary d-block mx-auto">Bayar</button>
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -103,6 +120,13 @@
         }
         reader.readAsDataURL(event.target.files[0]);
     }
+
+    document.getElementById('poin_digunakan').addEventListener('input', function() {
+        const poin = parseInt(this.value) || 0;
+        const totalPembayaranAsli = parseInt(document.getElementById('total_pembayaran_asli').value);
+        const totalPembayaran = totalPembayaranAsli - (poin * 100);
+        document.getElementById('total_pembayaran').value = totalPembayaran;
+    });
 </script>
 
 @endsection

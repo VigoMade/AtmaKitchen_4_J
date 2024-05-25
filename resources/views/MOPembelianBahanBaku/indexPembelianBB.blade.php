@@ -88,6 +88,7 @@
                                             <th class="text-center">Penambahan Bahan Baku</th>
                                             <th class="text-center">Jumlah Stock Bahan Baku</th>
                                             <th class="text-center">Tanggal Pembelian Bahan Baku</th>
+                                            <th class="text-center">Status Bahan Baku</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
@@ -99,6 +100,13 @@
                                             <td class="text-center">{{$item->jumlah_bb_dibeli}}</td>
                                             <td class="text-center">{{$item->bahanBaku->takaran_bahan_baku_tersedia}}</td>
                                             <td class="text-center">{{$item->tanggal_pembelian}}</td>
+                                            <td class="text-center">
+                                                @if($item->bahanBaku->status_bb == 'Tersedia')
+                                                <span class="badge text-bg-success">{{$item->bahanBaku->status_bb}}</span>
+                                                @else
+                                                <span class="badge text-bg-danger"> {{$item->bahanBaku->status_bb}}</span>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('pembelianBB.destroy',$item->id_pembelian)}}" method="POST">
                                                     <a href="{{route('pembelianBB.edit',$item->id_pembelian)}}" class="btn btn-sm btn-primary">EDIT</a>
