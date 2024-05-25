@@ -3,8 +3,9 @@
 <style>
     .container-isi {
         width: 80%;
-        height: 75%;
         margin-top: 50px;
+        margin-bottom: 50px;
+        /* Tambahkan margin bawah */
     }
 
     .box-image {
@@ -12,37 +13,44 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100%;
+        height: 50%;
     }
 
-    .box-image img {
-        margin-bottom: 10px;
+
+
+    .card {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .container-isi {
+        min-height: 50vh;
     }
 </style>
 
-<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
+<div class="d-flex justify-content-center align-items-center" style="min-height: 90vh;">
 
     <div class="container-isi">
         @if(session('error'))
-        <div id="errorAlert" class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        <script>
-            setTimeout(function() {
-                document.getElementById('errorAlert').style.display = 'none';
-            }, 5000);
-        </script>
+            <div id="errorAlert" class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+            <script>
+                setTimeout(function () {
+                    document.getElementById('errorAlert').style.display = 'none';
+                }, 5000);
+            </script>
         @endif
 
         @if(session('success'))
-        <div id="successAlert" class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        <script>
-            setTimeout(function() {
-                document.getElementById('successAlert').style.display = 'none';
-            }, 5000);
-        </script>
+            <div id="successAlert" class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            <script>
+                setTimeout(function () {
+                    document.getElementById('successAlert').style.display = 'none';
+                }, 5000);
+            </script>
         @endif
         @forelse($transaksi as $trans)
         <div class="card mb-3" style="max-width: 100%;">
@@ -90,14 +98,13 @@
                 @endif
 
             </div>
-        </div>
         @empty
-        <div class="box-image">
-            <img src="{{ asset('images/no_data.png') }}" width="50%" alt="">
-            <div class="alert alert-danger w-100 text-center" role="alert">
-                Kamu Belum Beli Apa-apa!
+            <div class="box-image">
+                <img src="{{ asset('images/no_data.png') }}" width="50%" alt="">
+                <div class="alert alert-danger w-100 text-center" role="alert">
+                    Kamu Belum Beli Apa-apa!
+                </div>
             </div>
-        </div>
         @endforelse
         {{$transaksi->links()}}
     </div>
