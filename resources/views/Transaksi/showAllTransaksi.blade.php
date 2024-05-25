@@ -116,7 +116,6 @@
         </div>
         @endforelse
     </div>
-    {{$transaksi->links()}}
 </div>
-
+{{$transaksi->links()}}
 @endsection
