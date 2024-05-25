@@ -52,6 +52,20 @@
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
+        .nav-item:hover .nav-link:not(.dropdown-item) {
+            transform: scale(1.1);
+            color: #F59794;
+        }
+
+        .dropdown-menu .dropdown-item {
+            transition: none;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            color: #AD343E !important;
+        }
+
+
 
         .nav-item .btn {
             background-color: transparent;
@@ -163,9 +177,25 @@
                     <li class="nav-item {{ Request::routeIs('landingPageCustomer') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('landingPageCustomer') }}">Home</a>
                     </li>
-                    <li class="nav-item {{ Request::is('informasiUmum') ? 'active' : '' }}">
-                        <a class="nav-link mx-2" href="{{route('informasiUmum')}}">Menu</a>
-                    </li>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color:white;">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: #AD343E;">
+                            <li class="nav-item {{ Request::is('informasiUmum') ? 'active' : '' }}">
+                                <a class="dropdown-item" href="{{route('informasiUmum')}}" style="color: white;">Menu</a>
+                            </li>
+                            <li>
+                                <form action="{{route('showByTanggal')}}" method="GET" class="dropdown-item" style="color: white;">
+                                    @csrf
+                                    <label for="tanggal" class="form-label" style="font-weight: normal;">Pilih Tanggal:</label>
+                                    <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+                                    <button type="submit" class="btn btn-primary">Cek Kuota</button>
+                                </form>
+                            </li>
+                        </ul>
+
+                    </div>
                     <li class="nav-item {{ Request::is('store') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{route('store')}}">Store</a>
                     </li>

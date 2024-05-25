@@ -19,6 +19,7 @@ class Transaksi extends Model
         'jumlah_produk',
         'tanggal_transaksi',
         'tanggal_pembayaran',
+        'tanggal_selesai',
         'total_pembayaran',
         'status',
         'ongkos_kirim',
@@ -28,7 +29,10 @@ class Transaksi extends Model
         'id_penitip_fk',
         'bukti_bayar',
         'jarak',
-        'id_alamat'
+        'id_alamat',
+        'id_hampers',
+        'poin_digunakan',
+        'poin_bonus',
     ];
 
     public function customer()
@@ -54,5 +58,10 @@ class Transaksi extends Model
     public function jarak()
     {
         return $this->belongsTo(Alamat::class, 'id_alamat');
+    }
+
+    public function hampers()
+    {
+        return $this->belongsTo(Hampers::class, 'id_hampers');
     }
 }
