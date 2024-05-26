@@ -162,7 +162,8 @@ class KatalogController extends Controller
                 'jumlah_produk' => 'required',
             ]
         );
-
+        $user = Auth::guard('customer')->user();
+        $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
         $produk = Produk::find($request->id_produk);
         if ($produk->tipe_produk === 'Produk Penitip') {
             $this->validate($request, [
@@ -183,7 +184,7 @@ class KatalogController extends Controller
         $year = Carbon::now()->format('y');
         $month = Carbon::now()->format('m');
         $index = Transaksi::count() + 1;
-
+        $input['id_alamat'] = $alamat->id_alamat;
         $input['total_pembayaran']
             = $request->jumlah_produk * $request->harga_produk;
         $input['jumlah_produk'] = $request->jumlah_produk;
@@ -214,6 +215,8 @@ class KatalogController extends Controller
     public function storeHampers(Request $request, $id)
     {
         $hampers = Hampers::find($id);
+        $user = Auth::guard('customer')->user();
+        $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
         $this->validate(
             $request,
             [
@@ -221,6 +224,7 @@ class KatalogController extends Controller
             ]
         );
         $input['id_customer'] = Auth::guard('customer')->id();
+        $input['id_alamat'] = $alamat->id_alamat;
         $year = Carbon::now()->format('y');
         $month = Carbon::now()->format('m');
         $index = Transaksi::count() + 1;
@@ -250,6 +254,8 @@ class KatalogController extends Controller
     public function storeHampersBuy(Request $request, $id)
     {
         $hampers = Hampers::find($id);
+        $user = Auth::guard('customer')->user();
+        $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
         $this->validate(
             $request,
             [
@@ -257,6 +263,7 @@ class KatalogController extends Controller
             ]
         );
         $input['id_customer'] = Auth::guard('customer')->id();
+        $input['id_alamat'] = $alamat->id_alamat;
         $year = Carbon::now()->format('y');
         $month = Carbon::now()->format('m');
         $input['tanggal_transaksi'] = Carbon::now();
