@@ -30,13 +30,14 @@ class NotaController extends Controller
                 'h.deskripsi_hampers',
                 'h.id_hampers',
                 't.status',
-                DB::raw('COALESCE(h.harga_hampers,p.harga_produk) AS harga_produk'),
-                DB::raw('COALESCE(h.nama_hampers,p.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
-                DB::raw('COALESCE(h.image,p.image, pn.image) AS image'),
+                DB::raw('COALESCE(h.harga_hampers, p.harga_produk) AS harga_produk'),
+                DB::raw('COALESCE(h.nama_hampers, p.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
+                DB::raw('COALESCE(h.image, p.image, pn.image) AS image'),
                 'pn.nama_penitip',
-                DB::raw('(COALESCE(h.harga_hampers,p.harga_produk) + t.ongkos_kirim) AS total_pembayaran_baru'),
+                DB::raw('(COALESCE(h.harga_hampers, p.harga_produk) * t.jumlah_produk) AS total_seluruh'),
+                DB::raw('(COALESCE(h.harga_hampers, p.harga_produk) * t.jumlah_produk + t.ongkos_kirim) AS total_pembayaran_baru'),
                 DB::raw('(t.poin_digunakan * 100) AS poin_dipake'),
-                DB::raw('(COALESCE(h.harga_hampers,p.harga_produk) + t.ongkos_kirim - (t.poin_digunakan * 100)) AS total_setelah_diskon')
+                DB::raw('((COALESCE(h.harga_hampers, p.harga_produk) * t.jumlah_produk) + t.ongkos_kirim - (t.poin_digunakan * 100)) AS total_setelah_diskon')
             )
             ->where('t.id_customer', $user->id_customer)
             ->where('t.status', 'Selesai')->where('t.id_transaksi', $id)

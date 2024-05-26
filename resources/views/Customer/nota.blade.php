@@ -105,13 +105,15 @@
             <div class="item">
                 <div>{{$transaksi->nama_produk}}</div>
                 <div>: Rp. {{$transaksi->harga_produk}}</div>
+                <div>Jumlah</div>
+                <div>: {{$transaksi->jumlah_produk}} Produk</div>
             </div>
             <div class="item">
                 <div>Total</div>
-                <div>: Rp. {{$transaksi->harga_produk}}</div>
+                <div>: Rp. {{$transaksi->total_seluruh}}</div>
                 <div>Ongkos Kirim (rad.5 Km)</div>
                 <div>: Rp. {{$transaksi->ongkos_kirim}}</div>
-                <div>Total</div>
+                <div>Total + Ongkir</div>
                 <div>: Rp. {{$transaksi->total_pembayaran_baru}}</div>
                 <div>
                     @if($transaksi->poin_digunakan == 0)

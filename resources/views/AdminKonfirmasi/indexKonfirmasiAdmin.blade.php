@@ -92,7 +92,12 @@
                                         <tr>
                                             <td class="text-center">{{$data->id_transaksi}}</td>
 
-                                            <td class="text-center"><img src="{{ Storage::url($data->image) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
+                                            <td class="text-center">
+                                                @if($data->id_hampers != null)
+                                                <img src=" /images/{{ $data->image }}" alt="Iklan 3" style="width: 150px; height: auto;" />
+                                                @else
+                                                <img src="{{ Storage::url($data->image) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
+                                                @endif
                                             </td>
                                             <td class="text-center"><img src="{{ Storage::url($data->bukti_bayar) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
                                             </td>

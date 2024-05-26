@@ -15,6 +15,7 @@ class KonfirmasiPembayaranController extends Controller
         $transaksi = DB::table('transaksi as t')
             ->leftJoin('produk as p', 't.id_produk_fk', '=', 'p.id_produk')
             ->leftJoin('penitip as pn', 'p.id_penitip', '=', 'pn.id_penitip')
+            ->leftJoin('hampers as h', 't.id_hampers', '=', 'h.id_hampers')
             ->leftJoin('alamat_customer as a', function ($join) {
                 $join->on('t.id_alamat', '=', 'a.id_alamat')
                     ->where('a.alamat_aktif', '=', 1);
@@ -26,11 +27,12 @@ class KonfirmasiPembayaranController extends Controller
                 't.total_pembayaran',
                 't.ongkos_kirim',
                 't.status',
+                'h.id_hampers',
                 't.bukti_bayar',
                 'a.alamat_customer',
                 'c.nama',
-                DB::raw('COALESCE(p.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
-                DB::raw('COALESCE(p.image, pn.image) AS image'),
+                DB::raw('COALESCE(p.nama_produk, pn.nama_produk_penitip,h.nama_hampers) AS nama_produk'),
+                DB::raw('COALESCE(p.image, pn.image,h.image) AS image'),
             )->where('t.status', 'Sudah Dibayar')
             ->paginate(5);
 
@@ -42,6 +44,7 @@ class KonfirmasiPembayaranController extends Controller
         $transaksi = DB::table('transaksi as t')
             ->leftJoin('produk as p', 't.id_produk_fk', '=', 'p.id_produk')
             ->leftJoin('penitip as pn', 'p.id_penitip', '=', 'pn.id_penitip')
+            ->leftJoin('hampers as h', 't.id_hampers', '=', 'h.id_hampers')
             ->leftJoin('alamat_customer as a', function ($join) {
                 $join->on('t.id_alamat', '=', 'a.id_alamat')
                     ->where('a.alamat_aktif', '=', 1);
@@ -52,12 +55,13 @@ class KonfirmasiPembayaranController extends Controller
                 't.id_transaksi',
                 't.total_pembayaran',
                 't.ongkos_kirim',
+                'h.id_hampers',
                 't.status',
                 't.bukti_bayar',
                 'a.alamat_customer',
                 'c.nama',
-                DB::raw('COALESCE(p.nama_produk, pn.nama_produk_penitip) AS nama_produk'),
-                DB::raw('COALESCE(p.image, pn.image) AS image'),
+                DB::raw('COALESCE(p.nama_produk, pn.nama_produk_penitip,h.nama_hampers) AS nama_produk'),
+                DB::raw('COALESCE(p.image, pn.image,h.image) AS image'),
             )
             ->where('t.id_transaksi', $id_transaksi)
             ->first();
