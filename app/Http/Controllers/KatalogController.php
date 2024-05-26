@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alamat;
 use App\Models\Hampers;
 use App\Models\Produk;
 use App\Models\Transaksi;
@@ -123,7 +124,12 @@ class KatalogController extends Controller
         );
 
         $input = $request->all();
+        $user = Auth::guard('customer')->user();
         $input['id_customer'] = Auth::guard('customer')->id();
+        $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
+        if (!$alamat) {
+            return redirect()->route('transaksi.index')->with(['error' => 'Alamat belum diatur']);
+        }
         $year = Carbon::now()->format('y');
         $month = Carbon::now()->format('m');
 
@@ -164,6 +170,9 @@ class KatalogController extends Controller
         );
         $user = Auth::guard('customer')->user();
         $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
+        if (!$alamat) {
+            return redirect()->route('transaksi.index')->with(['error' => 'Alamat belum diatur']);
+        }
         $produk = Produk::find($request->id_produk);
         if ($produk->tipe_produk === 'Produk Penitip') {
             $this->validate($request, [
@@ -217,6 +226,9 @@ class KatalogController extends Controller
         $hampers = Hampers::find($id);
         $user = Auth::guard('customer')->user();
         $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
+        if (!$alamat) {
+            return redirect()->route('transaksi.index')->with(['error' => 'Alamat belum diatur']);
+        }
         $this->validate(
             $request,
             [
@@ -256,6 +268,9 @@ class KatalogController extends Controller
         $hampers = Hampers::find($id);
         $user = Auth::guard('customer')->user();
         $alamat = DB::table('alamat_customer')->where('id_customer', $user->id_customer)->where('alamat_aktif', 1)->first();
+        if (!$alamat) {
+            return redirect()->route('transaksi.index')->with(['error' => 'Alamat belum diatur']);
+        }
         $this->validate(
             $request,
             [
