@@ -248,7 +248,6 @@
 </style>
 
 <body>
-
     <div class="container">
         <div class="center-container">
             <h2 style="text-decoration: underline;"><b>Our Menu</b></h2>
@@ -397,12 +396,6 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
-</div>
-
-
-
-
-
-
 @endsection
