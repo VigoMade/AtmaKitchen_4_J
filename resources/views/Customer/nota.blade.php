@@ -16,12 +16,10 @@
 
         .invoice-container {
             max-width: 380px;
-            /* Mengurangi lebar maksimum */
             margin: 50px auto;
             padding: 20px;
             background-color: #fff;
             border: 2px solid black;
-            /* Garis pinggir merah */
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -83,7 +81,7 @@
         <div class="invoice-header">
             <div class="company-details">
                 <h2>Atma Kitchen</h2>
-                <p>Jl. Raya Abadai, Sleman, Yogyakarta</p>
+                <p>Jl. Raya Abadi, Sleman, Yogyakarta</p>
             </div>
             <div class="invoice-details">
                 <p>No Nota : {{$transaksi->id_transaksi}}</p>
@@ -117,24 +115,24 @@
                 <div>: Rp. {{$transaksi->total_pembayaran_baru}}</div>
                 <div>
                     @if($transaksi->poin_digunakan == 0)
-                    Potongan 0 poin
+                        Potongan 0 poin
                     @else
-                    Potongan {{$transaksi->poin_digunakan}} poin
+                        Potongan {{$transaksi->poin_digunakan}} poin
                     @endif
                 </div>
                 <div>:
                     @if($transaksi->poin_digunakan == null)
-                    0
+                        0
                     @else
-                    - Rp. {{$transaksi->poin_dipake}}
+                        - Rp. {{$transaksi->poin_dipake}}
                     @endif
                 </div>
                 <div>Total </div>
                 <div>:
                     @if($transaksi->poin_digunakan == null)
-                    0
+                        0
                     @else
-                    Rp. {{$transaksi->total_setelah_diskon}}
+                        Rp. {{$transaksi->total_setelah_diskon}}
                     @endif
                 </div>
             </div>
@@ -143,9 +141,9 @@
                 <div>Poin dari pesanan ini</div>
                 <div>: @if($transaksi->poin_bonus == null)
                     0
-                    @else
+                @else
                     {{$transaksi->poin_bonus}}
-                    @endif
+                @endif
                 </div>
                 <div>Total Poin Customer</div>
                 <div>: {{$user->poin_customer}}</div>

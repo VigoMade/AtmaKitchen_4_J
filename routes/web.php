@@ -119,6 +119,30 @@ Route::get('/indexKonfirmasiSaldo', function () {
     return view('AdminKonfirmasi.indexKonfirmasiSaldo');
 })->name('indexKonfirmasiSaldo');
 
+// laporan
+Route::get('/laporanPenjualanBulanan', function () {
+    return view('Laporan.laporanPenjualanBulanan');
+})->name('laporanPenjualanBulanan');
+Route::get('/laporanPenjualanProduk', function () {
+    return view('Laporan.laporanPenjualanProduk');
+})->name('laporanPenjualanProduk');
+Route::get('/laporanPengunaanBB', function () {
+    return view('Laporan.laporanPengunaanBB');
+})->name('laporanPengunaanBB');
+Route::get('/laporanStockBB', function () {
+    return view('Laporan.laporanStockBB');
+})->name('laporanStockBB');
+Route::get('/laporanPemasukanPengeluaran', function () {
+    return view('Laporan.laporanPemasukanPengeluaran');
+})->name('laporanPemasukanPengeluaran');
+Route::get('/laporanPresensiGaji', function () {
+    return view('Laporan.laporanPresensiGaji');
+})->name('laporanPresensiGaji');
+Route::get('/laporanTransaksiPenitip', function () {
+    return view('Laporan.laporanTransaksiPenitip');
+})->name('laporanTransaksiPenitip');
+
+
 
 
 
