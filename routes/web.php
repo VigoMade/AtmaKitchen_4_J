@@ -11,6 +11,7 @@ use App\Http\Controllers\HistoryCustomerController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\KonfirmasiPembayaranController;
+use App\Http\Controllers\KonfirmasiPenarikanSaldo;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PegawaiController;
@@ -241,18 +242,22 @@ Route::put('/updateJarak/{id_transaksi}', [AlamatController::class, 'updateJarak
 Route::get('/konfirmasiPembayaran', [KonfirmasiPembayaranController::class, 'index'])->name('konfirmasiPembayaran.index');
 Route::get('/konfirmasiPembayaran/{id_transaksi}', [KonfirmasiPembayaranController::class, 'create'])->name('konfirmasiPembayaran.create');
 Route::post('/konfirmasiPembayaran/{id_transaksi}', [KonfirmasiPembayaranController::class, 'store'])->name('konfirmasiPembayaran.store');
-
+Route::put('/rejectAdmin/{id_transaksi}', [KonfirmasiPembayaranController::class, 'reject'])->name('rejectAdmin');
 Route::resource('/pemasukan', PemasukanController::class);
 
 //Konfirmasi MO
 Route::get('/indexKonfirmasi', [KonfirmasiController::class, 'index'])->name('indexKonfirmasi.index');
 Route::put('/reject/{id}', [KonfirmasiController::class, 'reject'])->name('reject');
 Route::put('/accept/{id}', [KonfirmasiController::class, 'accept'])->name('accept');
-Route::put('/prosses/{id}', [KonfirmasiController::class, 'progress'])->name('prosses');
+Route::put('/prosses/{id}/{deskripsi}/{id_bahan_baku}', [KonfirmasiController::class, 'progress'])->name('prosses');
 Route::put('/pickup/{id}', [KonfirmasiController::class, 'pickUp'])->name('pickUp');
 Route::put('/send/{id}', [KonfirmasiController::class, 'send'])->name('send');
 Route::put('/done/{id}', [KonfirmasiController::class, 'done'])->name('done');
 Route::put('/pickUpDone/{id}', [KonfirmasiController::class, 'pickUpDone'])->name('pickUpDone');
+
+//Konfirmasi Admin
+Route::get('/indexAdminKonfirmasi', [KonfirmasiController::class, 'indexAdmin'])->name('indexAdminKonfirmasi.index');
+
 
 //nota
 Route::get('/nota/{id_transaksi}', [NotaController::class, 'index'])->name('nota');
@@ -264,3 +269,9 @@ Route::resource('/rekening', RekeningController::class);
 Route::get('/penarikanSaldo', [PenarikanSaldoController::class, 'index'])->name('historyPenarikanSaldo.index');
 Route::get('/penarikanSaldo/create', [PenarikanSaldoController::class, 'create'])->name('penarikanSaldo.create');
 Route::post('/penarikanSaldo/store', [PenarikanSaldoController::class, 'store'])->name('penarikanSaldo.store');
+
+
+//Konfirmasi Saldo
+Route::get('/konfirmasiSaldo', [KonfirmasiPenarikanSaldo::class, 'index'])->name('konfirmasiSaldo.index');
+Route::put('/konfirmasiSaldo/terima/{id}', [KonfirmasiPenarikanSaldo::class, 'terima'])->name('konfirmasiSaldo.terima');
+Route::put('/konfirmasiSaldo/tolak/{id}/{id_customer}', [KonfirmasiPenarikanSaldo::class, 'tolak'])->name('konfirmasiSaldo.tolak');

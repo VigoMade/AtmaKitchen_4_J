@@ -65,7 +65,9 @@ class TransaksiController extends Controller
             ->where(function ($query) {
                 $query->where('t.status', 'Di Keranjang')
                     ->orWhere('t.status', 'Menunggu Pembayaran')
-                    ->orWhere('t.status', 'Perlu Jarak');
+                    ->orWhere('t.status', 'Perlu Jarak')
+                    ->orWhere('t.status', 'send')
+                    ->orWhere('t.status', 'pickup');
             })->where('t.id_transaksi', $id)
             ->first();
         return view('Transaksi.pembayaranPage', compact('transaksi', 'alamat', 'user'));
@@ -111,6 +113,8 @@ class TransaksiController extends Controller
         $beliData['id_alamat'] = $alamat->id_alamat;
         if ($transaksi->status == 'Menunggu Pembayaran') {
             $beliData['status'] = 'Sudah Dibayar';
+        } else if ($request->status == 'pickup') {
+            $beliData['status'] = 'Menunggu Pembayaran';
         } else {
             $beliData['status'] = 'Perlu Jarak';
         }

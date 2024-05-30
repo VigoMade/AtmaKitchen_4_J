@@ -62,48 +62,90 @@
                     <div class="card">
                         <div class="card-body">
                             @if(session('error'))
-                                <div id="errorAlert" class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
+                            <div id="errorAlert" class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
                             @endif
 
                             @if(session('success'))
-                                <div id="successAlert" class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
+                            <div id="successAlert" class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
                             @endif
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Profile</th>
                                             <th class="text-center">Nama Customer</th>
                                             <th class="text-center">Tanggal Penarikan</th>
-                                            <th class="text-center">Rekening Tujuan</th>
                                             <th class="text-center">Jumlah Penarikan</th>
+                                            <th class="text-center">Rekening Penarikan</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="text-center">Maharani</td>
-
-                                            <td class="text-center">2024-10-10</td>
-                                            <td class="text-center">Bank Mandiri - 1231233</td>
-                                            <td class="text-center">Rp. 100.000</td>
+                                            @forelse($penarikan_saldo as $data)
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#"
-                                                    method="POST">
-                                                    <a href="#" class="btn btn-sm btn-primary">Terima</a>
+                                                @if ($data->image)
+                                                <img src="{{ Storage::url($data->image) }}" width="100px" alt="profile">
+                                                @else
+                                                <img src="{{ asset('images/20240416153955.jpeg') }}" width="100px" alt="profile">
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{$data->nama_customer}}</td>
+                                            <td class="text-center">
+                                                {{$data->tanggal_penarikan}}
+                                            </td>
+                                            <td class="text-center">
+                                                Rp.{{$data->total_penarikan}}
+                                            </td>
+                                            <td class="text-center">
+                                                {{$data->nama_bank}} - {{$data->rekening_bank}}
+                                            </td>
+                                            <td class="text-center">
+                                                @if($data->status_penarikan == 'Menunggu Konfirmasi')
+                                                <span class="badge text-bg-info">{{$data->status_penarikan}}</span>
+                                                @elseif($data->status_penarikan == 'Selesai')
+                                                <span class="badge text-bg-success">{{$data->status_penarikan}}</span>
+                                                @else
+                                                <span class="badge text-bg-danger">{{$data->status_penarikan}}</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center">
+                                                @if($data->status_penarikan == 'Menunggu Konfirmasi')
+                                                <form action="{{route('konfirmasiSaldo.terima',$data->id_penarikan)}}" onsubmit="return confirm('Apakah Anda Yakin?');" method="POST">
                                                     @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Tolak</button>
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Terima
+                                                    </button>
                                                 </form>
+                                                <form action="{{ route('konfirmasiSaldo.tolak', ['id' => $data->id_penarikan, 'id_customer' => $data->id_customer]) }}" onsubmit="return confirm('Apakah Anda Yakin?');" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        Tolak
+                                                    </button>
+                                                </form>
+                                                @else
+                                                <button class="btn btn-secondary" disabled>
+                                                    Nothing..
+                                                </button>
+                                                @endif
                                             </td>
                                         </tr>
-
+                                    </tbody>
+                                    @empty
+                                    <div class="alert alert-danger">
+                                        Data History Penarikan belum tersedia
+                                    </div>
+                                    @endforelse
                                 </table>
                             </div>
-
+                            {{$penarikan_saldo->links()}}
                         </div>
                         <!-- body -->
                     </div>
