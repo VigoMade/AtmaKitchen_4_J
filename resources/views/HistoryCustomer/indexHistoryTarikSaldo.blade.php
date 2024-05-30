@@ -78,8 +78,8 @@
                                         <th class="text-center">Profile</th>
                                         <th class="text-center">Nama Customer</th>
                                         <th class="text-center">Tanggal Penarikan</th>
-                                        <th class="text-center">Rekening Penarikan</th>
                                         <th class="text-center">Jumlah Penarikan</th>
+                                        <th class="text-center">Rekening Penarikan</th>
                                         <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
@@ -116,7 +116,7 @@
                                 </tbody>
                                 @empty
                                 <div class="alert alert-danger">
-                                    Data History Customer belum tersedia
+                                    Data History Penarikan belum tersedia
                                 </div>
                                 @endforelse
                             </table>

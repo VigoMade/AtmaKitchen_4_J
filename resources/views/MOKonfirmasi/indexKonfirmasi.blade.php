@@ -25,6 +25,15 @@
         transition: transform 0.3s ease;
     }
 
+    .btn-outline-success:hover {
+        transform: scale(1.1);
+        background-color: #198754;
+        color: white;
+        border-radius: 2px solid #198754;
+        transition: transform 0.3s ease;
+
+    }
+
     .btn-success:hover {
         transform: scale(1.1);
         background-color: white;
@@ -99,6 +108,7 @@
                             </script>
                             @endif
                             <a href="#" class="btn btn-md btn-success mb-3 btn-tambah-resep" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cek Bahan Baku</a>
+                            <a href="#" class="btn btn-md btn-outline-success mb-3 btn-tambah-resep" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">Cek Pemakain Bahan baku</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
@@ -139,34 +149,11 @@
                                             </td>
                                             <td class="text-center">
                                                 @if($data->status == 'Diterima')
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('prosses',$data->id_pemasukan)}}">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('prosses', ['id' => $data->id_pemasukan, 'deskripsi' => $data->deskripsi_resep_produk ?? 'tidak', 'id_bahan_baku' => $data->id_bahan_baku ?? 0])}}">
                                                     @csrf
                                                     @method('PUT')
                                                     <button class="btn btn-primary">
                                                         Mulai Proses
-                                                    </button>
-                                                </form>
-                                                @elseif($data->status == 'Diproses')
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('pickUp',$data->id_pemasukan)}}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button class="btn btn-primary">
-                                                        Pick Up
-                                                    </button>
-                                                </form>
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('send',$data->id_pemasukan)}}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button class="btn btn-success">
-                                                        Send
-                                                    </button>
-                                                </form>
-                                                @elseif($data->status == 'Sedang dikirim kurir' || $data->status == 'Siap dipickup')
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('pickUpDone',$data->id_pemasukan)}}">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <button class="btn btn-warning">
-                                                        Pick Up Done
                                                     </button>
                                                 </form>
                                                 @else
@@ -210,7 +197,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #dc3545;">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Bahan Baku Hampir Habis & Habis</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -252,6 +239,60 @@
                 </div>
             </div>
         </div>
+
+    </div>
+    <!-- Modal 2 -->
+    <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #dc3545;">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Penggunaan Bahan Baku</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive p-0">
+                        <table class="table table-hover textnowrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Nama Bahan Baku</th>
+                                    <th class="text-center">Jumlah Bahan Baku</th>
+                                    <th class="text-center">Total Pemakaian Bahan Baku</th>
+                                    <th class="text-center">Satuan Bahan Baku</th>
+                                    <th class="text-center">Tanggal Pemakaian</th>
+                                    <th class="text-centee">Status Bahan Baku</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($pemakaian as $data)
+                                <tr>
+                                    <td class="text-center">{{$data->bahanBaku->nama_bahan_baku}}</td>
+                                    <td class="text-center">{{$data->bahanBaku->takaran_bahan_baku_tersedia}}</td>
+                                    <td class="text-center">{{$data->total_pemakaian}}</td>
+                                    <td class="text-center">{{$data->bahanBaku->satuan_bahan_baku}}</td>
+                                    <td class="text-center">{{$data->tanggal_pemakaian}}</td>
+                                    <td class="text-center">
+                                        <span class="badge text-bg-danger">{{$data->bahanBaku->status_bb}}</span>
+                                    </td>
+                                    @empty
+                                    <div class="alert alert-danger">
+                                        Bahan Baku Masih Lengkap
+                                    </div>
+                                    @endforelse
+                                </tr>
+                            </tbody>
+                        </table>
+                        {{$pemakaian->links()}}
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{route('pembelianBB.index')}}" onsubmit="return confirm('Anda Akan ke page pembelian baku')">
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Beli Bahan Baku</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 @endsection

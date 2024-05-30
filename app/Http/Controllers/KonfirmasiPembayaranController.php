@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pemasukan;
 use App\Models\Transaksi;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ class KonfirmasiPembayaranController extends Controller
                 't.jumlah_produk',
                 't.id_transaksi',
                 't.total_pembayaran',
+                't.tanggal_transaksi',
                 't.ongkos_kirim',
                 't.status',
                 'h.id_hampers',
@@ -34,8 +36,16 @@ class KonfirmasiPembayaranController extends Controller
                 DB::raw('COALESCE(p.nama_produk, pn.nama_produk_penitip,h.nama_hampers) AS nama_produk'),
                 DB::raw('COALESCE(p.image, pn.image,h.image) AS image'),
             )->where('t.status', 'Sudah Dibayar')
+            ->orWhere('t.status', 'Menunggu Pembayaran')
+            ->orWhere('t.status', 'Lewat Bayar')
             ->paginate(5);
 
+        foreach ($transaksi as $t) {
+            if ($t->status == 'Menunggu Pembayaran' && Carbon::parse($t->tanggal_transaksi)->addHours(24)->isPast()) {
+                $t->status = 'Lewat Bayar';
+                DB::table('transaksi')->where('id_transaksi', $t->id_transaksi)->update(['status' => 'Lewat Bayar']);
+            }
+        }
         return view('AdminKonfirmasi.indexKonfirmasiAdmin', compact('transaksi'));
     }
 
@@ -94,6 +104,19 @@ class KonfirmasiPembayaranController extends Controller
             return redirect()->route('konfirmasiPembayaran.index')->with('success', 'Pemasukan berhasil ditambahkan');
         } catch (Exception $e) {
             return redirect()->route('konfirmasiPembayaran.index')->with('error', 'Pemasukan gagal ditambahkan');
+        }
+    }
+
+
+    public function reject($id)
+    {
+        try {
+            $transaksi = Transaksi::where('id_transaksi', $id)->first();
+            $transaksi->status = 'Ditolak';
+            $transaksi->save();
+            return redirect()->route('konfirmasiPembayaran.index')->with(['success' => 'Berhasil Hapus']);
+        } catch (Exception $e) {
+            return redirect()->route('konfirmasiPembayaran.index')->with(['error' => 'Gagal Hapus']);
         }
     }
 }
