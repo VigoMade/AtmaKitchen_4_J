@@ -16,11 +16,13 @@ use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembelianBBController;
+use App\Http\Controllers\PenarikanSaldoController;
 use App\Http\Controllers\PengeluaranLainnyaController;
 use App\Http\Controllers\PenitipController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\TransaksiController;
@@ -230,3 +232,11 @@ Route::put('/pickUpDone/{id}', [KonfirmasiController::class, 'pickUpDone'])->nam
 
 //nota
 Route::get('/nota/{id_transaksi}', [NotaController::class, 'index'])->name('nota');
+
+//rekening
+Route::resource('/rekening', RekeningController::class);
+
+//Tarik
+Route::get('/penarikanSaldo', [PenarikanSaldoController::class, 'index'])->name('historyPenarikanSaldo.index');
+Route::get('/penarikanSaldo/create', [PenarikanSaldoController::class, 'create'])->name('penarikanSaldo.create');
+Route::post('/penarikanSaldo/store', [PenarikanSaldoController::class, 'store'])->name('penarikanSaldo.store');

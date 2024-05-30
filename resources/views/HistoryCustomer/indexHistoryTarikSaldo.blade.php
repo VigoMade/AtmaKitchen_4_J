@@ -38,15 +38,15 @@
     <div class="content-header">
         <div class="container-fluid">
             @if(session('error'))
-                <div id="errorAlert" class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
+            <div id="errorAlert" class="alert alert-danger">
+                {{ session('error') }}
+            </div>
             @endif
 
             @if(session('success'))
-                <div id="successAlert" class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+            <div id="successAlert" class="alert alert-success">
+                {{ session('success') }}
+            </div>
             @endif
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -55,17 +55,11 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="#">My History</a>
+                            <a href="#">My History Tarik Saldo</a>
                         </li>
                     </ol>
-                    <li class="breadcrumb-item active">Show My History</li>
+                    <li class="breadcrumb-item active">Show My History Tarik Saldo</li>
                 </div>
-                <form action="{{route('historyCustomer.search')}}" method="GET" class="mb-3">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="search" placeholder="Cari History....">
-                        <button class="btn btn-outline-primary" type="submit">Cari</button>
-                    </div>
-                </form>
                 <!-- /.col -->
             </div>
             <!-- row -->
@@ -81,45 +75,53 @@
                             <table class="table table-hover textnowrap">
                                 <thead>
                                     <tr>
+                                        <th class="text-center">Profile</th>
                                         <th class="text-center">Nama Customer</th>
                                         <th class="text-center">Tanggal Penarikan</th>
                                         <th class="text-center">Rekening Penarikan</th>
                                         <th class="text-center">Jumlah Penarikan</th>
                                         <th class="text-center">Status</th>
-                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-
-                                        <td class="text-center">Maharanie</td>
-
+                                        @forelse($penarikan_saldo as $data)
                                         <td class="text-center">
-                                            2024-10-10
+                                            @if ($data->image)
+                                            <img src="{{ Storage::url($data->image) }}" width="100px" alt="profile">
+                                            @else
+                                            <img src="{{ asset('images/20240416153955.jpeg') }}" width="100px" alt="profile">
+                                            @endif
+                                        </td>
+                                        <td class="text-center">{{$data->nama_customer}}</td>
+                                        <td class="text-center">
+                                            {{$data->tanggal_penarikan}}
                                         </td>
                                         <td class="text-center">
-                                            Rp.100000
+                                            Rp.{{$data->total_penarikan}}
                                         </td>
                                         <td class="text-center">
-                                            Bank Mandiri - 123412234
+                                            {{$data->nama_bank}} - {{$data->rekening_bank}}
                                         </td>
                                         <td class="text-center">
-                                            <span class="badge text-bg-info">Sedang Diajukan</span>
-
+                                            @if($data->status_penarikan == 'Menunggu Konfirmasi')
+                                            <span class="badge text-bg-info">{{$data->status_penarikan}}</span>
+                                            @elseif($data->status_penarikan == 'Selesai')
+                                            <span class="badge text-bg-success">{{$data->status_penarikan}}</span>
+                                            @else
+                                            <span class="badge text-bg-danger">{{$data->status_penarikan}}</span>
+                                            @endif
                                         </td>
-
-                                        <td class="text-center">
-                                            <a href="#" class="btn btn-primary">Tarik Saldo</a>
-                                        </td>
-
-
                                     </tr>
                                 </tbody>
-
-
+                                @empty
+                                <div class="alert alert-danger">
+                                    Data History Customer belum tersedia
+                                </div>
+                                @endforelse
                             </table>
                         </div>
-
+                        {{$penarikan_saldo->links()}}
                     </div>
                     <!-- body -->
                 </div>
