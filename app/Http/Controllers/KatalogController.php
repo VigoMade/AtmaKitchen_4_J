@@ -24,6 +24,11 @@ class KatalogController extends Controller
                 DB::raw('COALESCE(produk.jenis_produk, penitip.jenis_produk_penitip) AS jenis_produk'),
                 'produk.harga_produk',
                 'produk.id_produk',
+                'produk.tanggal_mulai_po',
+                'produk.tanggal_selesai_po',
+                'produk.status',
+                'produk.kuota',
+                'produk.stock_produk',
                 DB::raw('COALESCE(produk.image, penitip.image) AS image')
             )->where('produk.stock_produk', '>', 0)
             ->orWhere('produk.kuota', '>', 0)
@@ -39,6 +44,11 @@ class KatalogController extends Controller
                 DB::raw('COALESCE(produk.jenis_produk, penitip.jenis_produk_penitip) AS jenis_produk'),
                 'produk.harga_produk',
                 'produk.id_produk',
+                'produk.tanggal_mulai_po',
+                'produk.tanggal_selesai_po',
+                'produk.status',
+                'produk.kuota',
+                'produk.stock_produk',
                 DB::raw('COALESCE(produk.image, penitip.image) AS image')
             );
         if ($jenis_produk == 'other') {

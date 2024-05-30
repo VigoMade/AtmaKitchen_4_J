@@ -123,6 +123,23 @@
                     <div class="card-body">
                         <img src="{{ Storage::url($item->image) }}" class="d-block w-100" alt="profile" style="width: 100%; height: 280px;">
                         <p style="text-align: center;"><b>{{$item->nama_produk}}</b></p>
+                        @if($item->kuota == null)
+                        <p style="text-align: center;"><b>Stock : {{$item->stock_produk}}</b></p>
+                        @else
+                        <p style="text-align: center;"><b>Kuota : {{$item->kuota}}</b></p>
+                        @endif
+                        @if($item->status == 'Ready')
+                        <p style="text-align: center;"><b>Tanggal Mulai PO : -</b></p>
+                        <p style="text-align: center;"><b>Tanggal Selesai PO : - </b></p>
+                        @else
+                        <p style="text-align: center;"><b>Tanggal Mulai PO : {{$item->tanggal_mulai_po}}</b></p>
+                        <p style="text-align: center;"><b>Tanggal Selesai PO : {{$item->tanggal_selesai_po}}</b> </p>
+                        @endif
+                        @if($item->status == 'Ready')
+                        <p style="text-align: center;"><b>Status : <span class="badge text-bg-primary">{{$item->status}}</span></b></p>
+                        @else
+                        <p style="text-align: center;"><b>Status : <span class="badge text-bg-secondary">{{$item->status}}</span></b></p>
+                        @endif
                         <p class="card-text text-center">Rp. {{$item->harga_produk}}</p>
                         <a href="{{route('detailProduk.showById', $item->id_produk)}}" class="btn btn-block" style="background-color: #AD343E; color: white;">Lihat Detail</a>
                     </div>
