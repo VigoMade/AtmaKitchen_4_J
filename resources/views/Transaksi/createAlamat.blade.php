@@ -18,6 +18,20 @@
         border-radius: 2px;
         transition: transform 0.3s ease;
     }
+
+    .box-image {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        margin-bottom: 50px !important;
+    }
+
+    .box-image img {
+        margin-bottom: 10px;
+    }
 </style>
 
 <div class="content-header">
@@ -44,18 +58,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('alamat.store') }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('alamat.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label class="font-weight-bold">Masukkan Alamat Anda</label>
-                                    <input type="text"
-                                        class="form-control @error('alamat_customer') is-invalid @enderror"
-                                        name="alamat_customer" value="{{ old('alamat_customer') }}"
-                                        placeholder="Masukkan Alamat">
+                                    <input type="text" class="form-control @error('alamat_customer') is-invalid @enderror" name="alamat_customer" value="{{ old('alamat_customer') }}" placeholder="Masukkan Alamat">
                                     @error('alamat_customer')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
@@ -65,6 +75,13 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="box-image">
+    <img src="{{ asset('images/no_data.png') }}" width="30%" alt="">
+    <div class="alert alert-primary w-100 text-center" role="alert">
+        Isi Dengan Benar!
     </div>
 </div>
 
