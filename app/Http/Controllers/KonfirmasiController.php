@@ -65,14 +65,14 @@ class KonfirmasiController extends Controller
 
             $produk = Produk::find($transaksi->id_produk_fk);
 
-            if ($produk) {
-                if ($produk->id_penitip) {
-                    $produk->stock_produk += $transaksi->jumlah_produk;
-                } else {
-                    $produk->kuota += $transaksi->jumlah_produk;
-                }
-                $produk->save();
-            }
+            // if ($produk) {
+            //     if ($produk->id_penitip) {
+            //         $produk->stock_produk += $transaksi->jumlah_produk;
+            //     } else {
+            //         $produk->kuota += $transaksi->jumlah_produk;
+            //     }
+            //     $produk->save();
+            // }
 
             $transaksi->status = 'Ditolak';
             $transaksi->jumlah_produk = 0;
