@@ -108,9 +108,9 @@
             <div class="billing-details">
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
                     Penjualan Bulanan</h3>
-                <div>Bulan : Februari</div>
-                <div>Tahun : 2024</div>
-                <div>Tanggal Cetak : 2 Februari 2024</div>
+                <div>Bulan : {{$namaBulan}}</div>
+                <div>Tahun : {{$tahun}}</div>
+                <div>Tanggal Cetak : {{$tanggalFormat}}</div>
             </div>
 
             <div class="invoice-body">
@@ -118,22 +118,48 @@
                     <tr>
                         <th></th>
                         <th>Pemasukan</th>
+                        <th>Tip</th>
                         <th>Pengeluaran</th>
                     </tr>
+                    @forelse($pemasukanPengeluaran as $data)
                     <tr>
-                        <td>Tip</td>
-                        <td>2.000.000</td>
-                        <td></td>
+                        <td>
+                            @if($data->pemasukan != null)
+                            Penjualan
+                            @else
+                            {{$data->nama_pengeluaran_lainnya}}
+                            @endif
+                        </td>
+                        <td>
+                            @if($data->pemasukan != null)
+                            {{$data->pemasukan}}
+                            @else
+                            -
+                            @endif
+                        </td>
+                        <td>
+                            @if($data->total_tip != null)
+                            {{$data->total_tip}}
+                            @else
+                            -
+                            @endif
+                        <td>
+                            @if($data->biaya_pengeluaran_lainnya != null)
+                            {{$data->biaya_pengeluaran_lainnya}}
+                            @else
+                            -
+                            @endif
+                        </td>
                     </tr>
+                    @empty
                     <tr>
-                        <td>Gas</td>
-                        <td></td>
-                        <td>500.000</td>
+                        <td colspan="3" style="text-align: center;">Tidak ada data</td>
                     </tr>
+                    @endforelse
                     <tr class="total">
-                        <td></td>
                         <td>Total</td>
-                        <td>Rp. 10.000.000</td>
+                        <td colspan="2">{{$totalMasuk}}</td>
+                        <td>{{$totalKeluar}}</td>
                     </tr>
                 </table>
             </div>

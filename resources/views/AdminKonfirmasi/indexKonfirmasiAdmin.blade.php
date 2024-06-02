@@ -115,6 +115,8 @@
                                             <td class="text-center">
                                                 @if($data->status == 'Menunggu Pembayaran')
                                                 <span class="badge rounded-pill text-bg-primary">{{$data->status}}</span>
+                                                @elseif($data->status == 'Sudah Dibayar')
+                                                <span class="badge rounded-pill text-bg-success">{{$data->status}}</span>
                                                 @else
                                                 <span class="badge rounded-pill text-bg-danger">{{$data->status}}</span>
                                                 @endif

@@ -109,8 +109,8 @@
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
                     Penggunaan Bahan Baku</h3>
 
-                <div>Periode : 1 Maret - 5 Juni</div>
-                <div>Tanggal Cetak : 2 Februari 2024</div>
+                <div>Periode : {{$tanggalAwal}} - {{$tanggalAkhir}}</div>
+                <div>Tanggal Cetak : {{$tanggalFormat}}</div>
             </div>
 
             <div class="invoice-body">
@@ -120,11 +120,17 @@
                         <th>Satuan</th>
                         <th>Digunakan</th>
                     </tr>
+                    @forelse($laporan as $data)
                     <tr>
-                        <td>Susu Bubuk</td>
-                        <td>gr</td>
-                        <td>20.000</td>
+                        <td>{{$data->nama}}</td>
+                        <td>{{$data->satuan}}</td>
+                        <td>{{$data->total_pemakaian}}</td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td colspan="3">Tidak ada data</td>
+                    </tr>
+                    @endforelse
                 </table>
             </div>
 

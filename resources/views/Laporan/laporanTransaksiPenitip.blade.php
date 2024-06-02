@@ -93,6 +93,7 @@
 </head>
 
 <body>
+    @forelse($laporan as $data)
     <div class="invoice-container">
         <div class="invoice-header">
             <div class="company-details">
@@ -105,14 +106,11 @@
             <div class="billing-details">
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
                     Transaksi Penitip</h3>
-                <div>ID Penitip : 10.2</div>
-                <div>Nama : Maharanie</div>
-                <div>Bulan : Februari </div>
-                <div>Tahun : 2024 </div>
-                <div>Tanggal Cetak : 10 Februari 2024 </div>
-
-
-
+                <div>ID Penitip : Penitip{{$data->id_penitip}}</div>
+                <div>Nama : {{$data->nama_penitip}}</div>
+                <div>Bulan : {{$namaBulan}} </div>
+                <div>Tahun : {{$tahun}}</div>
+                <div>Tanggal Cetak : {{$tanggalFormat}} </div>
             </div>
 
             <table>
@@ -124,13 +122,14 @@
                     <th>20% Komisi</th>
                     <th>Yang Diterima</th>
                 </tr>
+
                 <tr>
-                    <td>Keripik Kentang 250 gr</td>
-                    <td>10</td>
-                    <td>75.000</td>
-                    <td>1.500.000</td>
-                    <td>300.000</td>
-                    <td>1.200.000</td>
+                    <td>{{$data->nama_produk_penitip}}</td>
+                    <td>{{$data->jumlah_produk}}</td>
+                    <td>{{$data->harga_produk}}</td>
+                    <td>{{$data->total_pemasukan}}</td>
+                    <td>{{$data->pembagian_komisi}}</td>
+                    <td>{{$data->diterima}}</td>
 
                 </tr>
 
@@ -139,13 +138,15 @@
                     <td></td>
                     <td></td>
                     <td colspan="3" style="text-align: right;">Total</td>
-                    <td> 11.000.000</td>
+                    <td> {{$data->diterima}}</td>
                 </tr>
             </table>
 
 
         </div>
     </div>
+    @empty
+    @endforelse
 </body>
 
 </html>

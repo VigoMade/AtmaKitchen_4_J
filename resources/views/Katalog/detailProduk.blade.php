@@ -270,7 +270,7 @@
                                     <span class="tag">{{$produk->status}}</span>
                                 </div>
                                 <p class="price-label">Harga Produk</p>
-                                <p class="price"><b>Rp.{{$produk->harga_produk}}0</b></p>
+                                <p class="price"><b>Rp.{{$produk->harga_produk}}</b></p>
                                 <dl class="details">
                                     <div class="detail-item">
                                         <dt class="detail-title">Nama Produk</dt>

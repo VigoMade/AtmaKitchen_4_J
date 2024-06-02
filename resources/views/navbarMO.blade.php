@@ -117,6 +117,9 @@
                     <li class="nav-item {{ Request::routeIs('pembelianBB.*') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{ route('pembelianBB.index') }}">Pembelian Bahan Baku</a>
                     </li>
+                    <li class="nav-item {{ request()->routeIs('indexPageLaporanMO') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('indexPageLaporanMO') }}">Laporan</a>
+                    </li>
                     <li class="nav-item">
                         <div class="dropdown">
                             <a class="btn btn-rounded dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

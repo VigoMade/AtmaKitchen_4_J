@@ -105,9 +105,9 @@
             <div class="billing-details">
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
                     Penjualan Bulanan</h3>
-                <div>Bulan : Februari</div>
-                <div>Tahun : 2024</div>
-                <div>Tanggal Cetak : 2 Februari 2024</div>
+                <div>Bulan : {{$namaBulan}}</div>
+                <div>Tahun : {{$tahun}}</div>
+                <div>Tanggal Cetak : {{$tanggalFormat}}</div>
             </div>
 
             <table>
@@ -117,15 +117,21 @@
                     <th>Harga</th>
                     <th>Total</th>
                 </tr>
+                @forelse($laporan as $data)
                 <tr>
-                    <td>Lapis Legis 1 Loyang</td>
-                    <td>5</td>
-                    <td>Rp 850.000</td>
-                    <td>Rp 8.500.000</td>
+                    <td>{{$data->nama_produk}}</td>
+                    <td>{{$data->jumlah_produk}}</td>
+                    <td>Rp {{$data->harga_produk}}</td>
+                    <td>Rp {{$data->total_masuk}}</td>
                 </tr>
+                @empty
+                <tr>
+                    <td colspan="4" style="text-align: center;">Tidak ada data</td>
+                </tr>
+                @endforelse
                 <tr class="total">
                     <td colspan="3" style="text-align: right;">Total</td>
-                    <td>Rp. 10.000.000</td>
+                    <td>Rp. {{$total}}</td>
                 </tr>
             </table>
 

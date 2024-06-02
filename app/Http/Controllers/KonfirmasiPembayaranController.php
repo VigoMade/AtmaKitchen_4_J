@@ -97,6 +97,7 @@ class KonfirmasiPembayaranController extends Controller
             $input['tip'] = 0;
         }
         $input['id_transaksi_fk'] = $id_transaksi;
+        $input['tanggal_pemasukan'] = Carbon::now();
         try {
             $transaksi->status = 'Pembayaran Valid';
             $transaksi->save();

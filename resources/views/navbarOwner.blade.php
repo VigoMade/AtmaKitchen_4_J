@@ -99,9 +99,13 @@
                     <li class="nav-item {{ Request::is('gaji') ? 'active' : '' }}">
                         <a class="nav-link mx-2" href="{{url('/gaji')}}">Gaji</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link mx-2" href="#!">Laporan</a>
+                    <li class="nav-item {{ request()->routeIs('indexPageLaporanOwner') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('indexPageLaporanOwner') }}">Laporan</a>
                     </li>
+                    <li class="nav-item {{ Request::routeIs('pembagianKomisi') ? 'active' : '' }}">
+                        <a class="nav-link mx-2" href="{{ route('OwnerPembagianKomisi.index') }}">Pembagian Komisi</a>
+                    </li>
+
                     <li class="nav-item ">
                         @if(auth()->guard('pegawai')->check())
                         <a class="btn btn-rounded" href="{{route('actionLogout')}}">Log Out</a>
