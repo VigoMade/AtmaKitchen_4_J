@@ -89,63 +89,83 @@
         th {
             background-color: #f2f2f2;
         }
+
+        .box-image {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+            margin-bottom: 50px !important;
+        }
+
+        .box-image img {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
 <body>
     @forelse($laporan as $data)
-    <div class="invoice-container">
-        <div class="invoice-header">
-            <div class="company-details">
-                <h2>Atma Kitchen</h2>
-                <p>Jl. Raya Abadi, Sleman, Yogyakarta</p>
-            </div>
-        </div>
-
-        <div class="invoice-body">
-            <div class="billing-details">
-                <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
-                    Transaksi Penitip</h3>
-                <div>ID Penitip : Penitip{{$data->id_penitip}}</div>
-                <div>Nama : {{$data->nama_penitip}}</div>
-                <div>Bulan : {{$namaBulan}} </div>
-                <div>Tahun : {{$tahun}}</div>
-                <div>Tanggal Cetak : {{$tanggalFormat}} </div>
+        <div class="invoice-container">
+            <div class="invoice-header">
+                <div class="company-details">
+                    <h2>Atma Kitchen</h2>
+                    <p>Jl. Raya Abadi, Sleman, Yogyakarta</p>
+                </div>
             </div>
 
-            <table>
-                <tr>
-                    <th>Nama</th>
-                    <th>Qty</th>
-                    <th>Harga Jual</th>
-                    <th>Total</th>
-                    <th>20% Komisi</th>
-                    <th>Yang Diterima</th>
-                </tr>
+            <div class="invoice-body">
+                <div class="billing-details">
+                    <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
+                        Transaksi Penitip</h3>
+                    <div>ID Penitip : Penitip{{$data->id_penitip}}</div>
+                    <div>Nama : {{$data->nama_penitip}}</div>
+                    <div>Bulan : {{$namaBulan}} </div>
+                    <div>Tahun : {{$tahun}}</div>
+                    <div>Tanggal Cetak : {{$tanggalFormat}} </div>
+                </div>
 
-                <tr>
-                    <td>{{$data->nama_produk_penitip}}</td>
-                    <td>{{$data->jumlah_produk}}</td>
-                    <td>{{$data->harga_produk}}</td>
-                    <td>{{$data->total_pemasukan}}</td>
-                    <td>{{$data->pembagian_komisi}}</td>
-                    <td>{{$data->diterima}}</td>
+                <table>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Qty</th>
+                        <th>Harga Jual</th>
+                        <th>Total</th>
+                        <th>20% Komisi</th>
+                        <th>Yang Diterima</th>
+                    </tr>
 
-                </tr>
+                    <tr>
+                        <td>{{$data->nama_produk_penitip}}</td>
+                        <td>{{$data->jumlah_produk}}</td>
+                        <td>{{$data->harga_produk}}</td>
+                        <td>{{$data->total_pemasukan}}</td>
+                        <td>{{$data->pembagian_komisi}}</td>
+                        <td>{{$data->diterima}}</td>
+
+                    </tr>
 
 
-                <tr class="total">
-                    <td></td>
-                    <td></td>
-                    <td colspan="3" style="text-align: right;">Total</td>
-                    <td> {{$data->diterima}}</td>
-                </tr>
-            </table>
+                    <tr class="total">
+                        <td></td>
+                        <td></td>
+                        <td colspan="3" style="text-align: right;">Total</td>
+                        <td> {{$data->diterima}}</td>
+                    </tr>
+                </table>
 
 
+            </div>
         </div>
-    </div>
     @empty
+        <div class="box-image">
+            <img src="{{ asset('images/no_data.png') }}" width="40%" alt="">
+            <div class="alert alert-danger w-100 text-center" role="alert">
+                Tidak Ada Laporan Y!
+            </div>
+        </div>
     @endforelse
 </body>
 
