@@ -27,6 +27,7 @@ class Customer extends Model implements Authenticatable
         'active',
         'verify_key',
         'email_verified_at',
+        'device_key'
     ];
 
 

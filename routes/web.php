@@ -229,6 +229,7 @@ Route::put('/pickup/{id}', [KonfirmasiController::class, 'pickUp'])->name('pickU
 Route::put('/send/{id}', [KonfirmasiController::class, 'send'])->name('send');
 Route::put('/done/{id}', [KonfirmasiController::class, 'done'])->name('done');
 Route::put('/pickUpDone/{id}', [KonfirmasiController::class, 'pickUpDone'])->name('pickUpDone');
+Route::post('/notifyapp', [KonfirmasiController::class, 'notifyapp']);
 
 //nota
 Route::get('/nota/{id_transaksi}', [NotaController::class, 'index'])->name('nota');

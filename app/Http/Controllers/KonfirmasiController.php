@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Kreait\Firebase\Factory;
 
 class KonfirmasiController extends Controller
 {
@@ -142,7 +143,7 @@ class KonfirmasiController extends Controller
     {
         try {
             $pemasukan = Pemasukan::findOrFail($id);
-            $transaksi = Transaksi::where('id_transaksi', $pemasukan->id_transaksi_fk)
+            $transaksi = Transaksi::with('customer')->where('id_transaksi', $pemasukan->id_transaksi_fk)
                 ->where('tanggal_pembayaran', $pemasukan->transaksi->tanggal_pembayaran)
                 ->firstOrFail();
             $transaksi->status = 'Diproses';
@@ -157,6 +158,11 @@ class KonfirmasiController extends Controller
             }
 
             $transaksi->save();
+            $customerDeviceKey = $transaksi->customer->device_key; // Asumsikan ada kolom 'device_key' di tabel pelanggan
+            $title = 'Pesanan Diproses';
+            $body = 'Pesanan Anda sedang diproses. Terima kasih atas pembeliannya.';
+            $notificationResult = $this->notify($title, $body, $customerDeviceKey);
+            
             return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
@@ -172,6 +178,10 @@ class KonfirmasiController extends Controller
                 ->firstOrFail();
             $transaksi->status = 'Siap dipickup';
             $transaksi->save();
+            $customerDeviceKey = $transaksi->customer->device_key; // Asumsikan ada kolom 'device_key' di tabel pelanggan
+            $title = 'Pesanan Siap dipickup';
+            $body = 'Pesanan Anda telah siap dipickup. Terima kasih telah menunggu.';
+            $notificationResult = $this->notify($title, $body, $customerDeviceKey);
             return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
@@ -187,6 +197,11 @@ class KonfirmasiController extends Controller
                 ->firstOrFail();
             $transaksi->status = 'Sedang dikirim kurir';
             $transaksi->save();
+            $customerDeviceKey = $transaksi->customer->device_key; // Asumsikan ada kolom 'device_key' di tabel pelanggan
+            $title = 'Pesanan Siap dipickup';
+            $body = 'Pesanan Anda Sedang dikirim kurir. Terima kasih telah menunggu.';
+            $notificationResult = $this->notify($title, $body, $customerDeviceKey);
+            return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
             return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
@@ -202,6 +217,11 @@ class KonfirmasiController extends Controller
                 ->firstOrFail();
             $transaksi->status = 'Sudah dipickup';
             $transaksi->save();
+            $customerDeviceKey = $transaksi->customer->device_key; // Asumsikan ada kolom 'device_key' di tabel pelanggan
+            $title = 'Pesanan Sudah dipickup';
+            $body = 'Pesanan Anda Sudah dipickup. Terima kasih telah menunggu.';
+            $notificationResult = $this->notify($title, $body, $customerDeviceKey);
+            return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
             return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
@@ -215,9 +235,75 @@ class KonfirmasiController extends Controller
             $transaksi->status = 'Selesai';
             $transaksi->tanggal_selesai = Carbon::now();
             $transaksi->save();
+            $customerDeviceKey = $transaksi->customer->device_key; // Asumsikan ada kolom 'device_key' di tabel pelanggan
+            $title = 'Pesanan Selesai';
+            $body = 'Terimakasih atas Pembeliannya';
+            $notificationResult = $this->notify($title, $body, $customerDeviceKey);
+            return redirect()->route('indexKonfirmasi.index')->with('success', 'Transaksi berhasil Diproses.');
             return redirect()->route('historyCustomer.index')->with('success', 'Transaksi berhasil Selesai.');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Gagal menerima transaksi: ' . $e->getMessage());
         }
     }
+
+    static public function notify($title, $body, $device_key)
+{
+    // Mendapatkan path ke service account file
+    $serviceAccountPath = base_path('serviceAccountKey.json');
+
+    // Pastikan file service account ada
+    if (!file_exists($serviceAccountPath)) {
+        return [
+            'message' => 'failed',
+            'success' => false,
+            'error' => 'Service account file not found.',
+        ];
+    }
+
+    // Menginisialisasi Firebase Admin SDK
+    $factory = (new Factory)->withServiceAccount($serviceAccountPath);
+    $messaging = $factory->createMessaging();
+
+    $message = [
+        'notification' => [
+            'title' => $title,
+            'body' => $body,
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+            'status' => 'done',
+        ],
+        'token' => $device_key,
+    ];
+
+    try {
+        // Mengirimkan pesan menggunakan Firebase Admin SDK
+        $messaging->send($message);
+        return [
+            'message' => 'success',
+            'success' => true,
+        ];
+    } catch (\Throwable $th) {
+        return [
+            'message' => 'failed',
+            'success' => false,
+            'error' => $th->getMessage(),
+        ];
+    }
+}
+
+    // public function testqueues(Request $request)
+    // {
+    //     $users = Customer::whereNotNull('device_key')->whereNotNull9('delay')->get();
+    // }
+    
+    public function notifyapp(Request $request)
+    {
+        $title = $request->input('title');
+        $body = $request->input('body');
+        $device_key = $request->input('key');
+    
+        // Panggil fungsi notify dan kembalikan responsnya
+        return $this->notify($title, $body, $device_key);
+    }
+    
+
 }

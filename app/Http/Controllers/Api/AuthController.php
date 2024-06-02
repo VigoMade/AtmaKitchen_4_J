@@ -98,6 +98,8 @@ class AuthController extends Controller
                 'token' => $token,
                 'nama' => $customer->nama,
                 'image' => $customer->image ? $customer->image : "",
+                'point_customer' => $customer->point_customer ?? 0,
+                'saldo_customer' => $customer->saldo_customer ?? 0
             ]);
         }
 

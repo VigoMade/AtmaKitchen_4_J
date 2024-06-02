@@ -8,6 +8,11 @@ use App\Http\Controllers\Api\ProdukControllerM;
 use App\Http\Controllers\Api\PegawaiControllerM;
 use App\Http\Controllers\Api\HistoriController;
 use App\Http\Controllers\Api\HampersControllerM;
+use App\Http\Controllers\Api\DaftarPesananController;
+use App\Http\Controllers\Api\PenarikanController;
+use App\Http\Controllers\Api\PpReportController;
+use App\Http\Controllers\Api\ReportBBController;
+use App\Http\Controllers\KonfirmasiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +40,14 @@ Route::get('/pegawai', [PegawaiControllerM::class, 'index_mobile']);
 Route::get('/history/{id}', [HistoriController::class, 'index']);
 Route::get('/history_/{search}', [HistoriController::class, 'search']);
 Route::get('/hampers', [HampersControllerM::class, 'getHampers']);
-
-
+Route::post('/notifyapp', [KonfirmasiController::class, 'notifyapp']);
+Route::put('/pesanan/{id}/selesai', [DaftarPesananController::class, 'updateStatusSelesai']);
+Route::get('/pesanan/{id}', [DaftarPesananController::class, 'index']);
+Route::get('/penarikan/{id}', [PenarikanController::class, 'index']);
+Route::get('/penarikan/{id}/create', [PenarikanController::class, 'create']);
+Route::get('/penarikan/{id}/saldo', [PenarikanController::class, 'getSaldo']);
+Route::post('/penarikan/{id}/store', [PenarikanController::class, 'store']);
+Route::get('/pemakaianBB/{periodeAwal}/{periodeAkhir}', [ReportBBController::class, 'index']);
+Route::get('/report/{bulan}', [PpReportController::class, 'getPP']);
+Route::get('/report/{bulan}/bb', [PpReportController::class, 'getBahanBaku']);
 
