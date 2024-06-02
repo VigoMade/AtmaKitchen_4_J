@@ -17,6 +17,7 @@ class Pemasukan extends Model
         'id_transaksi_fk',
         'total_pemasukan',
         'tip',
+        'tanggal_pemasukan'
     ];
 
     public function transaksi()

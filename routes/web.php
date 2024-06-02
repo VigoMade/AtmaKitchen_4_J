@@ -12,10 +12,12 @@ use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\KonfirmasiPembayaranController;
 use App\Http\Controllers\KonfirmasiPenarikanSaldo;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PembagianKomisiController;
 use App\Http\Controllers\PembelianBBController;
 use App\Http\Controllers\PenarikanSaldoController;
 use App\Http\Controllers\PengeluaranLainnyaController;
@@ -100,48 +102,19 @@ Route::get('/nota', function () {
     return view('nota');
 })->name('nota');
 
-Route::get('/indexKonfirmasi', function () {
-    return view('MOKonfirmasi.indexKonfirmasi');
-});
 
 
-Route::get('/indexKonfirmasiAdmin', function () {
-    return view('AdminKonfirmasi.indexKonfirmasiAdmin');
-});
-Route::get('/indexHistorySaldo', function () {
-    return view('HistoryCustomer.indexHistorySaldo');
-});
 
-Route::get('/narikSaldo', function () {
-    return view('Customer.narikSaldo');
-});
-
-Route::get('/indexKonfirmasiSaldo', function () {
-    return view('AdminKonfirmasi.indexKonfirmasiSaldo');
-})->name('indexKonfirmasiSaldo');
-
-// laporan
-Route::get('/laporanPenjualanBulanan', function () {
-    return view('Laporan.laporanPenjualanBulanan');
-})->name('laporanPenjualanBulanan');
 Route::get('/laporanPenjualanProduk', function () {
     return view('Laporan.laporanPenjualanProduk');
 })->name('laporanPenjualanProduk');
-Route::get('/laporanPengunaanBB', function () {
-    return view('Laporan.laporanPengunaanBB');
-})->name('laporanPengunaanBB');
+
 Route::get('/laporanStockBB', function () {
     return view('Laporan.laporanStockBB');
 })->name('laporanStockBB');
-Route::get('/laporanPemasukanPengeluaran', function () {
-    return view('Laporan.laporanPemasukanPengeluaran');
-})->name('laporanPemasukanPengeluaran');
-Route::get('/laporanPresensiGaji', function () {
-    return view('Laporan.laporanPresensiGaji');
-})->name('laporanPresensiGaji');
-Route::get('/laporanTransaksiPenitip', function () {
-    return view('Laporan.laporanTransaksiPenitip');
-})->name('laporanTransaksiPenitip');
+
+
+
 
 
 
@@ -276,3 +249,26 @@ Route::post('/penarikanSaldo/store', [PenarikanSaldoController::class, 'store'])
 Route::get('/konfirmasiSaldo', [KonfirmasiPenarikanSaldo::class, 'index'])->name('konfirmasiSaldo.index');
 Route::put('/konfirmasiSaldo/terima/{id}', [KonfirmasiPenarikanSaldo::class, 'terima'])->name('konfirmasiSaldo.terima');
 Route::put('/konfirmasiSaldo/tolak/{id}/{id_customer}', [KonfirmasiPenarikanSaldo::class, 'tolak'])->name('konfirmasiSaldo.tolak');
+
+//Laporan
+
+Route::get('/laporanMO', function () {
+    return view('Laporan.indexPageLaporanMO');
+})->name('indexPageLaporanMO');
+
+
+Route::get('/laporanOwner', function () {
+    return view('Laporan.indexPageLaporanOwner');
+})->name('indexPageLaporanOwner');
+
+Route::get('/laporanPemasukanPengeluran', [LaporanController::class, 'pemasukanPengeluaran'])->name('laporanPemasukanPengeluaran');
+Route::get('/laporanPresensi', [LaporanController::class, 'laporanPresensi'])->name('laporanPresensi');
+Route::get('/laporanPenitip', [LaporanController::class, 'laporanPenitip'])->name('laporanPenitip');
+Route::get('/laporanPenggunaanBB', [LaporanController::class, 'laporanPenggunaanBB'])->name('laporanPenggunaanBB');
+Route::get('/laporanPenjualanBulanan', [LaporanController::class, 'laporanPenjualan'])->name('laporanPenjualanBulanan');
+Route::get('/laporanStockBB', [LaporanController::class, 'laporanBB'])->name('laporanStockBB');
+Route::get('/laporanLaporan', [LaporanController::class, 'laporanLaporan'])->name('laporanLaporan');
+
+//Pembgian Komisi
+Route::get('/pembagianKomisi', [PembagianKomisiController::class, 'index'])->name('OwnerPembagianKomisi.index');
+Route::put('/pembagianKomisi/{id_pemasukan}/{id_penitip}', [PembagianKomisiController::class, 'pembagian'])->name('OwnerPembagianKomisi.pembagian');

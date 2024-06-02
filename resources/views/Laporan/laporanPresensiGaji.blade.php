@@ -104,10 +104,10 @@
         <div class="invoice-body">
             <div class="billing-details">
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
-                    Presensi Karyawa</h3>
-                <div>Bulan : Februari</div>
-                <div>Tahun : 2024</div>
-                <div>Tanggal Cetak : 2 Februari 2024</div>
+                    Presensi Karyawan</h3>
+                <div>Bulan : {{$namaBulan}}</div>
+                <div>Tahun : {{$tahun}}</div>
+                <div>Tanggal Cetak : {{$tanggalFormat}}</div>
             </div>
 
             <table>
@@ -119,22 +119,25 @@
                     <th>Bonus Rajin</th>
                     <th>Total</th>
                 </tr>
+                @forelse($laporanPresensi as $data)
                 <tr>
-                    <td>Maharanie</td>
-                    <td>10</td>
-                    <td>0</td>
-                    <td>Rp 10.000.000</td>
-                    <td>Rp 1.000.000</td>
-                    <td>Rp 11.000.000</td>
-
+                    <td>{{$data->nama_pegawai}}</td>
+                    <td>{{$data->jumlah_hadir}}</td>
+                    <td>{{$data->jumlah_alpha}}</td>
+                    <td>Rp {{$data->gaji}}</td>
+                    <td>Rp {{$data->bonus_gaji}}0</td>
+                    <td>Rp {{$data->total_gaji}}</td>
                 </tr>
-
-
+                @empty
+                <tr>
+                    <td colspan="6" style="text-align: center;">Tidak ada data</td>
+                </tr>
+                @endforelse
                 <tr class="total">
                     <td></td>
                     <td></td>
                     <td colspan="3" style="text-align: right;">Total</td>
-                    <td>Rp. 11.000.000</td>
+                    <td>Rp. {{$totalKeseluruhan}}</td>
                 </tr>
             </table>
 

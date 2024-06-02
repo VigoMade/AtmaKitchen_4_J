@@ -104,32 +104,28 @@
         <div class="invoice-body">
             <div class="billing-details">
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
-                    Penjualan Bulanan</h3>
-                <div>Bulan : Februari</div>
-                <div>Tahun : 2024</div>
-                <div>Tanggal Cetak : 2 Februari 2024</div>
+                    Stock Bahan Baku</h3>
+                <div>Tanggal Cetak : {{$tanggalFormat}}</div>
             </div>
 
             <table>
                 <tr>
-                    <th>Produk</th>
-                    <th>Kuantitas</th>
-                    <th>Harga</th>
-                    <th>Total</th>
+                    <th>Nama Bahan</th>
+                    <th>Satuan</th>
+                    <th>Stok</th>
                 </tr>
+                @forelse($laporan as $data)
                 <tr>
-                    <td>Lapis Legis 1 Loyang</td>
-                    <td>5</td>
-                    <td>Rp 850.000</td>
-                    <td>Rp 8.500.000</td>
+                    <td>{{$data->nama_bahan_baku}}</td>
+                    <td>{{$data->satuan_bahan_baku}}</td>
+                    <td>{{$data->takaran_bahan_baku_tersedia}}</td>
                 </tr>
-                <tr class="total">
-                    <td colspan="3" style="text-align: right;">Total</td>
-                    <td>Rp. 10.000.000</td>
+                @empty
+                <tr>
+                    <td colspan="3">Tidak ada data</td>
                 </tr>
+                @endforelse
             </table>
-
-
         </div>
     </div>
 </body>

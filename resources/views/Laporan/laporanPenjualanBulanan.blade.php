@@ -92,7 +92,13 @@
         .total td {
             text-align: right;
         }
+
+        .chart-container {
+            max-width: 800px;
+            margin: 20px auto;
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -108,9 +114,8 @@
             <div class="billing-details">
                 <h3 style="display: inline-block; border-bottom: 2px solid black; padding-bottom: 1px;">Laporan
                     Penjualan Bulanan</h3>
-
                 <div>Tahun : 2024</div>
-                <div>Tanggal Cetak : 2 Februari 2024</div>
+                <div>Tanggal Cetak :{{ \Carbon\Carbon::now()->format('d F Y') }}</div>
             </div>
 
             <div class="invoice-body">
@@ -120,20 +125,60 @@
                         <th>Jumlah Transaksi</th>
                         <th>Jumlah Uang</th>
                     </tr>
+                    @forelse($laporan as $data)
                     <tr>
-                        <td>Mei</td>
-                        <td>5</td>
-                        <td>Rp 1,625,000.00</td>
+                        <td>
+                            @if($data->bulan === 'Total Keseluruhan')
+                            {{ $data->bulan }}
+                            @else
+                            {{ \Carbon\Carbon::parse($data->bulan)->locale('id')->isoFormat('MMMM') }}
+                            @endif
+                        </td>
+
+                        <td>{{$data->jumlah_transaksi}}</td>
+                        <td>Rp {{$data->total_pemasukan_bulanan}}</td>
                     </tr>
-                    <tr class="total">
-                        <td colspan="2">Total</td>
-                        <td>Rp. 10.000.000</td>
+                    @empty
+                    <tr>
+                        <td colspan="3">Tidak ada data</td>
                     </tr>
+                    @endforelse
+
                 </table>
             </div>
-
-
         </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="salesChart"></canvas>
+    </div>
+
+    <script>
+        const labels = <?php echo json_encode($chartData->pluck('bulan')); ?>;
+        const data = <?php echo json_encode($chartData->pluck('total_pemasukan_bulanan')); ?>;
+
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Jumlah Uang (Rp)',
+                    data: data,
+                    backgroundColor: 'rgba(60, 179, 113, 0.7)', // Warna hijau solid
+                    borderColor: 'rgba(60, 179, 113, 1)', // Warna hijau solid
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
