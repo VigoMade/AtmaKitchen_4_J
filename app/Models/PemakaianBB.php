@@ -9,16 +9,10 @@ class PemakaianBB extends Model
 {
     use HasFactory;
 
-    protected $table = 'pemakaian_bb'; // Name of the table in the database
-    protected $primaryKey = 'id_pemakaian'; // Primary key of the table
-    public $timestamps = false; // If your table doesn't have created_at and updated_at columns
-
-    protected $fillable = [
-        'id_pemakaian',
-        'id_bb',
-        'tanggal_pemakaian',
-        'total_pemakaian'
-    ];
+    public $timestamps = false;
+    protected $table = 'pemakaian_bb';
+    protected $primaryKey = 'id_pemakaian';
+    protected $fillable = ['id_bb', 'id_pemakaian', 'tanggal_pemakaian', 'total_pemakaian'];
 
     public function bahanBaku()
     {

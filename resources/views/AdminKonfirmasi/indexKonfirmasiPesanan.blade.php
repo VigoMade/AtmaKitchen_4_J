@@ -25,6 +25,31 @@
         transition: transform 0.3s ease;
     }
 
+    .btn-outline-success:hover {
+        transform: scale(1.1);
+        background-color: #198754;
+        color: white;
+        border-radius: 2px solid #198754;
+        transition: transform 0.3s ease;
+
+    }
+
+    .btn-success:hover {
+        transform: scale(1.1);
+        background-color: white;
+        color: #198754;
+        border-radius: 2px solid #198754;
+        transition: transform 0.3s ease;
+    }
+
+    .btn-warning:hover {
+        transform: scale(1.1);
+        background-color: white;
+        color: #ffc107;
+        border-radius: 2px solid #ffc107;
+        transition: transform 0.3s ease;
+    }
+
     .btn-danger:hover {
         transform: scale(1.1);
         background-color: white;
@@ -65,22 +90,31 @@
                             <div id="errorAlert" class="alert alert-danger">
                                 {{ session('error') }}
                             </div>
+                            <script>
+                                setTimeout(function() {
+                                    document.getElementById('errorAlert').style.display = 'none';
+                                }, 5000);
+                            </script>
                             @endif
 
                             @if(session('success'))
                             <div id="successAlert" class="alert alert-success">
                                 {{ session('success') }}
                             </div>
+                            <script>
+                                setTimeout(function() {
+                                    document.getElementById('successAlert').style.display = 'none';
+                                }, 5000);
+                            </script>
                             @endif
                             <div class="table-responsive p-0">
                                 <table class="table table-hover textnowrap">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No Transaksi</th>
-                                            <th class="text-center">Foto Produk</th>
-                                            <th class="text-center">Bukti Transfer</th>
                                             <th class="text-center">Nama Customer</th>
-                                            <th class="text-center">Alamat</th>
+                                            <th class="text-center">Alamat Customer</th>
+                                            <th class="text-center">Foto Produk</th>
                                             <th class="text-center">Nama Produk</th>
                                             <th class="text-center">Jumlah </th>
                                             <th class="text-center">Total Bayar</th>
@@ -89,49 +123,56 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($transaksi as $data)
                                         <tr>
+                                            @forelse($transaksi as $data)
                                             <td class="text-center">{{$data->id_transaksi}}</td>
-
+                                            <td class="text-center">{{$data->nama_customer}}</td>
+                                            <td class="text-center">{{$data->alamat_customer}}</td>
                                             <td class="text-center">
                                                 @if($data->id_hampers != null)
-                                                <img src=" /images/{{ $data->image }}" alt="Iklan 3" style="width: 150px; height: auto;" />
+                                                <img src="/images/{{ $data->image }}" alt="Iklan 3" style="width: 150px; height: auto;" />
                                                 @else
                                                 <img src="{{ Storage::url($data->image) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
                                                 @endif
                                             </td>
-                                            <td class="text-center">
-                                                @if($data->bukti_bayar == null)
-                                                <span class="badge rounded-pill text-bg-danger">Belum Bayar</span>
-                                                @else
-                                                <img src="{{ Storage::url($data->bukti_bayar) }}" alt="Iklan 3" style="width: 150px; height: auto;" />
-                                                @endif
-                                            </td>
-                                            <td class="text-center">{{$data->nama}}</td>
-                                            <td class="text-center">{{$data->alamat_customer}}</td>
                                             <td class="text-center">{{$data->nama_produk}}</td>
                                             <td class="text-center">{{$data->jumlah_produk}}</td>
-                                            <td class="text-center">Rp. {{$data->total_pembayaran}}</td>
+                                            <td class="text-center">Rp. {{$data->total_pemasukan}}</td>
                                             <td class="text-center">
-                                                @if($data->status == 'Menunggu Pembayaran')
-                                                <span class="badge rounded-pill text-bg-primary">{{$data->status}}</span>
+                                                @if($data->status == 'Pembayaran Valid')
+                                                <span class="badge text-bg-info">{{$data->status}}</span>
                                                 @else
-                                                <span class="badge rounded-pill text-bg-danger">{{$data->status}}</span>
+                                                <span class="badge text-bg-success">{{$data->status}}</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if($data->status == 'Lewat Bayar')
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{route('rejectAdmin',$data->id_transaksi)}}" method="POST">
+                                                @if($data->status == 'Diproses')
+                                                @if($data->ongkos_kirim == null)
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('pickUp',$data->id_pemasukan)}}">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button class="btn btn-sm btn-danger" type="submit">Tolak</button>
+                                                    <button class="btn btn-primary">
+                                                        Pick Up
+                                                    </button>
                                                 </form>
                                                 @else
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="#" method="POST">
-                                                    <a href="{{route('konfirmasiPembayaran.create', $data->id_transaksi)}}" class="btn btn-sm btn-primary" type="submit">Lihat Detail</a>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('send',$data->id_pemasukan)}}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="btn btn-success">
+                                                        Send
+                                                    </button>
                                                 </form>
                                                 @endif
-
+                                                @elseif($data->status == 'Sedang dikirim kurir' || $data->status == 'Siap dipickup')
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" method="POST" action="{{route('pickUpDone',$data->id_pemasukan)}}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="btn btn-warning">
+                                                        Done
+                                                    </button>
+                                                </form>
+                                                @endif
                                             </td>
                                         </tr>
                                         @empty

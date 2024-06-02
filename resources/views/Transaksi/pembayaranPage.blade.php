@@ -79,6 +79,18 @@
                                     <input type="hidden" id="total_pembayaran_asli" value="{{ $transaksi->total_pembayaran }}">
                                 </div>
                             </div>
+                            @if($transaksi->status != 'Menunggu Pembayaran')
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="font-weight-bold">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option value="" disabled selected>Pilih tipe pengiriman</option>
+                                        <option value="pickup">Pickup</option>
+                                        <option value="send">Send</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @endif
                             @if($transaksi->status == 'Menunggu Pembayaran')
                             <div class="form-group col-md-12">
                                 <label class="font-weight-bold">Poin Kamu Sekarang : {{ $user->poin_customer }}</label>

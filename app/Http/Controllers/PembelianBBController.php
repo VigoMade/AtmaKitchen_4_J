@@ -33,6 +33,7 @@ class PembelianBBController extends Controller
         $bahanBaku = BahanBaku::find($id_bahan_baku);
         if ($bahanBaku) {
             $bahanBaku->takaran_bahan_baku_tersedia += $request->jumlah_bb_dibeli;
+            $bahanBaku->status_bb = 'Tersedia';
             $bahanBaku->save();
         }
         try {
