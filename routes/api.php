@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\DaftarPesananController;
 use App\Http\Controllers\Api\PenarikanController;
 use App\Http\Controllers\Api\PpReportController;
 use App\Http\Controllers\Api\ReportBBController;
+use App\Http\Controllers\Api\StockReportController;
 use App\Http\Controllers\KonfirmasiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::put('/updateDevice/{id}/{device_key}', [AuthController::class, 'updateDeviceKey']);
 Route::post('/reset', [ForgetPasswordController::class, 'reset']);
 Route::get('/reset/{email}/{verify_key}', [ForgetPasswordController::class, 'gotoResetPassword']);
 Route::put('/presensi/{id}', [PresensiController::class, 'update']);
@@ -50,4 +52,4 @@ Route::post('/penarikan/{id}/store', [PenarikanController::class, 'store']);
 Route::get('/pemakaianBB/{periodeAwal}/{periodeAkhir}', [ReportBBController::class, 'index']);
 Route::get('/report/{bulan}', [PpReportController::class, 'getPP']);
 Route::get('/report/{bulan}/bb', [PpReportController::class, 'getBahanBaku']);
-
+Route::get('/stock', [StockReportController::class, 'index']);

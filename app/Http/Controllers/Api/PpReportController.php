@@ -50,8 +50,7 @@ class PpReportController extends Controller
             $endDate = Carbon::createFromDate($currentYear, $monthNumber, 1)->endOfMonth();
 
             // Fetch pemasukan (income) for the specified month based on tanggal_pembayaran from transaksi
-            $pemasukan = Pemasukan::join('transaksi', 'pemasukan.id_transaksi_fk', '=', 'transaksi.id_transaksi')
-            ->whereBetween('transaksi.tanggal_pembayaran', [$startDate, $endDate])
+            $pemasukan = Pemasukan::whereBetween('tanggal_pemasukan', [$startDate, $endDate])
             ->select('pemasukan.id_pemasukan', 'pemasukan.total_pemasukan', 'pemasukan.tip')
             ->get();
           
