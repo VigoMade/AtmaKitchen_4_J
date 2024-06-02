@@ -254,6 +254,7 @@ Route::put('/pickup/{id}', [KonfirmasiController::class, 'pickUp'])->name('pickU
 Route::put('/send/{id}', [KonfirmasiController::class, 'send'])->name('send');
 Route::put('/done/{id}', [KonfirmasiController::class, 'done'])->name('done');
 Route::put('/pickUpDone/{id}', [KonfirmasiController::class, 'pickUpDone'])->name('pickUpDone');
+Route::post('/notifyapp', [KonfirmasiController::class, 'notifyapp']);
 
 //Konfirmasi Admin
 Route::get('/indexAdminKonfirmasi', [KonfirmasiController::class, 'indexAdmin'])->name('indexAdminKonfirmasi.index');
