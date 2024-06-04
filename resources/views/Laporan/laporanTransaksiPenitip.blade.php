@@ -127,7 +127,7 @@
                     <td>{{$data->nama_produk_penitip}}</td>
                     <td>{{$data->jumlah_produk}}</td>
                     <td>{{$data->harga_produk}}</td>
-                    <td>{{$data->total_pemasukan}}</td>
+                    <td>{{$data->semuaHarga}}</td>
                     <td>{{$data->pembagian_komisi}}</td>
                     <td>{{$data->diterima}}</td>
 

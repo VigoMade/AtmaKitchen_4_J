@@ -125,7 +125,7 @@
                     <td>{{$data->jumlah_hadir}}</td>
                     <td>{{$data->jumlah_alpha}}</td>
                     <td>Rp {{$data->gaji}}</td>
-                    <td>Rp {{$data->bonus_gaji}}0</td>
+                    <td>Rp {{$data->bonus_gaji}}</td>
                     <td>Rp {{$data->total_gaji}}</td>
                 </tr>
                 @empty
