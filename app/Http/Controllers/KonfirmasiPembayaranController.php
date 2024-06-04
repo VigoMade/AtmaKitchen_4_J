@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemasukan;
+use App\Models\Produk;
 use App\Models\Transaksi;
 use Carbon\Carbon;
 use Exception;
@@ -29,6 +30,7 @@ class KonfirmasiPembayaranController extends Controller
                 't.tanggal_transaksi',
                 't.ongkos_kirim',
                 't.status',
+                't.id_produk_fk',
                 'h.id_hampers',
                 't.bukti_bayar',
                 'a.alamat_customer',
@@ -43,6 +45,17 @@ class KonfirmasiPembayaranController extends Controller
         foreach ($transaksi as $t) {
             if ($t->status == 'Menunggu Pembayaran' && Carbon::parse($t->tanggal_transaksi)->addHours(24)->isPast()) {
                 $t->status = 'Lewat Bayar';
+                $produk = Produk::where('id_produk', $t->id_produk_fk)->first();
+                if ($produk->stock_produk > 0) {
+                    $produk->stock_produk = $produk->stock_produk + $t->jumlah_produk;
+                    $produk->save();
+                } else {
+                    $produk->kuota += $t->jumlah_produk;
+                    $produk->tanggal_mulai_po = Carbon::now();
+                    $produk->tanggal_selesai_po = Carbon::now()->addDays(3);
+                    $produk->save();
+                }
+
                 DB::table('transaksi')->where('id_transaksi', $t->id_transaksi)->update(['status' => 'Lewat Bayar']);
             }
         }

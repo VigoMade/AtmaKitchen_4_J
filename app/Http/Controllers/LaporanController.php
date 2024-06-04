@@ -76,20 +76,18 @@ class LaporanController extends Controller
         $laporanPresensi = DB::table('presensi')
             ->select(
                 'pegawai.nama_pegawai',
-                DB::raw('IFNULL(pegawai.gaji,0) + IFNULL(pegawai.bonus_gaji,0) AS total_gaji'),
+                'pegawai.gaji',
+                'pegawai.bonus_gaji',
                 DB::raw('SUM(CASE WHEN presensi.status_presensi = "Hadir" THEN 1 ELSE 0 END) AS jumlah_hadir'),
                 DB::raw('SUM(CASE WHEN presensi.status_presensi = "Alpha" THEN 1 ELSE 0 END) AS jumlah_alpha'),
-                'pegawai.gaji',
-                'pegawai.bonus_gaji'
+                DB::raw('(SUM(CASE WHEN presensi.status_presensi = "Hadir" THEN 1 ELSE 0 END) * (IFNULL(pegawai.gaji,0)) + IFNULL(pegawai.bonus_gaji,0)) AS total_gaji')
             )
             ->join('pegawai', 'presensi.id_pegawai', '=', 'pegawai.id_pegawai')
             ->whereMonth('presensi.tanggal_presensi', $bulan)
             ->groupBy('pegawai.nama_pegawai', 'pegawai.gaji', 'pegawai.bonus_gaji')
             ->get();
 
-        $totalKeseluruhan = DB::table(DB::raw("(SELECT DISTINCT p.nama_pegawai, IFNULL(p.gaji, 0) + IFNULL(p.bonus_gaji, 0) AS total_gaji FROM presensi pr LEFT JOIN pegawai p ON pr.id_pegawai = p.id_pegawai WHERE MONTH(pr.tanggal_presensi) = $bulan) AS subquery"))
-            ->selectRaw('SUM(IFNULL(total_gaji, 0)) AS total_keseluruhan')
-            ->first()->total_keseluruhan;
+        $totalKeseluruhan = $laporanPresensi->sum('total_gaji');
 
 
         $tanggalHari = Carbon::now();
@@ -113,20 +111,22 @@ class LaporanController extends Controller
             ->select(
                 'pemasukan.id_transaksi_fk',
                 'pemasukan.total_pemasukan',
-                DB::raw('pemasukan.total_pemasukan * 0.2 AS pembagian_komisi'),
+
                 'penitip.nama_penitip',
                 'penitip.nama_produk_penitip',
                 'penitip.id_penitip',
                 'transaksi.jumlah_produk',
+                DB::raw('(transaksi.jumlah_produk * produk.harga_produk)* 0.2 AS pembagian_komisi'),
+                DB::raw('transaksi.jumlah_produk * produk.harga_produk AS semuaHarga'),
                 'produk.harga_produk',
-                DB::raw('SUM(pemasukan.total_pemasukan - (pemasukan.total_pemasukan * 0.2)) AS diterima')
+                DB::raw('SUM(transaksi.jumlah_produk * produk.harga_produk - (transaksi.jumlah_produk * produk.harga_produk)* 0.2) AS diterima')
             )
             ->leftJoin('transaksi', 'pemasukan.id_transaksi_fk', '=', 'transaksi.id_transaksi')
             ->leftJoin('produk', 'transaksi.id_produk_fk', '=', 'produk.id_produk')
             ->leftJoin('penitip', 'produk.id_penitip', '=', 'penitip.id_penitip')
             ->whereNotNull('produk.id_penitip')
             ->whereMonth('pemasukan.tanggal_pemasukan', $bulan)
-            ->groupBy('penitip.id_penitip', 'pemasukan.id_transaksi_fk', 'pemasukan.total_pemasukan', 'penitip.nama_penitip', 'penitip.nama_produk_penitip', 'transaksi.jumlah_produk', 'produk.harga_produk')
+            ->groupBy('penitip.id_penitip', 'pemasukan.id_transaksi_fk', 'pemasukan.total_pemasukan', 'penitip.nama_penitip', 'penitip.nama_produk_penitip', 'transaksi.jumlah_produk', 'produk.harga_produk', 'semuaHarga')
             ->get();
 
         $tanggalHari = Carbon::now();
