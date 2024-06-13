@@ -100,7 +100,7 @@ class AlamatController extends Controller
         $user = Auth::guard('customer')->user();
         $alamat = Alamat::where('alamat_customer', 'LIKE', '%' . $request->search . '%')
             ->where('id_customer', $user->id_customer)
-            ->get();
+            ->paginate(5);
         if ($alamat->isEmpty()) {
             return redirect()->route('alamat.index')->with(['error' => 'Alamat tidak ditemukan']);
         } else {
