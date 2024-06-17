@@ -268,6 +268,7 @@ Route::get('/laporanPenggunaanBB', [LaporanController::class, 'laporanPenggunaan
 Route::get('/laporanPenjualanBulanan', [LaporanController::class, 'laporanPenjualan'])->name('laporanPenjualanBulanan');
 Route::get('/laporanStockBB', [LaporanController::class, 'laporanBB'])->name('laporanStockBB');
 Route::get('/laporanLaporan', [LaporanController::class, 'laporanLaporan'])->name('laporanLaporan');
+Route::get('/laporanJumlahTransaksi', [LaporanController::class, 'laporanJumlahTransaksi'])->name('laporanJumlahTransaksi');
 
 //Pembgian Komisi
 Route::get('/pembagianKomisi', [PembagianKomisiController::class, 'index'])->name('OwnerPembagianKomisi.index');
