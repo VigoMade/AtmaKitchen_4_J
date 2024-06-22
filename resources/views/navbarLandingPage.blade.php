@@ -263,28 +263,18 @@
         <div class="row gy-4 gx-5">
             <div class="col-lg-4 col-md-6">
                 <h5 class="h1 text-white">Atma Kitchen</h5>
-                <p class="small text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt.</p>
-                <p class="small text-white mb-0">&copy; 2024. All rights reserved. <a href="#" class="footer-link">Bootstrapious.com</a></p>
+                <p class="small text-white">Tempat Membeli Roti dan Kue Terenak Seduniaa</p>
+                <p class="small text-white mb-0">&copy; 2024. All rights reserved. <a href="#" class="footer-link">Kelompok 4</a></p>
             </div>
             <div class="col-lg-2 col-md-6">
                 <h5 class="text-white mb-3">Quick links</h5>
                 <ul class="list-unstyled text-white">
-                    <li><a href="#" class="footer-link">Home</a></li>
-                    <li><a href="#" class="footer-link">About</a></li>
-                    <li><a href="#" class="footer-link">Get started</a></li>
-                    <li><a href="#" class="footer-link">FAQ</a></li>
+                    <li><a href=" {{ route('landingPageCustomer') }}" class="footer-link">Home</a></li>
+                    <li><a href="{{ route('aboutUs') }}" class="footer-link">About</a></li>
+                    <li><a href="{{route('developerPage')}}" class="footer-link">Develpoper</a></li>
                 </ul>
             </div>
-            <div class="col-lg-2 col-md-6">
-                <h5 class="text-white mb-3">Services</h5>
-                <ul class="list-unstyled text-white">
-                    <li><a href="#" class="footer-link">Catering</a></li>
-                    <li><a href="#" class="footer-link">Delivery</a></li>
-                    <li><a href="#" class="footer-link">Custom Orders</a></li>
-                    <li><a href="#" class="footer-link">Special Events</a></li>
-                </ul>
-            </div>
+
             <div class="col-lg-4 col-md-6">
                 <h5 class="text-white mb-3">Newsletter</h5>
                 <p class="small text-white">Stay updated with our latest news and offers.</p>

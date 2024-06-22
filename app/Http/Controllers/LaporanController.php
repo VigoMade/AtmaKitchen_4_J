@@ -269,23 +269,4 @@ class LaporanController extends Controller
         $namaBulan = $bulanObj->translatedFormat('F');
         return view('Laporan.laporanPenjualanProduk', compact('laporan', 'bulan', 'namaBulan', 'tanggalFormat', 'tahun', 'total'));
     }
-
-    public function laporanJumlahTransaksi(Request $request)
-    {
-        setlocale(LC_TIME, 'id_ID');
-
-        $tahun = $request->input('tahun', date('Y'));
-        $laporan = DB::table('transaksi')
-            ->leftJoin('customer', 'transaksi.id_customer', '=', 'customer.id_customer')
-            ->select(
-                'customer.id_customer as id_customer',
-                'customer.nama as nama_customer',
-                DB::raw('COUNT(transaksi.id_transaksi) as jumlah_transaksi')
-            )
-            ->whereYear('transaksi.tanggal_selesai', $tahun)
-            ->groupBy('customer.id_customer', 'customer.nama')
-            ->get();
-
-        return view('Laporan.indexLaporanJumlahTransaksi', compact('laporan'));
-    }
 }

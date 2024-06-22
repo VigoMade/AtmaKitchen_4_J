@@ -261,6 +261,11 @@ Route::get('/laporanOwner', function () {
     return view('Laporan.indexPageLaporanOwner');
 })->name('indexPageLaporanOwner');
 
+
+Route::get('/developerPage', function () {
+    return view('Katalog.developerPage');
+})->name('developerPage');
+
 Route::get('/laporanPemasukanPengeluran', [LaporanController::class, 'pemasukanPengeluaran'])->name('laporanPemasukanPengeluaran');
 Route::get('/laporanPresensi', [LaporanController::class, 'laporanPresensi'])->name('laporanPresensi');
 Route::get('/laporanPenitip', [LaporanController::class, 'laporanPenitip'])->name('laporanPenitip');
@@ -268,7 +273,7 @@ Route::get('/laporanPenggunaanBB', [LaporanController::class, 'laporanPenggunaan
 Route::get('/laporanPenjualanBulanan', [LaporanController::class, 'laporanPenjualan'])->name('laporanPenjualanBulanan');
 Route::get('/laporanStockBB', [LaporanController::class, 'laporanBB'])->name('laporanStockBB');
 Route::get('/laporanLaporan', [LaporanController::class, 'laporanLaporan'])->name('laporanLaporan');
-Route::get('/laporanJumlahTransaksi', [LaporanController::class, 'laporanJumlahTransaksi'])->name('laporanJumlahTransaksi');
+
 
 //Pembgian Komisi
 Route::get('/pembagianKomisi', [PembagianKomisiController::class, 'index'])->name('OwnerPembagianKomisi.index');
