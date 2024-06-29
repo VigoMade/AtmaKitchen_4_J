@@ -41,15 +41,15 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0" style="color:black">Gaji</h1>
+                    <h1 class="m-0" style="color:black">Laporan</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="#">Gaji</a>
+                            <a href="#">Laporan</a>
                         </li>
                     </ol>
-                    <li class="breadcrumb-item active">Show Gaji</li>
+                    <li class="breadcrumb-item active">Show Laporan</li>
                 </div>
                 <!-- /.col -->
             </div>
@@ -125,12 +125,7 @@
                                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">Cetak Laporan</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-start">Laporan Jumlah Transaksi user</td>
-                                            <td class="text-center">
-                                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal10">Cetak Laporan</a>
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -275,29 +270,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #dc3545;">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Masukan Laporan Tahunan</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('laporanJumlahTransaksi')}}" method="GET" onsubmit="return confirm('Apakah anda yakin?')">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="tahun" class="form-label">Pilih Tahun:</label>
-                        <input type="number" id="tahun" name="tahun" class="form-control" placeholder="Masukkan Tahun" required>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Cetak</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
